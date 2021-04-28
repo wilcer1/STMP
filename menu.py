@@ -6,17 +6,26 @@ def main():
 
 
 def stmpMenu():
-    print("\nWelcome")
-    print("1. Make a budget")
-    print("2. ")
-    print("3. ")
+    userInput = input("\nWelcome"
+    "\n1. Make a budget"
+    "\n2. Create long-term savings"
+    "\n3. Sew how much you can save \n")
+
+    if userInput == "1":
+        budget()
+
+    elif userInput == "2":
+        saving()
+
+    elif userInput == "3":
+        calculateSave()
 
 
 def signIn():
     userInput = input("Welcome to STMP" 
     "\n1. Sign in "
     "\n2. Register \n")
-   
+
     if userInput == "1":
         username = input("Enter your username: ")
         password = input("Enter your password: ")
@@ -32,7 +41,14 @@ def signIn():
         print("That is not valid, enter 1 or 2 \n")
         signIn()
 
-    
+def budget():
+    pass
+
+def saving():
+    pass
+
+def calculateSave():
+    pass
 
 if __name__ == "__main__":
     main()
