@@ -1,9 +1,12 @@
 # Unittest
 coverage
+
 # MySql
 mysql-connector-python
+
 # Code analysis
 bandit
+
 #metrics.pylint
 flake8
 flake8-docstrings
@@ -14,6 +17,3 @@ radon
 # Documentation
 pdoc3
 sphinx
-
-# Game
-playsound
