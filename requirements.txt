@@ -17,3 +17,6 @@ radon
 # Documentation
 pdoc3
 sphinx
+
+#GUI
+PyQt5
