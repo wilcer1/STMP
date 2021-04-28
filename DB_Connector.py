@@ -3,22 +3,33 @@ from mysql.connector import Error
 
 
 def connect():
-    database = None
+    connection = None
     try:
-        database = mysql.connector.connect(host='localhost',
-                                        database='NAMNET PÅ DATABASEN',
-                                        user='root',
-                                        password='LÖSENORD')
-        if database.is_connected():
+        connection = mysql.connector.connect(host='localhost',
+                                        database='gym',
+                                        user='newuser',
+                                        password='rootroot!123')
+        if connection.is_connected():
             print('Connected to MySQL database')
+            cursor = connection.cursor()  
+            cursor.execute("SELECT * FROM customer;")
+            print(cursor.fetchall())
+
+
 
     except Error as e:
                 print(e)
 
     finally:
-        if database is not None and database.is_connected():
-            database.close()
+        if connection is not None and connection.is_connected():
+            cursor.close()
+            connection.close()
+
+
 
 
 if __name__ == '__main__':
     connect()
+
+
+    
