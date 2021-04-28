@@ -6,27 +6,31 @@ def main():
 
 
 def stmpMenu():
-    print("Welcome")
+    print("\nWelcome")
     print("1. Make a budget")
     print("2. ")
     print("3. ")
 
 
 def signIn():
-    a = input("Welcome to STMP" 
+    userInput = input("Welcome to STMP" 
     "\n1. Sign in "
-    "\n2. Register ")
+    "\n2. Register \n")
    
-    if a == "1":
-        username = input("Enter your username ")
-        password = input("Enter your password ")
+    if userInput == "1":
+        username = input("Enter your username: ")
+        password = input("Enter your password: ")
 
-    elif a == "2":
-        firstName = input("Enter your firstname ")
-        lastName = input("Enter your lastname ")
-        username = input("Enter a username ")
-        password = input("Enter a password ")
-        password1 = input("Confirm your password ")
+    elif userInput == "2":
+        firstName = input("Enter your firstname: ")
+        lastName = input("Enter your lastname: ")
+        username = input("Enter a username: ")
+        password = input("Enter a password: ")
+        password1 = input("Confirm your password: ")
+
+    else:
+        print("That is not valid, enter 1 or 2 \n")
+        signIn()
 
     
 
