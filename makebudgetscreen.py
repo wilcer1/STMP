@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'LoggedInScreen.ui'
+# Form implementation generated from reading ui file 'makeabudget.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.2
 #
@@ -14,27 +14,27 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(601, 410)
+        MainWindow.resize(604, 392)
+        MainWindow.setAutoFillBackground(False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(300, 50, 47, 13))
-        self.label.setObjectName("label")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(260, 100, 131, 23))
+        self.pushButton.setGeometry(QtCore.QRect(150, 140, 75, 23))
+        self.pushButton.setText("")
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(260, 140, 131, 23))
+        self.pushButton_2.setGeometry(QtCore.QRect(360, 140, 75, 23))
+        self.pushButton_2.setText("")
         self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_3.setGeometry(QtCore.QRect(260, 180, 131, 23))
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_4.setGeometry(QtCore.QRect(260, 220, 131, 23))
-        self.pushButton_4.setObjectName("pushButton_4")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(140, 120, 121, 16))
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(340, 120, 131, 16))
+        self.label_2.setObjectName("label_2")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 601, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 604, 21))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -47,11 +47,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "Welcome"))
-        self.pushButton.setText(_translate("MainWindow", "Make a budget"))
-        self.pushButton_2.setText(_translate("MainWindow", "Create long-term savings"))
-        self.pushButton_3.setText(_translate("MainWindow", "PushButton"))
-        self.pushButton_4.setText(_translate("MainWindow", "PushButton"))
+        self.label.setText(_translate("MainWindow", "Make your own budget"))
+        self.label_2.setText(_translate("MainWindow", "Get help with your budget"))
 
 
 if __name__ == "__main__":

@@ -165,6 +165,45 @@ class Ui_MainWindow3(object):
         self.label_3.setText(_translate("MainWindow", "Password"))
         self.pushButton.setText(_translate("MainWindow", "Register"))
         self.pushButton_2.setText(_translate("MainWindow", "Back"))
+    
+class Ui_MainWindow4(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(604, 392)
+        MainWindow.setAutoFillBackground(False)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(150, 140, 75, 23))
+        self.pushButton.setText("")
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.setGeometry(QtCore.QRect(360, 140, 75, 23))
+        self.pushButton_2.setText("")
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(140, 120, 121, 16))
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(340, 120, 131, 16))
+        self.label_2.setObjectName("label_2")
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 604, 21))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.label.setText(_translate("MainWindow", "Make your own budget"))
+        self.label_2.setText(_translate("MainWindow", "Get help with your budget"))
 
 
 class first(QMainWindow, Ui_MainWindow1):
@@ -203,7 +242,10 @@ class second(QMainWindow, Ui_MainWindow2):
 
     def MakeBudget(self):
         # display makebudget
-        pass
+        self.displayUi = fourth() 
+        self.hide()
+        self.displayUi.show()
+        
 
 class third(QMainWindow, Ui_MainWindow3):
     """Inherit from the code for the ui to have all information necessary."""
@@ -230,6 +272,19 @@ class third(QMainWindow, Ui_MainWindow3):
         self.displayUi = first() 
         self.hide()
         self.displayUi.show()
+    
+class fourth(QMainWindow, Ui_MainWindow4):
+    """Inherit from the code for the ui to have all information necessary."""
+    # Login Screen Controller
+    def __init__(self):
+        super().__init__() # Call the superclass constructor
+        self.setupUi(self) # Run the code that creates the UI layout
+        self.pushButton.clicked.connect(self.Manual) # Call function when button is pressed
+        self.pushButton_2.clicked.connect(self.Auto) #
+    def Manual(self):
+        pass
+    def Auto(self):
+        pass
 
 
 
