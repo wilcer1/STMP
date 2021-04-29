@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import *
 
 
 class Ui_MainWindow1(object):
+    """Main Login Window"""
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(701, 561)
@@ -34,14 +35,15 @@ class Ui_MainWindow1(object):
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(410, 240, 75, 23))
         self.pushButton.setObjectName("pushButton")
-        # self.pushButton.clicked.connect(self.LogIn)
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(20, 360, 141, 23))
         self.pushButton_2.setObjectName("pushButton_2")
-        # self.pushButton_2.clicked.connect(self.Register)
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(270, 100, 191, 61))
         self.label_3.setObjectName("label_3")
+        self.popUp = QMessageBox()
+        self.popUp.setWindowTitle("Error")
+        self.popUp.setText("Username/Password incorrect. Please try again")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 701, 21))
@@ -62,24 +64,13 @@ class Ui_MainWindow1(object):
         self.pushButton.setText(_translate("MainWindow", "Log in"))
         self.label_3.setText(_translate("MainWindow", "STMP"))
         self.pushButton_2.setText(_translate("MainWindow", "Not Registered? Click here"))
-        
-
-    def LogIn(self):
-        username = self.lineEdit.text()
-        password = self.lineEdit_2.text()
-        # compare credentials to sql logins existant
-        MainScreen = Ui_LoggedInWindow()
-        MainScreen.setupUi(MainWindow)
-    
-    def Register(self):
-        MainScreen = Ui_RegisterWindow()
-        MainScreen.setupUi(MainWindow)
     
     
         
         
 
 class Ui_MainWindow2(object):
+    """Menu Window"""
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(601, 410)
@@ -115,14 +106,15 @@ class Ui_MainWindow2(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "Welcome"))
+        self.label.setText(_translate("MainWindow", "Welcome,"))
         self.pushButton.setText(_translate("MainWindow", "Make a budget"))
         self.pushButton_2.setText(_translate("MainWindow", "Create long-term savings"))
         self.pushButton_3.setText(_translate("MainWindow", "eee"))
         self.pushButton_4.setText(_translate("MainWindow", "PushButton"))
 
 
-class Ui_RegisterWindow(object):
+class Ui_MainWindow3(object):
+    """Register window."""
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(810, 427)
@@ -137,6 +129,7 @@ class Ui_RegisterWindow(object):
         self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_2.setGeometry(QtCore.QRect(200, 180, 113, 20))
         self.lineEdit_2.setObjectName("lineEdit_2")
+        self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(200, 110, 47, 13))
         self.label_2.setObjectName("label_2")
@@ -146,11 +139,12 @@ class Ui_RegisterWindow(object):
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(340, 180, 75, 23))
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(self.Register)
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(20, 360, 141, 23))
         self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_2.clicked.connect(self.GoBack)
+        self.popUp = QMessageBox()
+        self.popUp.setWindowTitle("Error")
+        self.popUp.setText("Username/Password incorrect. Please try again")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 810, 21))
@@ -172,26 +166,28 @@ class Ui_RegisterWindow(object):
         self.pushButton.setText(_translate("MainWindow", "Register"))
         self.pushButton_2.setText(_translate("MainWindow", "Back"))
 
-    def Register(self):
-        username = self.lineEdit.text()
-        password = self.lineEdit_2.text()
-        # compare credentials to sql logins existant
-        MainScreen = Ui_LoggedInWindow()
-        MainScreen.setupUi(MainWindow)
-
-    
-    def GoBack(self):
-        MainScreen = Ui_MainWindow()
-        MainScreen.setupUi(MainWindow)
 
 class first(QMainWindow, Ui_MainWindow1):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.pushButton.clicked.connect(self.loginFunc)
+        self.pushButton_2.clicked.connect(self.registerFunc)
+        
 
     def loginFunc(self):
-        self.displayUi = second() 
+        username = self.lineEdit.text()
+        password = self.lineEdit_2.text()
+        # Check if password and username exists
+        if username != "" and password != "":
+            self.displayUi = second() 
+            self.hide()
+            self.displayUi.show()
+        else:
+            self.popUp.exec_()
+    
+    def registerFunc(self):
+        self.displayUi = third()
         self.hide()
         self.displayUi.show()
 
@@ -203,6 +199,30 @@ class second(QMainWindow, Ui_MainWindow2):
 
     def MakeBudget(self):
         # display makebudget
+        pass
+
+class third(QMainWindow, Ui_MainWindow3):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.pushButton.clicked.connect(self.Register)
+        self.pushButton_2.clicked.connect(self.goBack)
+    
+    def Register(self):
+        username = self.lineEdit.text()
+        password = self.lineEdit_2.text()
+        if username != "" and password != "":
+            self.displayUi = second() 
+            self.hide()
+            self.displayUi.show()
+        else:
+            self.popUp.exec_()
+
+    def goBack(self):
+        self.displayUi = first() 
+        self.hide()
+        self.displayUi.show()
+
 
 
 if __name__ == "__main__":
