@@ -58,6 +58,7 @@ class Ui_MainWindow(object):
 
     def LogIn(self):
         MainScreen = Ui_LoggedInWindow()
+        MainScreen.setupUi(MainWindow)
 
         
         
