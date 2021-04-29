@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(701, 561)
+        MainWindow.resize(703, 443)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -36,9 +36,10 @@ class Ui_MainWindow(object):
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(270, 100, 191, 61))
         self.label_3.setObjectName("label_3")
+     
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 701, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 703, 21))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -55,6 +56,7 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Password"))
         self.pushButton.setText(_translate("MainWindow", "Log in"))
         self.label_3.setText(_translate("MainWindow", "STMP"))
+        self.pushButton_2.setText(_translate("MainWindow", "Not Registered? Click here"))
 
 
 if __name__ == "__main__":

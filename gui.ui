@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>701</width>
-    <height>561</height>
+    <width>703</width>
+    <height>443</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -89,13 +89,26 @@
      <string>STMP</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>360</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Not Registered? Click here</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>701</width>
+     <width>703</width>
      <height>21</height>
     </rect>
    </property>

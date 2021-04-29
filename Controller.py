@@ -9,9 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import *
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow1(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(701, 561)
@@ -33,7 +34,11 @@ class Ui_MainWindow(object):
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(410, 240, 75, 23))
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(self.LogIn)
+        # self.pushButton.clicked.connect(self.LogIn)
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.setGeometry(QtCore.QRect(20, 360, 141, 23))
+        self.pushButton_2.setObjectName("pushButton_2")
+        # self.pushButton_2.clicked.connect(self.Register)
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(270, 100, 191, 61))
         self.label_3.setObjectName("label_3")
@@ -56,6 +61,8 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Password"))
         self.pushButton.setText(_translate("MainWindow", "Log in"))
         self.label_3.setText(_translate("MainWindow", "STMP"))
+        self.pushButton_2.setText(_translate("MainWindow", "Not Registered? Click here"))
+        
 
     def LogIn(self):
         username = self.lineEdit.text()
@@ -63,11 +70,16 @@ class Ui_MainWindow(object):
         # compare credentials to sql logins existant
         MainScreen = Ui_LoggedInWindow()
         MainScreen.setupUi(MainWindow)
-
+    
+    def Register(self):
+        MainScreen = Ui_RegisterWindow()
+        MainScreen.setupUi(MainWindow)
+    
+    
         
         
 
-class Ui_LoggedInWindow(object):
+class Ui_MainWindow2(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(601, 410)
@@ -109,14 +121,102 @@ class Ui_LoggedInWindow(object):
         self.pushButton_3.setText(_translate("MainWindow", "eee"))
         self.pushButton_4.setText(_translate("MainWindow", "PushButton"))
 
+
+class Ui_RegisterWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(810, 427)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(230, 70, 47, 13))
+        self.label.setObjectName("label")
+        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit.setGeometry(QtCore.QRect(200, 130, 113, 20))
+        self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_2.setGeometry(QtCore.QRect(200, 180, 113, 20))
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(200, 110, 47, 13))
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(200, 160, 47, 13))
+        self.label_3.setObjectName("label_3")
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(340, 180, 75, 23))
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(self.Register)
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.setGeometry(QtCore.QRect(20, 360, 141, 23))
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_2.clicked.connect(self.GoBack)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 810, 21))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.label.setText(_translate("MainWindow", "Register"))
+        self.label_2.setText(_translate("MainWindow", "Email"))
+        self.label_3.setText(_translate("MainWindow", "Password"))
+        self.pushButton.setText(_translate("MainWindow", "Register"))
+        self.pushButton_2.setText(_translate("MainWindow", "Back"))
+
+    def Register(self):
+        username = self.lineEdit.text()
+        password = self.lineEdit_2.text()
+        # compare credentials to sql logins existant
+        MainScreen = Ui_LoggedInWindow()
+        MainScreen.setupUi(MainWindow)
+
+    
+    def GoBack(self):
+        MainScreen = Ui_MainWindow()
+        MainScreen.setupUi(MainWindow)
+
+class first(QMainWindow, Ui_MainWindow1):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.pushButton.clicked.connect(self.loginFunc)
+
+    def loginFunc(self):
+        self.displayUi = second() 
+        self.hide()
+        self.displayUi.show()
+
+class second(QMainWindow, Ui_MainWindow2):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.pushButton.clicked.connect(self.MakeBudget)
+
+    def MakeBudget(self):
+        # display makebudget
+
+
 if __name__ == "__main__":
     import sys
-    app = QtWidgets.QApplication(sys.argv)
-    LoggedInScreen = Ui_LoggedInWindow()
-    MainWindow = QtWidgets.QMainWindow()
-    MainScreen = Ui_MainWindow()
-    MainScreen.setupUi(MainWindow)
+    # app = QtWidgets.QApplication(sys.argv)
+    # MainWindow = QtWidgets.QMainWindow()
+    # MainScreen = Ui_MainWindow()
+    # MainScreen.setupUi(MainWindow)
    
 
+    # MainWindow.show()
+    # sys.exit(app.exec_())
+
+    app = QApplication(sys.argv)
+    MainWindow = first() 
     MainWindow.show()
     sys.exit(app.exec_())
