@@ -14,7 +14,7 @@ def signIn():
         password = input("Enter your password: ")
 
 
-        # QUERY: "SELECT Account.Email, Account.Password FROM Account WHERE Account.Email =", email, ";"
+        # QUERY: "SELECT account.email, account.password FROM account WHERE account.email =", email, ";"
 
 
         stmpMenu()
@@ -22,15 +22,15 @@ def signIn():
     elif userInput == "2":
         firstName = input("Enter your firstname: ")
         lastName = input("Enter your lastname: ")
-        password = input("Enter a password: ")
-        password1 = input("Confirm your password: ")
         email = input("Enter your email: ")
         income = input("Enter your monthly income: ")
         expenses = input("Enter your monthly expenses: ")
+        password = input("Enter a password: ")
+        password1 = input("Confirm your password: ")
 
         if password == password1:
             print("Test")
-            # QUERY: "INSERT INTO Account VALUES("firstName", "lastName", "password", "email", "income", "expenses");"
+            # QUERY: "INSERT INTO account VALUES("email", "firstName", "lastName", "password", "income", "expenses");"
 
         else:
             print("\n \nPassword did not match, try again")
