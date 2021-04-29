@@ -13,7 +13,7 @@ from PyQt5.QtWidgets import *
 
 
 class Ui_MainWindow1(object):
-    """Main Login Window"""
+    """Main Login Window."""
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(701, 561)
@@ -168,17 +168,19 @@ class Ui_MainWindow3(object):
 
 
 class first(QMainWindow, Ui_MainWindow1):
+    """Inherit from the code for the ui to have all information necessary."""
+    # Login Screen Controller
     def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-        self.pushButton.clicked.connect(self.loginFunc)
-        self.pushButton_2.clicked.connect(self.registerFunc)
+        super().__init__() # Call the superclass constructor
+        self.setupUi(self) # Run the code that creates the UI layout
+        self.pushButton.clicked.connect(self.loginFunc) # Call function when button is pressed
+        self.pushButton_2.clicked.connect(self.registerFunc) #
         
 
     def loginFunc(self):
-        username = self.lineEdit.text()
-        password = self.lineEdit_2.text()
-        # Check if password and username exists
+        username = self.lineEdit.text() # Get the text from the username & password lineedit
+        password = self.lineEdit_2.text() #
+        # Check if password and username isnt empty, if it is, popup
         if username != "" and password != "":
             self.displayUi = second() 
             self.hide()
@@ -192,25 +194,30 @@ class first(QMainWindow, Ui_MainWindow1):
         self.displayUi.show()
 
 class second(QMainWindow, Ui_MainWindow2):
+    """Inherit from the code for the ui to have all information necessary."""
+    # Logged in menu screen Controller
     def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-        self.pushButton.clicked.connect(self.MakeBudget)
+        super().__init__() # Call the superclass constructor
+        self.setupUi(self) # Run the code that creates the UI layout
+        self.pushButton.clicked.connect(self.MakeBudget) # Call function when button is pressed
 
     def MakeBudget(self):
         # display makebudget
         pass
 
 class third(QMainWindow, Ui_MainWindow3):
+    """Inherit from the code for the ui to have all information necessary."""
+    # Register user window controller
     def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-        self.pushButton.clicked.connect(self.Register)
-        self.pushButton_2.clicked.connect(self.goBack)
+        super().__init__() # Call the superclass constructor
+        self.setupUi(self) # Run the code that creates the UI layout
+        self.pushButton.clicked.connect(self.Register) # Call function when button is pressed
+        self.pushButton_2.clicked.connect(self.goBack) # 
     
     def Register(self):
-        username = self.lineEdit.text()
-        password = self.lineEdit_2.text()
+        """Get username and password for register."""
+        username = self.lineEdit.text() # Get the text from the username lineedit
+        password = self.lineEdit_2.text() # Get the text from the password lineedit
         if username != "" and password != "":
             self.displayUi = second() 
             self.hide()
@@ -219,6 +226,7 @@ class third(QMainWindow, Ui_MainWindow3):
             self.popUp.exec_()
 
     def goBack(self):
+        """ Go back to login page."""
         self.displayUi = first() 
         self.hide()
         self.displayUi.show()
