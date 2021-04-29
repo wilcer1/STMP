@@ -33,7 +33,6 @@ class Ui_MainWindow(object):
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(410, 240, 75, 23))
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(self.LogIn)
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(270, 100, 191, 61))
         self.label_3.setObjectName("label_3")
@@ -57,66 +56,12 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "Log in"))
         self.label_3.setText(_translate("MainWindow", "STMP"))
 
-    def LogIn(self):
-        username = self.lineEdit.text()
-        password = self.lineEdit_2.text()
-        # compare credentials to sql logins existant
-        MainScreen = Ui_LoggedInWindow()
-        MainScreen.setupUi(MainWindow)
-
-        
-        
-
-class Ui_LoggedInWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(601, 410)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(300, 50, 47, 13))
-        self.label.setObjectName("label")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(260, 100, 131, 23))
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(260, 140, 131, 23))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_3.setGeometry(QtCore.QRect(260, 180, 131, 23))
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_4.setGeometry(QtCore.QRect(260, 220, 131, 23))
-        self.pushButton_4.setObjectName("pushButton_4")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 601, 21))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
-
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "Welcome"))
-        self.pushButton.setText(_translate("MainWindow", "Make a budget"))
-        self.pushButton_2.setText(_translate("MainWindow", "Create long-term savings"))
-        self.pushButton_3.setText(_translate("MainWindow", "eee"))
-        self.pushButton_4.setText(_translate("MainWindow", "PushButton"))
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    LoggedInScreen = Ui_LoggedInWindow()
     MainWindow = QtWidgets.QMainWindow()
-    MainScreen = Ui_MainWindow()
-    MainScreen.setupUi(MainWindow)
-   
-
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
