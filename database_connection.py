@@ -31,7 +31,7 @@ def disconnect():
 
 def showTables():
     print("Show Tables")
-    mycursor.execute("SELECT customer_id FROM customer;")
+    mycursor.execute("show columns from account;")
     myresult = mycursor.fetchall()
 
     print(myresult)
