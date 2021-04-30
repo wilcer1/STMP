@@ -354,7 +354,7 @@ class Ui_BudgetScreen(object):
         self.label_8.setText(_translate("MainWindow", "SEK"))
         self.label_9.setText(_translate("MainWindow", "SEK"))
         self.label_10.setText(_translate("MainWindow", "TextLabel"))
-        self.label_11.setText(_translate("MainWindow", "Food"))
+        self.label_11.setText(_translate("MainWindow", "something"))
         self.label_12.setText(_translate("MainWindow", "Fixed Expenses"))
         self.label_13.setText(_translate("MainWindow", "SEK"))
         self.label_14.setText(_translate("MainWindow", "SEK"))
@@ -362,7 +362,7 @@ class Ui_BudgetScreen(object):
         self.label_16.setText(_translate("MainWindow", "SEK"))
         self.label_17.setText(_translate("MainWindow", "Fixed Expenses"))
         self.label_18.setText(_translate("MainWindow", "TextLabel"))
-        self.label_19.setText(_translate("MainWindow", "Food"))
+        self.label_19.setText(_translate("MainWindow", "something"))
         self.label_20.setText(_translate("MainWindow", "SEK"))
         self.pushButton.setText(_translate("MainWindow", "Back"))
         self.label_21.setText(_translate("MainWindow", "Your total monthly income in SEK:"))
@@ -471,11 +471,21 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         self.displayUi.show()
     
     def updateIncome(self):
-        income = self.lineEdit.text()
-        int(income)
-        self.label_2.setText(f"{income} SEK")
-        self.lineEdit.clear()
-        
+        income = self.lineEdit.text() # Get the lineedit text with the income
+        income = int(income) # convert it to int
+        self.label_2.setText(f"{income} SEK")  # set the income in GUI
+        self.lineEdit.clear() # Clear the lineedit
+
+        """Set the labels to 1/5 of the income"""
+        self.label_4.setText(f"{income / 5} SEK")
+        self.label_6.setText(f"{income / 5} SEK")
+        self.label_8.setText(f"{income / 5} SEK")
+        self.label_9.setText(f"{income / 5} SEK")
+        self.label_13.setText(f"{income / 5} SEK")
+        self.label_14.setText(f"{income / 5} SEK")
+        self.label_15.setText(f"{income / 5} SEK")
+        self.label_16.setText(f"{income / 5} SEK")
+        self.label_20.setText(f"{income / 5} SEK")
 
 
 if __name__ == "__main__":
