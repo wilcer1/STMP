@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 
 
-class Ui_MainWindow1(object):
+class Ui_LoginScreen(object):
     """Main Login Window."""
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -69,7 +69,7 @@ class Ui_MainWindow1(object):
         
         
 
-class Ui_MainWindow2(object):
+class Ui_MenuScreen(object):
     """Menu Window"""
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -113,7 +113,7 @@ class Ui_MainWindow2(object):
         self.pushButton_4.setText(_translate("MainWindow", "PushButton"))
 
 
-class Ui_MainWindow3(object):
+class Ui_RegisterScreen(object):
     """Register window."""
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -166,7 +166,7 @@ class Ui_MainWindow3(object):
         self.pushButton.setText(_translate("MainWindow", "Register"))
         self.pushButton_2.setText(_translate("MainWindow", "Back"))
     
-class Ui_MainWindow4(object):
+class Ui_BudgetChoiceScreen(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(604, 392)
@@ -206,7 +206,7 @@ class Ui_MainWindow4(object):
         self.label_2.setText(_translate("MainWindow", "Get help with your budget"))
 
 
-class first(QMainWindow, Ui_MainWindow1):
+class LoginScreen(QMainWindow, Ui_LoginScreen):
     """Inherit from the code for the ui to have all information necessary."""
     # Login Screen Controller
     def __init__(self):
@@ -221,18 +221,18 @@ class first(QMainWindow, Ui_MainWindow1):
         password = self.lineEdit_2.text() #
         # Check if password and username isnt empty, if it is, popup
         if username != "" and password != "":
-            self.displayUi = second() 
+            self.displayUi = MenuScreen() 
             self.hide()
             self.displayUi.show()
         else:
             self.popUp.exec_()
     
     def registerFunc(self):
-        self.displayUi = third()
+        self.displayUi = RegisterScreen()
         self.hide()
         self.displayUi.show()
 
-class second(QMainWindow, Ui_MainWindow2):
+class MenuScreen(QMainWindow, Ui_MenuScreen):
     """Inherit from the code for the ui to have all information necessary."""
     # Logged in menu screen Controller
     def __init__(self):
@@ -242,12 +242,12 @@ class second(QMainWindow, Ui_MainWindow2):
 
     def MakeBudget(self):
         # display makebudget
-        self.displayUi = fourth() 
+        self.displayUi = BudgetChoiceScreen() 
         self.hide()
         self.displayUi.show()
         
 
-class third(QMainWindow, Ui_MainWindow3):
+class RegisterScreen(QMainWindow, Ui_RegisterScreen):
     """Inherit from the code for the ui to have all information necessary."""
     # Register user window controller
     def __init__(self):
@@ -261,7 +261,7 @@ class third(QMainWindow, Ui_MainWindow3):
         username = self.lineEdit.text() # Get the text from the username lineedit
         password = self.lineEdit_2.text() # Get the text from the password lineedit
         if username != "" and password != "":
-            self.displayUi = second() 
+            self.displayUi = MenuScreen() 
             self.hide()
             self.displayUi.show()
         else:
@@ -269,11 +269,11 @@ class third(QMainWindow, Ui_MainWindow3):
 
     def goBack(self):
         """ Go back to login page."""
-        self.displayUi = first() 
+        self.displayUi = LoginScreen() 
         self.hide()
         self.displayUi.show()
     
-class fourth(QMainWindow, Ui_MainWindow4):
+class BudgetChoiceScreen(QMainWindow, Ui_BudgetChoiceScreen):
     """Inherit from the code for the ui to have all information necessary."""
     # Login Screen Controller
     def __init__(self):
@@ -300,6 +300,6 @@ if __name__ == "__main__":
     # sys.exit(app.exec_())
 
     app = QApplication(sys.argv)
-    MainWindow = first() 
+    MainWindow = LoginScreen() 
     MainWindow.show()
     sys.exit(app.exec_())
