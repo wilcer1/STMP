@@ -312,6 +312,23 @@ class Ui_BudgetScreen(object):
         self.label_20 = QtWidgets.QLabel(self.centralwidget)
         self.label_20.setGeometry(QtCore.QRect(570, 170, 47, 13))
         self.label_20.setObjectName("label_20")
+        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit.setGeometry(QtCore.QRect(90, 80, 71, 20))
+        self.lineEdit.setObjectName("lineEdit")
+        self.label_21 = QtWidgets.QLabel(self.centralwidget)
+        self.label_21.setGeometry(QtCore.QRect(30, 60, 201, 16))
+        font = QtGui.QFont()
+        font.setPointSize(7)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_21.setFont(font)
+        self.label_21.setObjectName("label_21")
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(30, 490, 75, 23))
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.setGeometry(QtCore.QRect(170, 80, 31, 23))
+        self.pushButton_2.setObjectName("pushButton_2")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -347,8 +364,9 @@ class Ui_BudgetScreen(object):
         self.label_18.setText(_translate("MainWindow", "TextLabel"))
         self.label_19.setText(_translate("MainWindow", "Food"))
         self.label_20.setText(_translate("MainWindow", "SEK"))
-    
-
+        self.pushButton.setText(_translate("MainWindow", "Back"))
+        self.label_21.setText(_translate("MainWindow", "Your total monthly income in SEK:"))
+        self.pushButton_2.setText(_translate("MainWindow", "OK"))
 
 
 class LoginScreen(QMainWindow, Ui_LoginScreen):
@@ -435,7 +453,7 @@ class BudgetChoiceScreen(QMainWindow, Ui_BudgetChoiceScreen):
     def Auto(self):
         pass
     def goBack(self):
-        self.displayUi = BudgetScreen() 
+        self.displayUi = MenuScreen() 
         self.hide()
         self.displayUi.show()
 
@@ -444,6 +462,20 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
     def __init__(self):
         super().__init__() # Call the superclass constructor
         self.setupUi(self) # Run the code that creates the UI layout
+        self.pushButton.clicked.connect(self.goBack)
+        self.pushButton_2.clicked.connect(self.updateIncome)
+    
+    def goBack(self):
+        self.displayUi = BudgetChoiceScreen() 
+        self.hide()
+        self.displayUi.show()
+    
+    def updateIncome(self):
+        income = self.lineEdit.text()
+        int(income)
+        self.label_2.setText(f"{income} SEK")
+        self.lineEdit.clear()
+        
 
 
 if __name__ == "__main__":
