@@ -1,5 +1,6 @@
 """Database connection and quieries."""
 
+from account import Account
 import mysql.connector
 from mysql.connector import Error
 
@@ -104,8 +105,9 @@ def verify_login(email, password):
         if password != myresult or myresult == None:
             return False
         else:
-            customer = Account()
-            customer = customer.setCustomer()
+            customer = Account.getInstance()
+            # customer = Account.getInstance()
+            customer.setCustomer(get_all_info(email))
             return True
 
 

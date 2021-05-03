@@ -75,7 +75,7 @@ class Ui_MenuScreen(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(300, 50, 47, 13))
+        self.label.setGeometry(QtCore.QRect(300, 50, 100, 13))
         self.label.setObjectName("label")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(260, 100, 131, 23))
@@ -104,7 +104,7 @@ class Ui_MenuScreen(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "Welcome,"))
+        self.label.setText(_translate("MainWindow", f"Welcome, {customer.first_name}"))
         self.pushButton.setText(_translate("MainWindow", "Make a budget"))
         self.pushButton_2.setText(_translate("MainWindow", "Create long-term savings"))
         self.pushButton_3.setText(_translate("MainWindow", "eee"))
@@ -114,53 +114,82 @@ class Ui_RegisterScreen(object):
     """Register window."""
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(810, 427)
+        MainWindow.resize(700, 427)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(230, 70, 47, 13))
+        self.label.setGeometry(QtCore.QRect(320, 20, 47, 13))
         self.label.setObjectName("label")
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit.setGeometry(QtCore.QRect(200, 130, 113, 20))
+        self.lineEdit.setGeometry(QtCore.QRect(290, 70, 113, 20))
         self.lineEdit.setObjectName("lineEdit")
         self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_2.setGeometry(QtCore.QRect(200, 180, 113, 20))
+        self.lineEdit_2.setGeometry(QtCore.QRect(290, 120, 113, 20))
         self.lineEdit_2.setObjectName("lineEdit_2")
-        self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(200, 110, 47, 13))
+        self.label_2.setGeometry(QtCore.QRect(290, 50, 47, 13))
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(200, 160, 47, 13))
+        self.label_3.setGeometry(QtCore.QRect(290, 100, 47, 13))
         self.label_3.setObjectName("label_3")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(340, 180, 75, 23))
+        self.pushButton.setGeometry(QtCore.QRect(600, 360, 75, 23))
         self.pushButton.setObjectName("pushButton")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(290, 100, 47, 13))
+        self.label_3.setObjectName("label_3")
+        self.lineEdit_3 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_3.setGeometry(QtCore.QRect(290, 220, 113, 20))
+        self.lineEdit_3.setObjectName("lineEdit_3")
+        self.lineEdit_4 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_4.setGeometry(QtCore.QRect(290, 170, 113, 20))
+        self.lineEdit_4.setObjectName("lineEdit_4")
+        self.label_5 = QtWidgets.QLabel(self.centralwidget)
+        self.label_5.setGeometry(QtCore.QRect(290, 150, 61, 16))
+        self.label_5.setObjectName("label_5")
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(290, 200, 61, 16))
+        self.label_6.setObjectName("label_6")
+        self.lineEdit_5 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_5.setGeometry(QtCore.QRect(290, 320, 113, 20))
+        self.lineEdit_5.setObjectName("lineEdit_5")
+        self.lineEdit_6 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_6.setGeometry(QtCore.QRect(290, 270, 113, 20))
+        self.lineEdit_6.setObjectName("lineEdit_6")
+        self.label_7 = QtWidgets.QLabel(self.centralwidget)
+        self.label_7.setGeometry(QtCore.QRect(290, 250, 47, 13))
+        self.label_7.setObjectName("label_7")
+        self.label_8 = QtWidgets.QLabel(self.centralwidget)
+        self.label_8.setGeometry(QtCore.QRect(290, 300, 61, 16))
+        self.label_8.setObjectName("label_8")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(20, 360, 141, 23))
         self.pushButton_2.setObjectName("pushButton_2")
-        self.popUp = QMessageBox()
-        self.popUp.setWindowTitle("Error")
-        self.popUp.setText("Username/Password incorrect. Please try again")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 810, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 700, 21))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
+        self.popUp = QMessageBox()
+        self.popUp.setWindowTitle("Error")
+        self.popUp.setText("Username/Password incorrect. Please try again")
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "Register"))
+        self.label.setText(_translate("MainWindow", "Register¨¨"))
         self.label_2.setText(_translate("MainWindow", "Email"))
         self.label_3.setText(_translate("MainWindow", "Password"))
         self.pushButton.setText(_translate("MainWindow", "Register"))
+        self.label_5.setText(_translate("MainWindow", "First name"))
+        self.label_6.setText(_translate("MainWindow", "Last name"))
+        self.label_7.setText(_translate("MainWindow", "Income"))
+        self.label_8.setText(_translate("MainWindow", "Expenses"))
         self.pushButton_2.setText(_translate("MainWindow", "Back"))
     
 class Ui_BudgetChoiceScreen(object):
@@ -383,7 +412,6 @@ class LoginScreen(QMainWindow, Ui_LoginScreen):
         password = self.lineEdit_2.text() #
         # Check if password and username isnt empty, if it is, popup
         if database_connection.verify_login(username, password):
-            
             self.displayUi = MenuScreen() 
             self.hide()
             self.displayUi.show()
@@ -422,7 +450,8 @@ class RegisterScreen(QMainWindow, Ui_RegisterScreen):
         """Get username and password for register."""
         username = self.lineEdit.text() # Get the text from the username lineedit
         password = self.lineEdit_2.text() # Get the text from the password lineedit
-        if username != "" and password != "":
+        
+        if database_connection.register_account():
             self.displayUi = MenuScreen() 
             self.hide()
             self.displayUi.show()
@@ -489,11 +518,13 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         self.label_20.setText(f"{income / 5} SEK")
         # else:
         #     self.popUp.exec_()
-        
+
+    
 
 
 if __name__ == "__main__":
     import sys
+    customer = account.Account.getInstance()
     app = QApplication(sys.argv)
     MainWindow = LoginScreen() # Use the login screen as the mainwindow to start
     MainWindow.show()
