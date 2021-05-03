@@ -323,6 +323,9 @@ class Ui_BudgetScreen(object):
         font.setWeight(75)
         self.label_21.setFont(font)
         self.label_21.setObjectName("label_21")
+        self.popUp = QMessageBox()
+        self.popUp.setWindowTitle("Error")
+        self.popUp.setText("Incorrect income input")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(30, 490, 75, 23))
         self.pushButton.setObjectName("pushButton")
@@ -472,20 +475,25 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
     
     def updateIncome(self):
         income = self.lineEdit.text() # Get the lineedit text with the income
-        income = int(income) # convert it to int
-        self.label_2.setText(f"{income} SEK")  # set the income in GUI
-        self.lineEdit.clear() # Clear the lineedit
+        if income is int and int > 0:
+            income = int(income) # convert it to int
+            self.label_2.setText(f"{income} SEK")  # set the income in GUI
+            self.lineEdit.clear() # Clear the lineedit
 
-        """Set the labels to 1/5 of the income"""
-        self.label_4.setText(f"{income / 5} SEK")
-        self.label_6.setText(f"{income / 5} SEK")
-        self.label_8.setText(f"{income / 5} SEK")
-        self.label_9.setText(f"{income / 5} SEK")
-        self.label_13.setText(f"{income / 5} SEK")
-        self.label_14.setText(f"{income / 5} SEK")
-        self.label_15.setText(f"{income / 5} SEK")
-        self.label_16.setText(f"{income / 5} SEK")
-        self.label_20.setText(f"{income / 5} SEK")
+            """Set the labels to 1/5 of the income if its not < 0"""
+            
+            self.label_4.setText(f"{income / 5} SEK")
+            self.label_6.setText(f"{income / 5} SEK")
+            self.label_8.setText(f"{income / 5} SEK")
+            self.label_9.setText(f"{income / 5} SEK")
+            self.label_13.setText(f"{income / 5} SEK")
+            self.label_14.setText(f"{income / 5} SEK")
+            self.label_15.setText(f"{income / 5} SEK")
+            self.label_16.setText(f"{income / 5} SEK")
+            self.label_20.setText(f"{income / 5} SEK")
+        else:
+            self.popUp.exec_()
+        
 
 
 if __name__ == "__main__":
