@@ -81,6 +81,16 @@ def get_expenses(email):
     return myresult
 
 
+def get_all_info(email):
+    """Return all info."""
+    sql = "SELECT * FROM account WHERE email = %s;"
+    val = (email,)
+    mycursor.execute(sql, val)
+    myresult = mycursor.fetchone()
+
+    return myresult
+
+
 def verify_login(email, password):
     """verify_login."""
     sql = "SELECT password FROM account WHERE email = %s;"
@@ -88,7 +98,7 @@ def verify_login(email, password):
     mycursor.execute(sql, val)
     try:
         myresult = mycursor.fetchone()[0]
-    except(TypeError):
+    except (TypeError):
         myresult = None
     finally:
         if password != myresult or myresult == None:
@@ -98,8 +108,6 @@ def verify_login(email, password):
             customer = customer.setCustomer()
             return True
 
-    
-
 
 def register_account(email, first_name, last_name, password, income, expenses):
     """Add new account to database."""
@@ -107,3 +115,7 @@ def register_account(email, first_name, last_name, password, income, expenses):
     val = (email, first_name, last_name, password, income, expenses)
     mycursor.execute(sql, val)
     connection.commit()
+
+
+if __name__ == "__main__":
+    get_all_info("lucas@gmail.com")
