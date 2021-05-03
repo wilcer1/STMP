@@ -383,6 +383,7 @@ class LoginScreen(QMainWindow, Ui_LoginScreen):
         password = self.lineEdit_2.text() #
         # Check if password and username isnt empty, if it is, popup
         if database_connection.verify_login(username, password):
+            
             self.displayUi = MenuScreen() 
             self.hide()
             self.displayUi.show()
