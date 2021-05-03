@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
+import account
 
 
 class Ui_LoginScreen(object):
@@ -63,11 +64,7 @@ class Ui_LoginScreen(object):
         self.label_2.setText(_translate("MainWindow", "Password"))
         self.pushButton.setText(_translate("MainWindow", "Log in"))
         self.label_3.setText(_translate("MainWindow", "STMP"))
-        self.pushButton_2.setText(_translate("MainWindow", "Not Registered? Click here"))
-    
-    
-        
-        
+        self.pushButton_2.setText(_translate("MainWindow", "Not Registered? Click here"))    
 
 class Ui_MenuScreen(object):
     """Menu Window"""
@@ -111,7 +108,6 @@ class Ui_MenuScreen(object):
         self.pushButton_2.setText(_translate("MainWindow", "Create long-term savings"))
         self.pushButton_3.setText(_translate("MainWindow", "eee"))
         self.pushButton_4.setText(_translate("MainWindow", "PushButton"))
-
 
 class Ui_RegisterScreen(object):
     """Register window."""
@@ -371,7 +367,6 @@ class Ui_BudgetScreen(object):
         self.label_21.setText(_translate("MainWindow", "Your total monthly income in SEK:"))
         self.pushButton_2.setText(_translate("MainWindow", "OK"))
 
-
 class LoginScreen(QMainWindow, Ui_LoginScreen):
     """Inherit from the code for the ui to have all information necessary."""
     # Login Screen Controller
@@ -412,7 +407,6 @@ class MenuScreen(QMainWindow, Ui_MenuScreen):
         self.hide()
         self.displayUi.show()
         
-
 class RegisterScreen(QMainWindow, Ui_RegisterScreen):
     """Inherit from the code for the ui to have all information necessary."""
     # Register user window controller
@@ -475,24 +469,24 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
     
     def updateIncome(self):
         income = self.lineEdit.text() # Get the lineedit text with the income
-        if income is int and int > 0:
-            income = int(income) # convert it to int
-            self.label_2.setText(f"{income} SEK")  # set the income in GUI
-            self.lineEdit.clear() # Clear the lineedit
+        # if income isInstance(int) and income > 0:
+        income = int(income) # convert it to int
+        self.label_2.setText(f"{income} SEK")  # set the income in GUI
+        self.lineEdit.clear() # Clear the lineedit
 
-            """Set the labels to 1/5 of the income if its not < 0"""
+        """Set the labels to 1/5 of the income if its not < 0"""
             
-            self.label_4.setText(f"{income / 5} SEK")
-            self.label_6.setText(f"{income / 5} SEK")
-            self.label_8.setText(f"{income / 5} SEK")
-            self.label_9.setText(f"{income / 5} SEK")
-            self.label_13.setText(f"{income / 5} SEK")
-            self.label_14.setText(f"{income / 5} SEK")
-            self.label_15.setText(f"{income / 5} SEK")
-            self.label_16.setText(f"{income / 5} SEK")
-            self.label_20.setText(f"{income / 5} SEK")
-        else:
-            self.popUp.exec_()
+        self.label_4.setText(f"{income / 5} SEK")
+        self.label_6.setText(f"{income / 5} SEK")
+        self.label_8.setText(f"{income / 5} SEK")
+        self.label_9.setText(f"{income / 5} SEK")
+        self.label_13.setText(f"{income / 5} SEK")
+        self.label_14.setText(f"{income / 5} SEK")
+        self.label_15.setText(f"{income / 5} SEK")
+        self.label_16.setText(f"{income / 5} SEK")
+        self.label_20.setText(f"{income / 5} SEK")
+        # else:
+        #     self.popUp.exec_()
         
 
 
