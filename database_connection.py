@@ -86,12 +86,19 @@ def verify_login(email, password):
     sql = "SELECT password FROM account WHERE email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
-    myresult = mycursor.fetchone()[0]
+    try:
+        myresult = mycursor.fetchone()[0]
+    except(TypeError):
+        myresult = None
+    finally:
+        if password != myresult or myresult == None:
+            return False
+        else:
+            customer = Account()
+            customer = customer.setCustomer()
+            return True
 
-    if password == myresult:
-        return True
-    else:
-        return False
+    
 
 
 def register_account(email, first_name, last_name, password, income, expenses):
