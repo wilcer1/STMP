@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 import account
+import database_connection
 
 
 class Ui_LoginScreen(object):
@@ -381,7 +382,7 @@ class LoginScreen(QMainWindow, Ui_LoginScreen):
         username = self.lineEdit.text() # Get the text from the username & password lineedit
         password = self.lineEdit_2.text() #
         # Check if password and username isnt empty, if it is, popup
-        if username != "" and password != "":
+        if database_connection.verify_login(username, password):
             self.displayUi = MenuScreen() 
             self.hide()
             self.displayUi.show()

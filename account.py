@@ -1,6 +1,6 @@
 class Account():
-    """Constructor that takes the info needed as parameters."""
-    def __init__(self, email, firstName, lastName, password, income, expenses):
+
+    def setCustomer(email, firstName, lastName, password, income, expenses):
         self.email = email
         self.firstName = firstName
         self.lastName = lastName
