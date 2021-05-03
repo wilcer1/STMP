@@ -1,3 +1,5 @@
+"""Database connection and quieries."""
+
 import mysql.connector
 from mysql.connector import Error
 
@@ -19,6 +21,7 @@ except Error as e:
 
 
 def disconnect():
+    """Disconnect from database."""
     try:
         if connection is not None and connection.is_connected():
             mycursor.close()
@@ -29,51 +32,60 @@ def disconnect():
         print(e)
 
 
-def show_account():
-    print("Show Columns in account")
-    mycursor.execute("show columns from account;")
-    myresult = mycursor.fetchall()
+# def show_account():
+#     print("Show Columns in account")
+#     mycursor.execute("show columns from account;")
+#     myresult = mycursor.fetchall()
 
-    for x in myresult:
-        print(x)
+#     for x in myresult:
+#         print(x)
 
 
 def get_first_name(email):
-    """Gets first name from database"""
-
-    mycursor.execute("SELECT first_name FROM account WHERE email ='" + email + "';")
+    """Return first_name."""
+    sql = "SELECT password FROM account WHERE email = %s;"
+    val = (email,)
+    mycursor.execute(sql, val)
     myresult = mycursor.fetchone()[0]
 
     return myresult
 
 
 def get_last_name(email):
-
-    mycursor.execute("SELECT last_name FROM account WHERE email ='" + email + "';")
+    """Return last_name."""
+    sql = "SELECT password FROM account WHERE email = %s;"
+    val = (email,)
+    mycursor.execute(sql, val)
     myresult = mycursor.fetchone()[0]
 
     return myresult
 
 
 def get_income(email):
-
-    mycursor.execute("SELECT income FROM account WHERE email ='" + email + "';")
+    """Return income."""
+    sql = "SELECT password FROM account WHERE email = %s;"
+    val = (email,)
+    mycursor.execute(sql, val)
     myresult = mycursor.fetchone()[0]
 
     return myresult
 
 
 def get_expenses(email):
-
-    mycursor.execute("SELECT expenses FROM account WHERE email ='" + email + "';")
+    """Return expenses."""
+    sql = "SELECT password FROM account WHERE email = %s;"
+    val = (email,)
+    mycursor.execute(sql, val)
     myresult = mycursor.fetchone()[0]
 
     return myresult
 
 
 def verify_login(email, password):
-
-    mycursor.execute("SELECT password FROM account WHERE email ='" + email + "';")
+    """verify_login."""
+    sql = "SELECT password FROM account WHERE email = %s;"
+    val = (email,)
+    mycursor.execute(sql, val)
     myresult = mycursor.fetchone()[0]
 
     if password == myresult:
@@ -82,13 +94,9 @@ def verify_login(email, password):
         return False
 
 
-def main():
-    # mycursor.execute(
-    #     "INSERT INTO account VALUES ('lucas@gmail.com', 'Lucas', 'Carlsson', 'Lucas123', 20000, 15000);"
-    # )
-    # connection.commit()
-    disconnect()
-
-
-if __name__ == "__main__":
-    main()
+def register_account(email, first_name, last_name, password, income, expenses):
+    """Add new account to database."""
+    sql = "INSERT INTO account VALUES (%s, %s, %s, %s, %s, %s);"
+    val = (email, first_name, last_name, password, income, expenses)
+    mycursor.execute(sql, val)
+    connection.commit()
