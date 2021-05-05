@@ -132,9 +132,6 @@ class Ui_RegisterScreen(object):
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(290, 100, 47, 13))
         self.label_3.setObjectName("label_3")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(600, 360, 75, 23))
-        self.pushButton.setObjectName("pushButton")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(290, 100, 47, 13))
         self.label_3.setObjectName("label_3")
@@ -162,6 +159,9 @@ class Ui_RegisterScreen(object):
         self.label_8 = QtWidgets.QLabel(self.centralwidget)
         self.label_8.setGeometry(QtCore.QRect(290, 300, 61, 16))
         self.label_8.setObjectName("label_8")
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(600, 360, 75, 23))
+        self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(20, 360, 141, 23))
         self.pushButton_2.setObjectName("pushButton_2")
@@ -175,7 +175,7 @@ class Ui_RegisterScreen(object):
         MainWindow.setStatusBar(self.statusbar)
         self.popUp = QMessageBox()
         self.popUp.setWindowTitle("Error")
-        self.popUp.setText("Username/Password incorrect. Please try again")
+        self.popUp.setText("Email already exists, go back and log in")
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -447,12 +447,17 @@ class RegisterScreen(QMainWindow, Ui_RegisterScreen):
         self.pushButton_2.clicked.connect(self.goBack) # 
     
     def Register(self):
-        """Get username and password for register."""
-        username = self.lineEdit.text() # Get the text from the username lineedit
-        password = self.lineEdit_2.text() # Get the text from the password lineedit
+        """Get details for register function."""
+        val = (
+            self.lineEdit.text(), self.lineEdit_2.text(),   # Insert all the values
+            self.lineEdit_4.text(), self.lineEdit_3.text(), # from the lineedits
+            self.lineEdit_6.text(), self.lineEdit_5.text()  # into a tuple
+        )
         
-        if database_connection.register_account():
-            self.displayUi = MenuScreen() 
+        if database_connection.register_account(val):
+            self.popUp.setText("Registered successfully, please log in")
+            self.popUp.exec_()
+            self.displayUi = LoginScreen() 
             self.hide()
             self.displayUi.show()
         else:
@@ -525,6 +530,7 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
 if __name__ == "__main__":
     import sys
     customer = account.Account.getInstance()
+    print(database_connection.get_all_info("s"))
     app = QApplication(sys.argv)
     MainWindow = LoginScreen() # Use the login screen as the mainwindow to start
     MainWindow.show()
