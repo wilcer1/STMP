@@ -1,6 +1,8 @@
 import database_connection
 from account import Account
 
+# lucas@gmail.com Lucas123
+
 customer = Account()
 customer = customer.getCustomer()
 

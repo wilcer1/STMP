@@ -1,5 +1,6 @@
 """Database connection and quieries."""
 
+from account import Account
 import mysql.connector
 from mysql.connector import Error
 
@@ -43,7 +44,7 @@ def disconnect():
 
 def get_first_name(email):
     """Return first_name."""
-    sql = "SELECT password FROM account WHERE email = %s;"
+    sql = "SELECT first_name FROM account WHERE email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
     myresult = mycursor.fetchone()[0]
@@ -53,7 +54,7 @@ def get_first_name(email):
 
 def get_last_name(email):
     """Return last_name."""
-    sql = "SELECT password FROM account WHERE email = %s;"
+    sql = "SELECT last_name FROM account WHERE email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
     myresult = mycursor.fetchone()[0]
@@ -63,7 +64,7 @@ def get_last_name(email):
 
 def get_income(email):
     """Return income."""
-    sql = "SELECT password FROM account WHERE email = %s;"
+    sql = "SELECT income FROM account WHERE email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
     myresult = mycursor.fetchone()[0]
@@ -73,10 +74,20 @@ def get_income(email):
 
 def get_expenses(email):
     """Return expenses."""
-    sql = "SELECT password FROM account WHERE email = %s;"
+    sql = "SELECT expenses FROM account WHERE email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
     myresult = mycursor.fetchone()[0]
+
+    return myresult
+
+
+def get_all_info(email):
+    """Return all info."""
+    sql = "SELECT * FROM account WHERE email = %s;"
+    val = (email,)
+    mycursor.execute(sql, val)
+    myresult = mycursor.fetchone()
 
     return myresult
 
@@ -88,22 +99,58 @@ def verify_login(email, password):
     mycursor.execute(sql, val)
     try:
         myresult = mycursor.fetchone()[0]
-    except(TypeError):
+    except (TypeError):
         myresult = None
     finally:
         if password != myresult or myresult == None:
             return False
         else:
-            customer = Account()
-            customer = customer.setCustomer()
+            customer = Account.getInstance()
+            # customer = Account.getInstance()
+            customer.setCustomer(get_all_info(email))
             return True
 
-    
 
-
-def register_account(email, first_name, last_name, password, income, expenses):
+def register_account(val):
     """Add new account to database."""
-    sql = "INSERT INTO account VALUES (%s, %s, %s, %s, %s, %s);"
-    val = (email, first_name, last_name, password, income, expenses)
-    mycursor.execute(sql, val)
-    connection.commit()
+    # check if email is unique, return true if it is and create the acc. Otherwise return false
+    sql = "SELECT email FROM account;"
+    email = val[0]
+    mycursor.execute(sql)
+    res = mycursor.fetchall()
+    register = True
+    for x in res:
+        for i in x:
+            if email == i:
+                register = False
+                break
+
+    if register != False:
+        sql = "INSERT INTO account VALUES (%s, %s, %s, %s, %s, %s);"
+        mycursor.execute(sql, val)
+        connection.commit()           
+                
+    
+    return register
+
+       
+    
+    
+    
+    # try:
+        
+    # except(Error):
+    #     myresult = True
+    #    
+    #     val = (email, first_name, last_name, password, income, expenses)
+    #     mycursor.execute(sql, val)
+    #     connection.commit()
+    # else:
+    #     myresult = False
+    # finally: 
+    #     return myresult
+
+
+
+if __name__ == "__main__":
+    get_all_info("lucas@gmail.com")
