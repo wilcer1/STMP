@@ -560,7 +560,6 @@ if __name__ == "__main__":
     import sys
 
     customer = account.Account.getInstance()
-    print(database_connection.get_all_info("s"))
     app = QApplication(sys.argv)
     MainWindow = LoginScreen()  # Use the login screen as the mainwindow to start
     MainWindow.show()
