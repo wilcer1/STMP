@@ -16,6 +16,7 @@ import database_connection
 
 class Ui_LoginScreen(object):
     """Main Login Window."""
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(701, 561)
@@ -65,10 +66,14 @@ class Ui_LoginScreen(object):
         self.label_2.setText(_translate("MainWindow", "Password"))
         self.pushButton.setText(_translate("MainWindow", "Log in"))
         self.label_3.setText(_translate("MainWindow", "STMP"))
-        self.pushButton_2.setText(_translate("MainWindow", "Not Registered? Click here"))    
+        self.pushButton_2.setText(
+            _translate("MainWindow", "Not Registered? Click here")
+        )
+
 
 class Ui_MenuScreen(object):
     """Menu Window"""
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(601, 410)
@@ -110,8 +115,10 @@ class Ui_MenuScreen(object):
         self.pushButton_3.setText(_translate("MainWindow", "eee"))
         self.pushButton_4.setText(_translate("MainWindow", "PushButton"))
 
+
 class Ui_RegisterScreen(object):
     """Register window."""
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(700, 427)
@@ -191,7 +198,8 @@ class Ui_RegisterScreen(object):
         self.label_7.setText(_translate("MainWindow", "Income"))
         self.label_8.setText(_translate("MainWindow", "Expenses"))
         self.pushButton_2.setText(_translate("MainWindow", "Back"))
-    
+
+
 class Ui_BudgetChoiceScreen(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -220,13 +228,13 @@ class Ui_BudgetChoiceScreen(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton_2.setText(_translate("MainWindow", "Get help with budget"))
         self.pushButton_3.setText(_translate("MainWindow", "Make your own budget"))
         self.pushButton.setText(_translate("MainWindow", "Back"))
+
 
 class Ui_BudgetScreen(object):
     def setupUi(self, MainWindow):
@@ -394,70 +402,88 @@ class Ui_BudgetScreen(object):
         self.label_19.setText(_translate("MainWindow", "something"))
         self.label_20.setText(_translate("MainWindow", "SEK"))
         self.pushButton.setText(_translate("MainWindow", "Back"))
-        self.label_21.setText(_translate("MainWindow", "Your total monthly income in SEK:"))
+        self.label_21.setText(
+            _translate("MainWindow", "Your total monthly income in SEK:")
+        )
         self.pushButton_2.setText(_translate("MainWindow", "OK"))
+
 
 class LoginScreen(QMainWindow, Ui_LoginScreen):
     """Inherit from the code for the ui to have all information necessary."""
+
     # Login Screen Controller
     def __init__(self):
-        super().__init__() # Call the superclass constructor
-        self.setupUi(self) # Run the code that creates the UI layout
-        self.pushButton.clicked.connect(self.loginFunc) # Call function when button is pressed
-        self.pushButton_2.clicked.connect(self.registerFunc) #
-        
+        super().__init__()  # Call the superclass constructor
+        self.setupUi(self)  # Run the code that creates the UI layout
+        self.pushButton.clicked.connect(
+            self.loginFunc
+        )  # Call function when button is pressed
+        self.pushButton_2.clicked.connect(self.registerFunc)  #
 
     def loginFunc(self):
-        username = self.lineEdit.text() # Get the text from the username & password lineedit
-        password = self.lineEdit_2.text() #
+        username = (
+            self.lineEdit.text()
+        )  # Get the text from the username & password lineedit
+        password = self.lineEdit_2.text()  #
         # Check if password and username isnt empty, if it is, popup
         if database_connection.verify_login(username, password):
-            self.displayUi = MenuScreen() 
+            self.displayUi = MenuScreen()
             self.hide()
             self.displayUi.show()
         else:
             self.popUp.exec_()
-    
+
     def registerFunc(self):
         self.displayUi = RegisterScreen()
         self.hide()
         self.displayUi.show()
 
+
 class MenuScreen(QMainWindow, Ui_MenuScreen):
     """Inherit from the code for the ui to have all information necessary."""
+
     # Logged in menu screen Controller
     def __init__(self):
-        super().__init__() # Call the superclass constructor
-        self.setupUi(self) # Run the code that creates the UI layout
-        self.pushButton.clicked.connect(self.MakeBudget) # Call function when button is pressed
+        super().__init__()  # Call the superclass constructor
+        self.setupUi(self)  # Run the code that creates the UI layout
+        self.pushButton.clicked.connect(
+            self.MakeBudget
+        )  # Call function when button is pressed
 
     def MakeBudget(self):
         # display makebudget
-        self.displayUi = BudgetChoiceScreen() 
+        self.displayUi = BudgetChoiceScreen()
         self.hide()
         self.displayUi.show()
-        
+
+
 class RegisterScreen(QMainWindow, Ui_RegisterScreen):
     """Inherit from the code for the ui to have all information necessary."""
+
     # Register user window controller
     def __init__(self):
-        super().__init__() # Call the superclass constructor
-        self.setupUi(self) # Run the code that creates the UI layout
-        self.pushButton.clicked.connect(self.Register) # Call function when button is pressed
-        self.pushButton_2.clicked.connect(self.goBack) # 
-    
+        super().__init__()  # Call the superclass constructor
+        self.setupUi(self)  # Run the code that creates the UI layout
+        self.pushButton.clicked.connect(
+            self.Register
+        )  # Call function when button is pressed
+        self.pushButton_2.clicked.connect(self.goBack)  #
+
     def Register(self):
         """Get details for register function."""
         val = (
-            self.lineEdit.text(), self.lineEdit_2.text(),   # Insert all the values
-            self.lineEdit_4.text(), self.lineEdit_3.text(), # from the lineedits
-            self.lineEdit_6.text(), self.lineEdit_5.text()  # into a tuple
+            self.lineEdit.text(),
+            self.lineEdit_2.text(),  # Insert all the values
+            self.lineEdit_4.text(),
+            self.lineEdit_3.text(),  # from the lineedits
+            self.lineEdit_6.text(),
+            self.lineEdit_5.text(),  # into a tuple
         )
-        
+
         if database_connection.register_account(val):
             self.popUp.setText("Registered successfully, please log in")
             self.popUp.exec_()
-            self.displayUi = LoginScreen() 
+            self.displayUi = LoginScreen()
             self.hide()
             self.displayUi.show()
         else:
@@ -465,53 +491,60 @@ class RegisterScreen(QMainWindow, Ui_RegisterScreen):
 
     def goBack(self):
         """ Go back to login page."""
-        self.displayUi = LoginScreen() 
+        self.displayUi = LoginScreen()
         self.hide()
         self.displayUi.show()
-    
+
+
 class BudgetChoiceScreen(QMainWindow, Ui_BudgetChoiceScreen):
     """Inherit from the code for the ui to have all information necessary."""
+
     # Login Screen Controller
     def __init__(self):
-        super().__init__() # Call the superclass constructor
-        self.setupUi(self) # Run the code that creates the UI layout
-        self.pushButton_3.clicked.connect(self.Manual) # Call function when button is pressed
-        self.pushButton_2.clicked.connect(self.Auto) #  -""-
-        self.pushButton.clicked.connect(self.goBack) #    -""-
+        super().__init__()  # Call the superclass constructor
+        self.setupUi(self)  # Run the code that creates the UI layout
+        self.pushButton_3.clicked.connect(
+            self.Manual
+        )  # Call function when button is pressed
+        self.pushButton_2.clicked.connect(self.Auto)  #  -""-
+        self.pushButton.clicked.connect(self.goBack)  #    -""-
 
     def Manual(self):
-        self.displayUi = BudgetScreen() 
+        self.displayUi = BudgetScreen()
         self.hide()
         self.displayUi.show()
+
     def Auto(self):
         pass
+
     def goBack(self):
-        self.displayUi = MenuScreen() 
+        self.displayUi = MenuScreen()
         self.hide()
         self.displayUi.show()
+
 
 class BudgetScreen(QMainWindow, Ui_BudgetScreen):
     # Budget Screen Controller
     def __init__(self):
-        super().__init__() # Call the superclass constructor
-        self.setupUi(self) # Run the code that creates the UI layout
+        super().__init__()  # Call the superclass constructor
+        self.setupUi(self)  # Run the code that creates the UI layout
         self.pushButton.clicked.connect(self.goBack)
         self.pushButton_2.clicked.connect(self.updateIncome)
-    
+
     def goBack(self):
-        self.displayUi = BudgetChoiceScreen() 
+        self.displayUi = BudgetChoiceScreen()
         self.hide()
         self.displayUi.show()
-    
+
     def updateIncome(self):
-        income = self.lineEdit.text() # Get the lineedit text with the income
+        income = self.lineEdit.text()  # Get the lineedit text with the income
         # if income isInstance(int) and income > 0:
-        income = int(income) # convert it to int
+        income = int(income)  # convert it to int
         self.label_2.setText(f"{income} SEK")  # set the income in GUI
-        self.lineEdit.clear() # Clear the lineedit
+        self.lineEdit.clear()  # Clear the lineedit
 
         """Set the labels to 1/5 of the income if its not < 0"""
-            
+
         self.label_4.setText(f"{income / 5} SEK")
         self.label_6.setText(f"{income / 5} SEK")
         self.label_8.setText(f"{income / 5} SEK")
@@ -521,17 +554,14 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         self.label_15.setText(f"{income / 5} SEK")
         self.label_16.setText(f"{income / 5} SEK")
         self.label_20.setText(f"{income / 5} SEK")
-        # else:
-        #     self.popUp.exec_()
-
-    
 
 
 if __name__ == "__main__":
     import sys
+
     customer = account.Account.getInstance()
     print(database_connection.get_all_info("s"))
     app = QApplication(sys.argv)
-    MainWindow = LoginScreen() # Use the login screen as the mainwindow to start
+    MainWindow = LoginScreen()  # Use the login screen as the mainwindow to start
     MainWindow.show()
     sys.exit(app.exec_())

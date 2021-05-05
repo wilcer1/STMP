@@ -33,15 +33,6 @@ def disconnect():
         print(e)
 
 
-# def show_account():
-#     print("Show Columns in account")
-#     mycursor.execute("show columns from account;")
-#     myresult = mycursor.fetchall()
-
-#     for x in myresult:
-#         print(x)
-
-
 def get_first_name(email):
     """Return first_name."""
     sql = "SELECT first_name FROM account WHERE email = %s;"
@@ -102,18 +93,18 @@ def verify_login(email, password):
     except (TypeError):
         myresult = None
     finally:
-        if password != myresult or myresult == None:
+        if password != myresult or myresult is None:
             return False
         else:
             customer = Account.getInstance()
-            # customer = Account.getInstance()
             customer.setCustomer(get_all_info(email))
             return True
 
 
 def register_account(val):
     """Add new account to database."""
-    # check if email is unique, return true if it is and create the acc. Otherwise return false
+    # check if email is unique, return true if it is and create the acc.
+    # Otherwise return false
     sql = "SELECT email FROM account;"
     email = val[0]
     mycursor.execute(sql)
@@ -125,31 +116,11 @@ def register_account(val):
                 register = False
                 break
 
-    if register != False:
+    if register is not False:
         sql = "INSERT INTO account VALUES (%s, %s, %s, %s, %s, %s);"
         mycursor.execute(sql, val)
-        connection.commit()           
-                
-    
+        connection.commit()
     return register
-
-       
-    
-    
-    
-    # try:
-        
-    # except(Error):
-    #     myresult = True
-    #    
-    #     val = (email, first_name, last_name, password, income, expenses)
-    #     mycursor.execute(sql, val)
-    #     connection.commit()
-    # else:
-    #     myresult = False
-    # finally: 
-    #     return myresult
-
 
 
 if __name__ == "__main__":
