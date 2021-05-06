@@ -122,6 +122,7 @@ def register_account(val):
         connection.commit()
     return register
 
+# def updateIncome
 
 if __name__ == "__main__":
     get_all_info("lucas@gmail.com")
