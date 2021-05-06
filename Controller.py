@@ -154,18 +154,12 @@ class Ui_RegisterScreen(object):
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
         self.label_6.setGeometry(QtCore.QRect(290, 200, 61, 16))
         self.label_6.setObjectName("label_6")
-        self.income = QtWidgets.QLineEdit(self.centralwidget)
-        self.income.setGeometry(QtCore.QRect(290, 320, 113, 20))
-        self.income.setObjectName("income")
-        self.expenses = QtWidgets.QLineEdit(self.centralwidget)
-        self.expenses.setGeometry(QtCore.QRect(290, 270, 113, 20))
-        self.expenses.setObjectName("expenses")
-        self.label_7 = QtWidgets.QLabel(self.centralwidget)
-        self.label_7.setGeometry(QtCore.QRect(290, 250, 47, 13))
-        self.label_7.setObjectName("label_7")
-        self.label_8 = QtWidgets.QLabel(self.centralwidget)
-        self.label_8.setGeometry(QtCore.QRect(290, 300, 61, 16))
-        self.label_8.setObjectName("label_8")
+        # self.income = QtWidgets.QLineEdit(self.centralwidget)
+        # self.income.setGeometry(QtCore.QRect(290, 320, 113, 20))
+        # self.income.setObjectName("income")
+        # self.expenses = QtWidgets.QLineEdit(self.centralwidget)
+        # self.expenses.setGeometry(QtCore.QRect(290, 270, 113, 20))
+        # self.expenses.setObjectName("expenses")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(600, 360, 75, 23))
         self.pushButton.setObjectName("pushButton")
@@ -195,8 +189,6 @@ class Ui_RegisterScreen(object):
         self.pushButton.setText(_translate("MainWindow", "Register"))
         self.label_5.setText(_translate("MainWindow", "First name"))
         self.label_6.setText(_translate("MainWindow", "Last name"))
-        self.label_7.setText(_translate("MainWindow", "Income"))
-        self.label_8.setText(_translate("MainWindow", "Expenses"))
         self.pushButton_2.setText(_translate("MainWindow", "Back"))
 
 
@@ -389,32 +381,18 @@ class RegisterScreen(QMainWindow, Ui_RegisterScreen):
             self.firstname.text(),
             self.lastname.text(),  # from the lineedits
         )
-        try:
-            self.income = float(self.income.text())
-            self.expenses = float(self.expenses.text())
-        except(Exception):
-            self.popUp.setText("Income and expenses can only be int/float")
-            self.popUp.exec_()
-        else:
-            val = (
-            self.username.text(),
-            self.password.text(),  # Insert all the values
-            self.firstname.text(),
-            self.lastname.text(),  # from the lineedits
-            self.income,
-            self.expenses,
-            )
+        
         
         
 
-            if database_connection.register_account(val):
-                self.popUp.setText("Registered successfully, please log in")
-                self.popUp.exec_()
-                self.displayUi = LoginScreen()
-                self.hide()
-                self.displayUi.show()
-            else:
-                self.popUp.exec_()
+        if database_connection.register_account(val):
+            self.popUp.setText("Registered successfully, please log in")
+            self.popUp.exec_()
+            self.displayUi = LoginScreen()
+            self.hide()
+            self.displayUi.show()
+        else:
+            self.popUp.exec_()
 
     def goBack(self):
         """ Go back to login page."""
@@ -468,6 +446,7 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
     def saveChange(self):
         self.customer.income = float(self.incomeItem.text())
         self.incomeItem.setText(f"{self.customer.income}")
+        
 
 
     def goBack(self):
