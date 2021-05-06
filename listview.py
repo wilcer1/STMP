@@ -9,7 +9,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import *
 
 
 class Ui_MainWindow(object):
@@ -23,16 +22,18 @@ class Ui_MainWindow(object):
         self.label.setGeometry(QtCore.QRect(80, 20, 47, 21))
         self.label.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.label.setAlignment(QtCore.Qt.AlignCenter)
-        self.label.setObjectName("incomeLabel")
+        self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(450, 20, 51, 21))
         self.label_2.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_2.setObjectName("expensesLabel")
+        self.label_2.setObjectName("label_2")
         self.listOfIncome = QtWidgets.QListWidget(self.centralwidget)
         self.listOfIncome.setGeometry(QtCore.QRect(80, 50, 121, 391))
         self.listOfIncome.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.listOfIncome.setObjectName("listOfIncome")
+        item = QtWidgets.QListWidgetItem()
+        self.listOfIncome.addItem(item)
         self.listOfExpenses = QtWidgets.QListWidget(self.centralwidget)
         self.listOfExpenses.setGeometry(QtCore.QRect(450, 50, 131, 391))
         self.listOfExpenses.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -50,6 +51,9 @@ class Ui_MainWindow(object):
         self.listOfIncomeSEK.setGeometry(QtCore.QRect(200, 50, 141, 391))
         self.listOfIncomeSEK.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.listOfIncomeSEK.setObjectName("listOfIncomeSEK")
+        item = QtWidgets.QListWidgetItem()
+        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsEditable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        self.listOfIncomeSEK.addItem(item)
         self.listOfExpensesSEK = QtWidgets.QListWidget(self.centralwidget)
         self.listOfExpensesSEK.setGeometry(QtCore.QRect(580, 50, 131, 391))
         self.listOfExpensesSEK.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -71,24 +75,25 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "Income"))
         self.label_2.setText(_translate("MainWindow", "Expenses"))
+        __sortingEnabled = self.listOfIncome.isSortingEnabled()
+        self.listOfIncome.setSortingEnabled(False)
+        item = self.listOfIncome.item(0)
+        item.setText(_translate("MainWindow", "Income"))
+        self.listOfIncome.setSortingEnabled(__sortingEnabled)
         self.moneyleftLabel.setText(_translate("MainWindow", "Money left to spend:"))
         self.saveButton.setText(_translate("MainWindow", "Save"))
-
-class BudgetScreen(QMainWindow, Ui_MainWindow):
-
-    def __init__(self):
-        super().__init__()  # Call the superclass constructor
-        self.setupUi(self)  # Run the code that creates the UI layout
-        self.listOfIncomeSources = ["Salary"]
-        self.listOfIncome.addItems(self.listOfIncomeSources)
-        self.listOfIncomeSourcesSEK = ["20000 SEK"]
-        self.listOfIncomeSEK.addItems(self.listOfIncomeSourcesSEK)
-
+        __sortingEnabled = self.listOfIncomeSEK.isSortingEnabled()
+        self.listOfIncomeSEK.setSortingEnabled(False)
+        item = self.listOfIncomeSEK.item(0)
+        item.setText(_translate("MainWindow", "0"))
+        self.listOfIncomeSEK.setSortingEnabled(__sortingEnabled)
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = BudgetScreen()
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
