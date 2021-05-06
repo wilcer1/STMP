@@ -1,26 +1,26 @@
-class Account():
+class Account:
     __instance = None
 
-    @staticmethod 
+    @staticmethod
     def getInstance():
-      """ Static access method. """
-      if Account.__instance == None:
-        Account()
-    
-      return Account.__instance
+        """ Static access method. """
+        if Account.__instance == None:
+            Account()
+
+        return Account.__instance
 
     def __init__(self):
-      """ Virtually private constructor. """
-      if Account.__instance != None:
-        raise Exception("This class is a Account!")
-      else:
-        Account.__instance = self
-        self.email = None
-        self.first_name = None
-        self.last_name = None
-        self.password = None
-        self.income = None
-        self.expenses = None
+        """ Virtually private constructor. """
+        if Account.__instance != None:
+            raise Exception("This class is a Account!")
+        else:
+            Account.__instance = self
+            self.email = None
+            self.first_name = None
+            self.last_name = None
+            self.password = None
+            self.income = None  # list of tuples
+            self.expenses = None  # list of tuples
 
     def setCustomer(self, details):
         self.email = details[0]
@@ -32,7 +32,3 @@ class Account():
 
     def getCustomer(self):
         return self
-    
-
-   
-        

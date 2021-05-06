@@ -117,7 +117,7 @@ def register_account(val):
                 break
 
     if register is not False:
-        sql = "INSERT INTO account VALUES (%s, %s, %s, %s, %s, %s);"
+        sql = "INSERT INTO account VALUES (%s, %s, %s, %s);"
         mycursor.execute(sql, val)
         connection.commit()
     return register
