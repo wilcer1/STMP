@@ -491,8 +491,71 @@ class Ui_BudgetScreen(object):
         self.backButton.setText(_translate("MainWindow", "Back"))
         self.label_3.setText(_translate("MainWindow", "put money left here"))
 
+class Ui_SavinggoalScreen(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(606, 271)
+        MainWindow.setStyleSheet("background-color: rgb(3, 130, 168);")
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(50, 20, 71, 21))
+        self.label.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setWordWrap(True)
+        self.label.setObjectName("label")
+        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit.setGeometry(QtCore.QRect(50, 70, 141, 20))
+        self.lineEdit.setToolTip("")
+        self.lineEdit.setAccessibleDescription("")
+        self.lineEdit.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.lineEdit.setInputMask("")
+        self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_2.setGeometry(QtCore.QRect(50, 110, 141, 20))
+        self.lineEdit_2.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(50, 150, 141, 21))
+        self.label_2.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.label_2.setText("")
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(440, 30, 151, 71))
+        self.label_3.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.label_3.setTextFormat(QtCore.Qt.RichText)
+        self.label_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.label_3.setObjectName("label_3")
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(490, 200, 101, 23))
+        self.pushButton.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.setGeometry(QtCore.QRect(210, 150, 61, 21))
+        self.pushButton_2.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.pushButton_2.setObjectName("pushButton")
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 606, 21))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
 
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.label.setText(_translate("MainWindow", "Saving goal"))
+        self.lineEdit.setPlaceholderText(_translate("MainWindow", "Amount to save per month"))
+        self.lineEdit_2.setPlaceholderText(_translate("MainWindow", "Your saving goal"))
+        self.label_3.setText(_translate("MainWindow", "<html><head/><body><p>Play around and see how long </p><p>it would take to reach your</p><p>saving goal or buffert</p></body></html>"))
+        self.pushButton.setText(_translate("MainWindow", "Back"))
+        self.pushButton_2.setText(_translate("MainWindow", "Calculate"))
 class LoginScreen(QMainWindow, Ui_LoginScreen):
     """Inherit from the code for the ui to have all information necessary."""
 
@@ -535,10 +598,16 @@ class MenuScreen(QMainWindow, Ui_MenuScreen):
             self.MakeBudget
         )  # Call function when button is pressed
         self.pushButton_5.clicked.connect(self.logOut)
+        self.pushButton_2.clicked.connect(self.longtermSaving)
 
     def MakeBudget(self):
         # display makebudget
         self.displayUi = BudgetChoiceScreen()
+        self.hide()
+        self.displayUi.show()
+    
+    def longtermSaving(self):
+        self.displayUi = SavingGoal()
         self.hide()
         self.displayUi.show()
     
@@ -639,7 +708,26 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         self.hide()
         self.displayUi.show()
 
-    
+class SavingGoal(QMainWindow, Ui_SavinggoalScreen):
+
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.pushButton.clicked.connect(self.goBack)
+        self.pushButton_2.clicked.connect(self.calculate)
+        
+
+    def goBack(self):
+        self.displayUi = MenuScreen()
+        self.hide()
+        self.displayUi.show()
+
+    def calculate(self):
+        amountPerMonth = int(self.lineEdit.text())
+        savingGoal = int(self.lineEdit_2.text())
+        timeToReach = savingGoal / amountPerMonth
+        self.label2.setText(f"It will take {timeToReach} months to reach your goal")
+
 
 
 if __name__ == "__main__":
