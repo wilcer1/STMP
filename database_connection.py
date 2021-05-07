@@ -75,7 +75,7 @@ def get_expenses(email):
 
 def get_all_info(email):
     """Return all info."""
-    sql = "SELECT * FROM account, income WHERE email = %s;;"
+    sql = "SELECT * FROM fixed_expenses, variable_expenses INNER JOIN account ON budget_budget_id = account.email WHERE email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
     myresult = mycursor.fetchone()
@@ -124,4 +124,4 @@ def register_account(val):
 
 
 if __name__ == "__main__":
-    get_all_info("s")
+    get_all_info("lucas@gmail.com")
