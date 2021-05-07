@@ -122,6 +122,9 @@ def register_account(val):
         connection.commit()
     return register
 
+def logOut():
+    sql = "INSERT INTO account VALUES (%s, %s, %s, %s);"
+
 
 if __name__ == "__main__":
     get_all_info("s")
