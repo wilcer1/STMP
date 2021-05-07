@@ -55,7 +55,7 @@ def get_last_name(email):
 
 def get_income(email):
     """Return income."""
-    sql = "SELECT income FROM account WHERE email = %s;"
+    sql = "SELECT income.name, income.value From income Right join account ON budget_budget_id = account.email WHERE email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
     myresult = mycursor.fetchone()[0]
@@ -75,7 +75,7 @@ def get_expenses(email):
 
 def get_all_info(email):
     """Return all info."""
-    sql = "SELECT * FROM account WHERE email = %s;"
+    sql = "SELECT * FROM account, income WHERE email = %s;;"
     val = (email,)
     mycursor.execute(sql, val)
     myresult = mycursor.fetchone()
@@ -127,4 +127,4 @@ def logOut():
 
 
 if __name__ == "__main__":
-    get_all_info("lucas@gmail.com")
+    get_all_info("s")
