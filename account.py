@@ -30,5 +30,6 @@ class Account:
         self.income = 0
         self.expenses = 0
 
-    def getCustomer(self):
-        return self
+    def logOut(self):
+        Account.__instance = None
+    
