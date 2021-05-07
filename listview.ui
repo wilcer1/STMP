@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>572</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -69,7 +69,23 @@
     </property>
     <item>
      <property name="text">
-      <string>Income</string>
+      <string>Type:</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Total Income</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string/>
      </property>
     </item>
    </widget>
@@ -87,7 +103,38 @@
     </property>
     <item>
      <property name="text">
-      <string>Fixed expenses</string>
+      <string>Type:</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Fixed expenses:</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Subscriptions</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Insurance</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Rent</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Others</string>
      </property>
     </item>
     <item>
@@ -112,12 +159,42 @@
     </item>
     <item>
      <property name="text">
-      <string/>
+      <string>Variable expenses:</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>Variable expenses</string>
+      <string>Transportation</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Entertainment</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Clothes</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Hygien</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Food</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Bills</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Others</string>
      </property>
     </item>
    </widget>
@@ -125,9 +202,9 @@
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>490</y>
+      <y>470</y>
       <width>131</width>
-      <height>31</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -137,13 +214,13 @@
      <string>Money left to spend:</string>
     </property>
     <property name="alignment">
-     <set>Qt::AlignCenter</set>
+     <set>Qt::AlignHCenter|Qt::AlignTop</set>
     </property>
    </widget>
    <widget class="QPushButton" name="saveButton">
     <property name="geometry">
      <rect>
-      <x>670</x>
+      <x>700</x>
       <y>480</y>
       <width>75</width>
       <height>23</height>
@@ -170,10 +247,26 @@
     </property>
     <item>
      <property name="text">
+      <string>Amount:</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </item>
+    <item>
+     <property name="text">
       <string>0</string>
      </property>
      <property name="flags">
       <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string/>
      </property>
     </item>
    </widget>
@@ -189,12 +282,141 @@
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
+    <item>
+     <property name="text">
+      <string>Amount:</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>totalFixed</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Subscriptions</string>
+     </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>insurance</string>
+     </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>rent</string>
+     </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>other</string>
+     </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>totalvariable</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>transport</string>
+     </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>entertainment</string>
+     </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>clothes</string>
+     </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>hygien</string>
+     </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>food</string>
+     </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>bills</string>
+     </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>others</string>
+     </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+     </property>
+    </item>
    </widget>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>500</y>
+      <y>480</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -204,6 +426,22 @@
     </property>
     <property name="text">
      <string>Back</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>490</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>put money left here</string>
     </property>
    </widget>
   </widget>
