@@ -27,8 +27,8 @@ class Account:
         self.first_name = details[1]
         self.last_name = details[2]
         self.password = details[3]
-        self.income = 0
-        self.expenses = 0
+        self.income = []
+        self.expenses = []
 
     def logOut(self):
         Account.__instance = None

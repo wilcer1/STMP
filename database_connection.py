@@ -16,6 +16,7 @@ try:
     mycursor = connection.cursor()
     if connection.is_connected():
         print("Connected")
+        
 
 except Error as e:
     print(e)
@@ -79,7 +80,13 @@ def get_all_info(email):
     val = (email,)
     mycursor.execute(sql, val)
     myresult = mycursor.fetchone()
+    return myresult
 
+def getBasicInfo(email):
+    sql = "SELECT * FROM account WHERE email = %s;"
+    val = (email,)
+    mycursor.execute(sql, val)
+    myresult = mycursor.fetchone()
     return myresult
 
 
@@ -97,7 +104,7 @@ def verify_login(email, password):
             return False
         else:
             customer = Account.getInstance()
-            customer.setCustomer(get_all_info(email))
+            customer.setCustomer(getBasicInfo(email))
             return True
 
 
@@ -127,4 +134,4 @@ def logOut():
 
 
 if __name__ == "__main__":
-    get_all_info("lucas@gmail.com")
+    getBasicInfo("s")
