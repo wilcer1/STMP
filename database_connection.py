@@ -3,8 +3,11 @@
 from account import Account
 import mysql.connector
 from mysql.connector import Error
+from datetime import datetime
 
+current_date = datetime.today().strftime('%Y-%m-%d')
 connection = None
+
 
 try:
     connection = mysql.connector.connect(
@@ -73,10 +76,11 @@ def set_variable_expenses(email, var_exp):
     for x in var_exp:
         val.append(var_exp[x])
 
-    sql = "INSERT INTO variable_expenses VALUES %s, %s, %s, %s, %s, %s, %s, %s;"
+    sql = "INSERT INTO variable_expenses VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
+
 
     mycursor.execute(sql, tuple(val))
-    mycursor.commit()
+    connection.commit()
 
 
 def get_variable_expenses(email):
@@ -164,6 +168,10 @@ def register_account(val):
         sql = "INSERT INTO account VALUES (%s, %s, %s, %s, %s);"
         mycursor.execute(sql, val)
         connection.commit()
+        sql = "INSERT INTO budget VALUES (%s, %s, %s, %s, %s);"
+        val = (email, 0, 0, current_date, 0)
+        mycursor.execute(sql, val)
+        connection.commit()
 
     return register
 
@@ -198,5 +206,5 @@ def new_customer(email):
 
 
 if __name__ == "__main__":
-    print(get_variable_expenses("a"))
+    
     disconnect()

@@ -853,21 +853,22 @@ class FirstLoginScreen(QMainWindow, Ui_FirstLoginScreen):
     def save_change(self):
         income = self.listOfIncomeSEK.item(1)
         fixed_expenses = {
-                            "subscriptions" : int(self.listOfExpensesSEK.item(2).text()),
-                            "insurance" : int(self.listOfExpensesSEK.item(3).text()),
-                            "rent" : int(self.listOfExpensesSEK.item(4).text()),
-                            "others" : int(self.listOfExpensesSEK.item(5).text())
+                            "subscriptions" : float(self.listOfExpensesSEK.item(2).text()),
+                            "insurance" : float(self.listOfExpensesSEK.item(3).text()),
+                            "rent" : float(self.listOfExpensesSEK.item(4).text()),
+                            "others" : float(self.listOfExpensesSEK.item(5).text())
                         }   
         variable_expenses = {
-                            "food" :  int(self.listOfExpensesSEK.item(11).text()),
-                            "bills" :  int(self.listOfExpensesSEK.item(12).text()),
-                            "transportation" :  int(self.listOfExpensesSEK.item(13).text()),
-                            "hygien" :  int(self.listOfExpensesSEK.item(14).text()),
-                            "clothes" :  int(self.listOfExpensesSEK.item(15).text()),
-                            "entertainment" :  int(self.listOfExpensesSEK.item(16).text()),
-                            "others" :  int(self.listOfExpensesSEK.item(17).text())             
+                            "food" :  float(self.listOfExpensesSEK.item(11).text()),
+                            "bills" :  float(self.listOfExpensesSEK.item(12).text()),
+                            "transportation" :  float(self.listOfExpensesSEK.item(13).text()),
+                            "hygien" :  float(self.listOfExpensesSEK.item(14).text()),
+                            "clothes" :  float(self.listOfExpensesSEK.item(15).text()),
+                            "entertainment" :  float(self.listOfExpensesSEK.item(16).text()),
+                            "others" :  float(self.listOfExpensesSEK.item(17).text())             
                         }   
         customer.budget.set_budget(income, fixed_expenses, variable_expenses)
+        database_connection.set_variable_expenses(customer.email, variable_expenses)
         self.displayUi = MenuScreen()
         self.hide()
         self.displayUi.show()
@@ -1017,10 +1018,10 @@ class SavingGoal(QMainWindow, Ui_SavinggoalScreen):
         self.displayUi.show()
 
     def calculate(self):
-        amountPerMonth = int(self.lineEdit.text())
-        savingGoal = int(self.lineEdit_2.text())
+        amountPerMonth = float(self.lineEdit.text())
+        savingGoal = float(self.lineEdit_2.text())
         timeToReach = savingGoal / amountPerMonth
-        self.label2.setText(f"It will take {timeToReach} months to reach your goal")
+        self.label_2.setText(f"It will take {timeToReach} months to reach your goal")
 
 
 
