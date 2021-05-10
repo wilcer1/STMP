@@ -71,7 +71,16 @@ def set_variable_expenses(email, var_exp):
     mycursor.execute(sql, tuple(val))
     connection.commit()
 
+def update_variable_expenses(email, var_exp):
+     """update variable_expenses."""
+    val = []
+    for x in var_exp:
+        val.append(var_exp[x])
+    val.append(email)
+    sql = "UPDATE variable_expenses SET food = %s, bills = %s, transportation = %s, hygien = %s, clothes = %s, entertainment = %s, others = %s WHERE budget_account_email = %s);"
 
+    mycursor.execute(sql, tuple(val))
+    connection.commit()
 def get_variable_expenses(email):
     """Return variable_expenses."""
     sql = "SELECT * FROM variable_expenses WHERE budget_account_email = %s;"
