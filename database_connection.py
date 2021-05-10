@@ -82,7 +82,7 @@ def get_all_info(email):
     myresult = mycursor.fetchone()
     return myresult
 
-def getBasicInfo(email):
+def get_basic_info(email):
     sql = "SELECT * FROM account WHERE email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
@@ -129,9 +129,20 @@ def register_account(val):
         connection.commit()
     return register
 
-def logOut():
+def log_out():
     sql = "INSERT INTO account VALUES (%s, %s, %s, %s);"
 
+def check_email(email):
+    import re
+    # Make a regular expression
+    # for validating an Email
+    regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
+
+    if(re.search(regex, email)):
+        return True
+ 
+    else:
+        return False
 
 if __name__ == "__main__":
     getBasicInfo("s")
