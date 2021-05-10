@@ -1,8 +1,8 @@
 class Budget():
     def __init__(self):
         self.income = 0
-        self.variable_expenses = None
-        self.fixed_expenses = None
+        self.variable_expenses = {}
+        self.fixed_expenses = {}
 
     def set_budget(self, income, variable_expenses, fixed_expenses):
        
