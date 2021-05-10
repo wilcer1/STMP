@@ -5,7 +5,7 @@ import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
 
-current_date = datetime.today().strftime('%Y-%m-%d')
+current_date = datetime.today().strftime("%Y-%m-%d")
 connection = None
 
 
@@ -78,13 +78,12 @@ def set_variable_expenses(email, var_exp):
 
     sql = "INSERT INTO variable_expenses VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
 
-
     mycursor.execute(sql, tuple(val))
     connection.commit()
 
 
 def get_variable_expenses(email):
-    """Return expenses."""
+    """Return variable_expenses."""
     sql = "SELECT * FROM variable_expenses WHERE budget_account_email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
@@ -109,6 +108,41 @@ def get_variable_expenses(email):
         }
 
         return variable_expenses
+
+
+def set_fixed_expenses(email, var_exp):
+    """Set fixed_expenses."""
+    val = []
+    val.append(email)
+    for x in var_exp:
+        val.append(var_exp[x])
+
+    sql = "INSERT INTO fixed_expenses VALUES (%s, %s, %s, %s, %s);"
+
+    mycursor.execute(sql, tuple(val))
+    connection.commit()
+
+
+def get_fixed_expenses(email):
+    """Return fixed_expenses."""
+    sql = "SELECT * FROM fixed_expenses WHERE budget_account_email = %s;"
+    val = (email,)
+    mycursor.execute(sql, val)
+    myresult = mycursor.fetchone()
+    if myresult is not None:
+        rent = myresult[1]
+        subscription = myresult[2]
+        insurance = myresult[3]
+        others = myresult[4]
+
+        fixed_expenses = {
+            "rent": rent,
+            "subscription": subscription,
+            "insurance": insurance,
+            "others": others,
+        }
+
+        return fixed_expenses
 
 
 def get_all_info(email):
@@ -209,5 +243,5 @@ def new_customer(email):
 
 
 if __name__ == "__main__":
-    
+
     disconnect()
