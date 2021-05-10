@@ -15,11 +15,13 @@ class Budget():
         """Add the expenses together and return."""
         total_fix = 0
         total_var = 0
+     
+        for key in self.fixed_expenses:
+            total_fix += self.fixed_expenses[key]
+
         for key in self.variable_expenses:
             total_var += self.variable_expenses[key]
 
-        for key in self.fixed_expenses:
-            total_fix += self.fixed_expenses[key]
 
         return str(total_fix), str(total_var)
     

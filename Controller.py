@@ -686,17 +686,17 @@ class Ui_BudgetScreen(object):
         item = self.listOfExpenses.item(10)
         item.setText(_translate("MainWindow", "Variable expenses:"))
         item = self.listOfExpenses.item(11)
-        item.setText(_translate("MainWindow", "Transportation"))
+        item.setText(_translate("MainWindow", "Food"))
         item = self.listOfExpenses.item(12)
-        item.setText(_translate("MainWindow", "Entertainment"))
+        item.setText(_translate("MainWindow", "Bills"))
         item = self.listOfExpenses.item(13)
-        item.setText(_translate("MainWindow", "Clothes"))
+        item.setText(_translate("MainWindow", "Transportation"))
         item = self.listOfExpenses.item(14)
         item.setText(_translate("MainWindow", "Hygien"))
         item = self.listOfExpenses.item(15)
-        item.setText(_translate("MainWindow", "Food"))
+        item.setText(_translate("MainWindow", "Clothes"))
         item = self.listOfExpenses.item(16)
-        item.setText(_translate("MainWindow", "Bills"))
+        item.setText(_translate("MainWindow", "Entertainment"))
         item = self.listOfExpenses.item(17)
         item.setText(_translate("MainWindow", "Others"))
         self.listOfExpenses.setSortingEnabled(__sortingEnabled)
@@ -1022,9 +1022,11 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
                         }   
         customer.budget.set_budget(customer.budget.income, fixed_expenses, variable_expenses)
         # update instead of set
-        # DB.set_variable_expenses(customer.email, variable_expenses)
+        DB.update_variable_expenses(customer.email, variable_expenses)
         # DB.set_fixed_expenses(customer.email, fixed_expenses)
-
+        total_fix, total_var = customer.budget.get_expenses()
+        self.listOfExpensesSEK.item(1).setText(total_var)
+        self.listOfExpensesSEK.item(10).setText(total_fix)
 
     def go_back(self):
         self.displayUi = BudgetChoiceScreen()
@@ -1040,12 +1042,12 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         self.listOfExpensesSEK.item(4).setText(str(fix_exp["rent"]))
         self.listOfExpensesSEK.item(5).setText(str(fix_exp["others"]))
 
-        self.listOfExpensesSEK.item(11).setText(str(var_exp["transportation"]))
-        self.listOfExpensesSEK.item(12).setText(str(var_exp["entertainment"]))
-        self.listOfExpensesSEK.item(13).setText(str(var_exp["clothes"]))
+        self.listOfExpensesSEK.item(11).setText(str(var_exp["food"]))
+        self.listOfExpensesSEK.item(12).setText(str(var_exp["bills"]))
+        self.listOfExpensesSEK.item(13).setText(str(var_exp["transportation"]))
         self.listOfExpensesSEK.item(14).setText(str(var_exp["hygien"]))
-        self.listOfExpensesSEK.item(15).setText(str(var_exp["food"]))
-        self.listOfExpensesSEK.item(16).setText(str(var_exp["bills"]))
+        self.listOfExpensesSEK.item(15).setText(str(var_exp["clothes"]))
+        self.listOfExpensesSEK.item(16).setText(str(var_exp["entertainment"]))
         self.listOfExpensesSEK.item(17).setText(str(var_exp["others"]))
 
 
