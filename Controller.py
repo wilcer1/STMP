@@ -599,7 +599,7 @@ class MenuScreen(QMainWindow, Ui_MenuScreen):
         self.pushButton.clicked.connect(
             self.MakeBudget
         )  # Call function when button is pressed
-        self.pushButton_5.clicked.connect(self.logOut)
+        self.pushButton_5.clicked.connect(self.log_out)
         self.pushButton_2.clicked.connect(self.longtermSaving)
 
     def MakeBudget(self):
@@ -613,8 +613,8 @@ class MenuScreen(QMainWindow, Ui_MenuScreen):
         self.hide()
         self.displayUi.show()
     
-    def logOut(self):
-        database_connection.logOut()
+    def log_out(self):
+        database_connection.log_out()
         customer.logOut()
         self.displayUi = LoginScreen()
         self.hide()
