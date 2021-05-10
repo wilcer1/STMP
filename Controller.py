@@ -853,19 +853,19 @@ class FirstLoginScreen(QMainWindow, Ui_FirstLoginScreen):
     def save_change(self):
         income = self.listOfIncomeSEK.item(1)
         fixed_expenses = {
-                            "subscriptions" : self.listOfExpensesSEK.item(2),
-                            "insurance" : self.listOfExpensesSEK.item(3),
-                            "rent" : self.listOfExpensesSEK.item(4),
-                            "others" : self.listOfExpensesSEK.item(5)
+                            "subscriptions" : int(self.listOfExpensesSEK.item(2).text()),
+                            "insurance" : int(self.listOfExpensesSEK.item(3).text()),
+                            "rent" : int(self.listOfExpensesSEK.item(4).text()),
+                            "others" : int(self.listOfExpensesSEK.item(5).text())
                         }   
         variable_expenses = {
-                            "food" :  self.listOfExpensesSEK.item(11),
-                            "bills" :  self.listOfExpensesSEK.item(12),
-                            "transportation" :  self.listOfExpensesSEK.item(13),
-                            "hygien" :  self.listOfExpensesSEK.item(14),
-                            "clothes" :  self.listOfExpensesSEK.item(15),
-                            "entertainment" :  self.listOfExpensesSEK.item(16),
-                            "others" :  self.listOfExpensesSEK.item(17)             
+                            "food" :  int(self.listOfExpensesSEK.item(11).text()),
+                            "bills" :  int(self.listOfExpensesSEK.item(12).text()),
+                            "transportation" :  int(self.listOfExpensesSEK.item(13).text()),
+                            "hygien" :  int(self.listOfExpensesSEK.item(14).text()),
+                            "clothes" :  int(self.listOfExpensesSEK.item(15).text()),
+                            "entertainment" :  int(self.listOfExpensesSEK.item(16).text()),
+                            "others" :  int(self.listOfExpensesSEK.item(17).text())             
                         }   
         customer.budget.set_budget(income, fixed_expenses, variable_expenses)
         self.displayUi = MenuScreen()
@@ -988,6 +988,8 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         self.incomeItem.setText(f"{customer.budget.income}")
         self.saveButton.clicked.connect(self.saveChange)
         self.backButton.clicked.connect(self.goBack)
+        
+
 
     def saveChange(self):
         customer.income = float(self.incomeItem.text())
