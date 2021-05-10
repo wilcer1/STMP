@@ -117,6 +117,7 @@ def get_all_info(email):
 
 
 def get_basic_info(email):
+    """Get account info from DB."""
     sql = "SELECT * FROM account WHERE email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
@@ -173,6 +174,7 @@ def log_out():
 
 
 def check_email(email):
+    """Validate email format."""
     import re
 
     # Make a regular expression
@@ -187,6 +189,7 @@ def check_email(email):
 
 
 def new_customer(email):
+    """Check if customer is new."""
     sql = "select new_customer from account where email = %s"
     val = (email,)
     mycursor.execute(sql, val)
