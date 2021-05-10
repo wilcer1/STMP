@@ -136,6 +136,7 @@ class Ui_RegisterScreen(object):
         self.password = QtWidgets.QLineEdit(self.centralwidget)
         self.password.setGeometry(QtCore.QRect(290, 120, 113, 20))
         self.password.setObjectName("password")
+        self.password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(290, 50, 47, 13))
         self.label_2.setObjectName("label_2")
@@ -179,7 +180,7 @@ class Ui_RegisterScreen(object):
         MainWindow.setStatusBar(self.statusbar)
         self.popUp = QMessageBox()
         self.popUp.setWindowTitle("Error")
-        self.popUp.setText("Email already exists, go back and log in")
+        self.popUp.setText("Incorrect email, please try again")
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -556,6 +557,7 @@ class Ui_SavinggoalScreen(object):
         self.label_3.setText(_translate("MainWindow", "<html><head/><body><p>Play around and see how long </p><p>it would take to reach your</p><p>saving goal or buffert</p></body></html>"))
         self.pushButton.setText(_translate("MainWindow", "Back"))
         self.pushButton_2.setText(_translate("MainWindow", "Calculate"))
+
 class LoginScreen(QMainWindow, Ui_LoginScreen):
     """Inherit from the code for the ui to have all information necessary."""
 
@@ -597,7 +599,7 @@ class MenuScreen(QMainWindow, Ui_MenuScreen):
         self.pushButton.clicked.connect(
             self.MakeBudget
         )  # Call function when button is pressed
-        self.pushButton_5.clicked.connect(self.logOut)
+        self.pushButton_5.clicked.connect(self.log_out)
         self.pushButton_2.clicked.connect(self.longtermSaving)
 
     def MakeBudget(self):
@@ -611,8 +613,8 @@ class MenuScreen(QMainWindow, Ui_MenuScreen):
         self.hide()
         self.displayUi.show()
     
-    def logOut(self):
-        database_connection.logOut()
+    def log_out(self):
+        database_connection.log_out()
         customer.logOut()
         self.displayUi = LoginScreen()
         self.hide()
