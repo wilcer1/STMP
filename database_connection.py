@@ -46,6 +46,11 @@ def get_first_name(email):
 
     return myresult
 
+def not_new_customer(email):
+    sql = "UPDATE account SET new_customer = 'N' WHERE email = %s;"
+    val = (email,)
+    mycursor.execute(sql, val)
+    connection.commit()
 
 def get_last_name(email):
     """Return last_name."""
@@ -60,13 +65,16 @@ def get_last_name(email):
 def get_income(email):
     """Return income."""
     sql = (
-        "SELECT income.name, income.value From income where budget_account_email = %s;"
+        "SELECT income FROM budget WHERE email = %s;"
     )
     val = (email,)
     mycursor.execute(sql, val)
     myresult = mycursor.fetchone()
 
-    return myresult
+    if myresult is not None:
+        return myresult
+    else:
+        return 0
 
 
 def set_variable_expenses(email, var_exp):
@@ -143,7 +151,7 @@ def verify_login(email, password):
             return False
         else:
             customer = Account.getInstance()
-            customer.setCustomer(get_basic_info(email))
+            customer.set_customer(get_basic_info(email))
             return True
 
 
@@ -179,6 +187,7 @@ def register_account(val):
 
 def log_out():
     sql = "INSERT INTO account VALUES (%s, %s, %s, %s);"
+
 
 
 def check_email(email):

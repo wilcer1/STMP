@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 import account
-import database_connection
+import database_connection as DB
 
 
 
@@ -714,31 +714,31 @@ class Ui_BudgetScreen(object):
         item = self.listOfExpensesSEK.item(0)
         item.setText(_translate("MainWindow", "Amount:"))
         item = self.listOfExpensesSEK.item(1)
-        item.setText(_translate("MainWindow", "totalFixed"))
+        item.setText(_translate("MainWindow", "0"))
         item = self.listOfExpensesSEK.item(2)
-        item.setText(_translate("MainWindow", "Subscriptions"))
+        item.setText(_translate("MainWindow", "0"))
         item = self.listOfExpensesSEK.item(3)
-        item.setText(_translate("MainWindow", "insurance"))
+        item.setText(_translate("MainWindow", "0"))
         item = self.listOfExpensesSEK.item(4)
-        item.setText(_translate("MainWindow", "rent"))
+        item.setText(_translate("MainWindow", "0"))
         item = self.listOfExpensesSEK.item(5)
-        item.setText(_translate("MainWindow", "other"))
+        item.setText(_translate("MainWindow", "0"))
         item = self.listOfExpensesSEK.item(10)
-        item.setText(_translate("MainWindow", "totalvariable"))
+        item.setText(_translate("MainWindow", "0"))
         item = self.listOfExpensesSEK.item(11)
-        item.setText(_translate("MainWindow", "transport"))
+        item.setText(_translate("MainWindow", "0"))
         item = self.listOfExpensesSEK.item(12)
-        item.setText(_translate("MainWindow", "entertainment"))
+        item.setText(_translate("MainWindow", "0"))
         item = self.listOfExpensesSEK.item(13)
-        item.setText(_translate("MainWindow", "clothes"))
+        item.setText(_translate("MainWindow", "0"))
         item = self.listOfExpensesSEK.item(14)
-        item.setText(_translate("MainWindow", "hygien"))
+        item.setText(_translate("MainWindow", "0"))
         item = self.listOfExpensesSEK.item(15)
-        item.setText(_translate("MainWindow", "food"))
+        item.setText(_translate("MainWindow", "0"))
         item = self.listOfExpensesSEK.item(16)
-        item.setText(_translate("MainWindow", "bills"))
+        item.setText(_translate("MainWindow", "0"))
         item = self.listOfExpensesSEK.item(17)
-        item.setText(_translate("MainWindow", "others"))
+        item.setText(_translate("MainWindow", "0"))
         self.listOfExpensesSEK.setSortingEnabled(__sortingEnabled)
         self.backButton.setText(_translate("MainWindow", "Back"))
         self.label_3.setText(_translate("MainWindow", "put money left here"))
@@ -827,11 +827,12 @@ class LoginScreen(QMainWindow, Ui_LoginScreen):
         )  # Get the text from the username & password lineedit
         password = self.lineEdit_2.text()  #
         # Check if password and username isnt empty, if it is, popup
-        if database_connection.verify_login(username, password) and not database_connection.new_customer(username):
+        if DB.verify_login(username, password) and not DB.new_customer(username):
+            customer.set_budget(DB.get_income(), DB.get_variable_expenses)
             self.displayUi = MenuScreen()
             self.hide()
             self.displayUi.show()
-        elif database_connection.verify_login(username, password) and database_connection.new_customer(username):
+        elif DB.verify_login(username, password) and DB.new_customer(username):
             self.displayUi = FirstLoginScreen()
             self.hide()
             self.displayUi.show()
@@ -868,7 +869,9 @@ class FirstLoginScreen(QMainWindow, Ui_FirstLoginScreen):
                             "others" :  float(self.listOfExpensesSEK.item(17).text())             
                         }   
         customer.budget.set_budget(income, fixed_expenses, variable_expenses)
-        database_connection.set_variable_expenses(customer.email, variable_expenses)
+        DB.set_variable_expenses(customer.email, variable_expenses)
+        DB.not_new_customer(customer.email)
+
         self.displayUi = MenuScreen()
         self.hide()
         self.displayUi.show()
@@ -905,7 +908,7 @@ class MenuScreen(QMainWindow, Ui_MenuScreen):
         self.displayUi.show()
     
     def log_out(self):
-        database_connection.log_out()
+        DB.log_out()
         customer.logOut()
         self.displayUi = LoginScreen()
         self.hide()
@@ -937,7 +940,7 @@ class RegisterScreen(QMainWindow, Ui_RegisterScreen):
         
         
 
-        if database_connection.register_account(val):
+        if DB.register_account(val):
             self.popUp.setText("Registered successfully, please log in")
             self.popUp.exec_()
             self.displayUi = LoginScreen()
@@ -989,7 +992,9 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         self.incomeItem.setText(f"{customer.budget.income}")
         self.saveButton.clicked.connect(self.saveChange)
         self.backButton.clicked.connect(self.goBack)
-        
+        total_fix, total_var = customer.budget.get_total_expenses()
+        self.listOfExpensesSEK.item(1).setText(total_fix)
+        self.listOfExpensesSEK.item(10).setText(total_var)
 
 
     def saveChange(self):

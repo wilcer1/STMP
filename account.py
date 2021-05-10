@@ -23,7 +23,7 @@ class Account:
             self.password = None
             self.budget = Budget()
 
-    def setCustomer(self, details):
+    def set_customer(self, details):
         self.email = details[0]
         self.first_name = details[1]
         self.last_name = details[2]
