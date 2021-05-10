@@ -16,7 +16,7 @@ try:
     mycursor = connection.cursor()
     if connection.is_connected():
         print("Connected")
-        
+
 
 except Error as e:
     print(e)
@@ -56,16 +56,28 @@ def get_last_name(email):
 
 def get_income(email):
     """Return income."""
-    sql = "SELECT income.name, income.value From income where budget_account_email = %s;"
+    sql = (
+        "SELECT income.name, income.value From income where budget_account_email = %s;"
+    )
     val = (email,)
     mycursor.execute(sql, val)
     myresult = mycursor.fetchone()
 
     return myresult
 
+
 def set_variable_expenses(email, var_exp):
-    pass
-    
+    """Set variable_expenses."""
+    val = ()
+    val.append(email)
+    for x in var_exp:
+        val.append(var_exp[x])
+
+    sql = "INSERT INTO variable_expenses VALUES %s, %s, %s, %s, %s, %s, %s, %s;"
+
+    mycursor.execute(sql, val)
+    mycursor.commit()
+
 
 def get_variable_expenses(email):
     """Return expenses."""
@@ -83,14 +95,14 @@ def get_variable_expenses(email):
         others = myresult[7]
 
         variable_expenses = {
-                            "food" : food,
-                            "bills" : bills,
-                            "transportation" : transportation,
-                            "hygien" : hygien,
-                            "clothes" : clothes,
-                            "entertainment" : entertainment,
-                            "others" : others              
-                        }   
+            "food": food,
+            "bills": bills,
+            "transportation": transportation,
+            "hygien": hygien,
+            "clothes": clothes,
+            "entertainment": entertainment,
+            "others": others,
+        }
 
         return variable_expenses
 
@@ -102,6 +114,7 @@ def get_all_info(email):
     mycursor.execute(sql, val)
     myresult = mycursor.fetchone()
     return myresult
+
 
 def get_basic_info(email):
     sql = "SELECT * FROM account WHERE email = %s;"
@@ -143,7 +156,7 @@ def register_account(val):
             if email == i:
                 register = False
                 break
-    
+
     if not check_email(email):
         register = False
 
@@ -154,20 +167,24 @@ def register_account(val):
 
     return register
 
+
 def log_out():
     sql = "INSERT INTO account VALUES (%s, %s, %s, %s);"
 
+
 def check_email(email):
     import re
+
     # Make a regular expression
     # for validating an Email
-    regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
+    regex = "^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$"
 
-    if(re.search(regex, email)):
+    if re.search(regex, email):
         return True
- 
+
     else:
         return False
+
 
 def new_customer(email):
     sql = "select new_customer from account where email = %s"
@@ -178,6 +195,7 @@ def new_customer(email):
         return True
     else:
         return False
+
 
 if __name__ == "__main__":
     print(get_variable_expenses("a"))
