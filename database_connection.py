@@ -68,14 +68,14 @@ def get_income(email):
 
 def set_variable_expenses(email, var_exp):
     """Set variable_expenses."""
-    val = ()
+    val = []
     val.append(email)
     for x in var_exp:
         val.append(var_exp[x])
 
     sql = "INSERT INTO variable_expenses VALUES %s, %s, %s, %s, %s, %s, %s, %s;"
 
-    mycursor.execute(sql, val)
+    mycursor.execute(sql, tuple(val))
     mycursor.commit()
 
 
