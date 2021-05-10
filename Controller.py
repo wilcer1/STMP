@@ -14,6 +14,7 @@ import account
 import database_connection
 
 
+
 class Ui_LoginScreen(object):
     """Main Login Window."""
 
@@ -850,9 +851,27 @@ class FirstLoginScreen(QMainWindow, Ui_FirstLoginScreen):
         self.pushButton.clicked.connect(self.go_back)
 
     def save_change(self):
-        customer.income = self.listOfIncomeSEK.item(1)
-        
-        
+        income = self.listOfIncomeSEK.item(1)
+        fixed_expenses = {
+                            "subscriptions" : self.listOfExpensesSEK.item(2),
+                            "insurance" : self.listOfExpensesSEK.item(3),
+                            "rent" : self.listOfExpensesSEK.item(4),
+                            "others" : self.listOfExpensesSEK.item(5)
+                        }   
+        variable_expenses = {
+                            "food" :  self.listOfExpensesSEK.item(11),
+                            "bills" :  self.listOfExpensesSEK.item(12),
+                            "transportation" :  self.listOfExpensesSEK.item(13),
+                            "hygien" :  self.listOfExpensesSEK.item(14),
+                            "clothes" :  self.listOfExpensesSEK.item(15),
+                            "entertainment" :  self.listOfExpensesSEK.item(16),
+                            "others" :  self.listOfExpensesSEK.item(17)             
+                        }   
+        customer.budget.set_budget(income, fixed_expenses, variable_expenses)
+        self.displayUi = MenuScreen()
+        self.hide()
+        self.displayUi.show()
+
     def go_back(self):
         self.displayUi = LoginScreen()
         # logout
@@ -966,8 +985,7 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         super().__init__()  # Call the superclass constructor
         self.setupUi(self)  # Run the code that creates the UI layout
         self.incomeItem = self.listOfIncomeSEK.item(1)
-        if customer.income is not None:
-            self.incomeItem.setText(f"{customer.income}")
+        self.incomeItem.setText(f"{customer.budget.income}")
         self.saveButton.clicked.connect(self.saveChange)
         self.backButton.clicked.connect(self.goBack)
 
@@ -1008,6 +1026,7 @@ if __name__ == "__main__":
     import sys
 
     customer = account.Account.getInstance()
+    
     app = QApplication(sys.argv)
     MainWindow = LoginScreen()  # Use the login screen as the mainwindow to start
     MainWindow.show()

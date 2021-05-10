@@ -82,7 +82,7 @@ def get_variable_expenses(email):
         entertainment = myresult[6]
         others = myresult[7]
 
-        fixed_expenses = {
+        variable_expenses = {
                             "food" : food,
                             "bills" : bills,
                             "transportation" : transportation,
@@ -92,7 +92,7 @@ def get_variable_expenses(email):
                             "others" : others              
                         }   
 
-        return fixed_expenses
+        return variable_expenses
 
 
 def get_all_info(email):
@@ -180,5 +180,5 @@ def new_customer(email):
         return False
 
 if __name__ == "__main__":
-    print(get_variable_expenses("h@live.se"))
+    print(get_variable_expenses("a"))
     disconnect()

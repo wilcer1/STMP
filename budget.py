@@ -1,16 +1,12 @@
 class Budget():
     def __init__(self):
-        self.income = []
-        self.variable_expenses = []
-        self.fixed_expenses = []
+        self.income = 0
+        self.variable_expenses = None
+        self.fixed_expenses = None
 
     def set_budget(self, income, variable_expenses, fixed_expenses):
        
-        for name, amount in income:
-            self.income.append(name, amount)
-
-        for name, amount in variable_expenses:
-            self.variable_expenses.append(name, amount)
-
-        for pair in fixed_expenses.items():
-            self.fixed_expenses.append(pair)
+       
+       self.income = income
+       self.variable_expenses = variable_expenses
+       self.fixed_expenses = fixed_expenses
