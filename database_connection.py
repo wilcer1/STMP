@@ -37,26 +37,6 @@ def disconnect():
         print(e)
 
 
-def get_first_name(email):
-    """Return first_name."""
-    sql = "SELECT first_name FROM account WHERE email = %s;"
-    val = (email,)
-    mycursor.execute(sql, val)
-    myresult = mycursor.fetchone()[0]
-
-    return myresult
-
-
-def get_last_name(email):
-    """Return last_name."""
-    sql = "SELECT last_name FROM account WHERE email = %s;"
-    val = (email,)
-    mycursor.execute(sql, val)
-    myresult = mycursor.fetchone()[0]
-
-    return myresult
-
-
 def get_income(email):
     """Return income."""
     sql = (
@@ -143,15 +123,6 @@ def get_fixed_expenses(email):
         }
 
         return fixed_expenses
-
-
-def get_all_info(email):
-    """Return all info."""
-    sql = "SELECT * FROM fixed_expenses, variable_expenses INNER JOIN account ON budget_budget_id = account.email WHERE email = %s;"
-    val = (email,)
-    mycursor.execute(sql, val)
-    myresult = mycursor.fetchone()
-    return myresult
 
 
 def get_basic_info(email):
