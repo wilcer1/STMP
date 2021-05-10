@@ -6,6 +6,7 @@ from mysql.connector import Error
 from datetime import datetime
 
 current_date = datetime.today().strftime("%Y-%m-%d")
+
 connection = None
 
 
@@ -38,6 +39,7 @@ def disconnect():
 
 
 def not_new_customer(email):
+    """Change new_customer to 'N'."""
     sql = "UPDATE account SET new_customer = 'N' WHERE email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
@@ -46,9 +48,7 @@ def not_new_customer(email):
 
 def get_income(email):
     """Return income."""
-    sql = (
-        "SELECT income FROM budget WHERE account_email = %s;"
-    )
+    sql = "SELECT income FROM budget WHERE account_email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
     myresult = mycursor.fetchone()[0]
@@ -66,21 +66,28 @@ def set_variable_expenses(email, var_exp):
     for x in var_exp:
         val.append(var_exp[x])
 
-    sql = "INSERT INTO variable_expenses VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
+    sql = "INSERT INTO variable_expenses \
+           VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
 
     mycursor.execute(sql, tuple(val))
     connection.commit()
 
+
 def update_variable_expenses(email, var_exp):
-     """update variable_expenses."""
+    """Update variable_expenses."""
     val = []
     for x in var_exp:
         val.append(var_exp[x])
     val.append(email)
-    sql = "UPDATE variable_expenses SET food = %s, bills = %s, transportation = %s, hygien = %s, clothes = %s, entertainment = %s, others = %s WHERE budget_account_email = %s);"
+
+    sql = "UPDATE variable_expenses SET food = %s, bills = %s, transportation = %s, \
+           hygien = %s, clothes = %s, entertainment = %s, others = %s \
+           WHERE budget_account_email = %s;"
 
     mycursor.execute(sql, tuple(val))
     connection.commit()
+
+
 def get_variable_expenses(email):
     """Return variable_expenses."""
     sql = "SELECT * FROM variable_expenses WHERE budget_account_email = %s;"
@@ -202,8 +209,8 @@ def register_account(val):
 
 
 def log_out():
-    sql = "INSERT INTO account VALUES (%s, %s, %s, %s);"
-
+    """Log out."""
+    pass
 
 
 def check_email(email):
@@ -234,5 +241,5 @@ def new_customer(email):
 
 
 if __name__ == "__main__":
-
+    print(get_basic_info("s"))
     disconnect()
