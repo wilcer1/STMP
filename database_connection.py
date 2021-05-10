@@ -104,7 +104,7 @@ def verify_login(email, password):
             return False
         else:
             customer = Account.getInstance()
-            customer.setCustomer(getBasicInfo(email))
+            customer.setCustomer(get_basic_info(email))
             return True
 
 
@@ -122,11 +122,15 @@ def register_account(val):
             if email == i:
                 register = False
                 break
+    
+    if not check_email(email):
+        register = False
 
     if register is not False:
         sql = "INSERT INTO account VALUES (%s, %s, %s, %s);"
         mycursor.execute(sql, val)
         connection.commit()
+
     return register
 
 def log_out():
