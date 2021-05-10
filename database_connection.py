@@ -47,11 +47,11 @@ def not_new_customer(email):
 def get_income(email):
     """Return income."""
     sql = (
-        "SELECT income FROM budget WHERE email = %s;"
+        "SELECT income FROM budget WHERE account_email = %s;"
     )
     val = (email,)
     mycursor.execute(sql, val)
-    myresult = mycursor.fetchone()
+    myresult = mycursor.fetchone()[0]
 
     if myresult is not None:
         return myresult

@@ -828,7 +828,8 @@ class LoginScreen(QMainWindow, Ui_LoginScreen):
         password = self.lineEdit_2.text()  #
         # Check if password and username isnt empty, if it is, popup
         if DB.verify_login(username, password) and not DB.new_customer(username):
-            customer.set_budget(DB.get_income(), DB.get_variable_expenses)
+            customer.budget.set_budget(DB.get_income(customer.email), DB.get_variable_expenses(customer.email), 
+                                DB.get_fixed_expenses(customer.email))
             self.displayUi = MenuScreen()
             self.hide()
             self.displayUi.show()
@@ -870,6 +871,7 @@ class FirstLoginScreen(QMainWindow, Ui_FirstLoginScreen):
                         }   
         customer.budget.set_budget(income, fixed_expenses, variable_expenses)
         DB.set_variable_expenses(customer.email, variable_expenses)
+        DB.set_fixed_expenses(customer.email, fixed_expenses)
         DB.not_new_customer(customer.email)
 
         self.displayUi = MenuScreen()
@@ -984,29 +986,68 @@ class BudgetChoiceScreen(QMainWindow, Ui_BudgetChoiceScreen):
 
 
 class BudgetScreen(QMainWindow, Ui_BudgetScreen):
-
     def __init__(self):
         super().__init__()  # Call the superclass constructor
         self.setupUi(self)  # Run the code that creates the UI layout
         self.incomeItem = self.listOfIncomeSEK.item(1)
         self.incomeItem.setText(f"{customer.budget.income}")
-        self.saveButton.clicked.connect(self.saveChange)
-        self.backButton.clicked.connect(self.goBack)
-        total_fix, total_var = customer.budget.get_total_expenses()
+        self.saveButton.clicked.connect(self.save_change)
+        self.backButton.clicked.connect(self.go_back)
+        total_fix, total_var = customer.budget.get_expenses()
         self.listOfExpensesSEK.item(1).setText(total_fix)
         self.listOfExpensesSEK.item(10).setText(total_var)
+        self.set_list_of_expenses()
 
-
-    def saveChange(self):
-        customer.income = float(self.incomeItem.text())
-        self.incomeItem.setText(f"{customer.income}")
+        self.label_3.setText(str(customer.budget.get_total_expenses()))
         
 
 
-    def goBack(self):
+    def save_change(self):
+        customer.budget.income = float(self.incomeItem.text())
+        self.incomeItem.setText(f"{customer.budget.income}")
+        fixed_expenses = {
+                            "subscriptions" : float(self.listOfExpensesSEK.item(2).text()),
+                            "insurance" : float(self.listOfExpensesSEK.item(3).text()),
+                            "rent" : float(self.listOfExpensesSEK.item(4).text()),
+                            "others" : float(self.listOfExpensesSEK.item(5).text())
+                        }   
+        variable_expenses = {
+                            "food" :  float(self.listOfExpensesSEK.item(11).text()),
+                            "bills" :  float(self.listOfExpensesSEK.item(12).text()),
+                            "transportation" :  float(self.listOfExpensesSEK.item(13).text()),
+                            "hygien" :  float(self.listOfExpensesSEK.item(14).text()),
+                            "clothes" :  float(self.listOfExpensesSEK.item(15).text()),
+                            "entertainment" :  float(self.listOfExpensesSEK.item(16).text()),
+                            "others" :  float(self.listOfExpensesSEK.item(17).text())             
+                        }   
+        customer.budget.set_budget(customer.budget.income, fixed_expenses, variable_expenses)
+        # update instead of set
+        # DB.set_variable_expenses(customer.email, variable_expenses)
+        # DB.set_fixed_expenses(customer.email, fixed_expenses)
+
+
+    def go_back(self):
         self.displayUi = BudgetChoiceScreen()
         self.hide()
         self.displayUi.show()
+    
+    def set_list_of_expenses(self):
+        """Set the items in the listwidget to the budget numbers stored in DB."""
+        fix_exp = DB.get_fixed_expenses(customer.email)
+        var_exp = DB.get_variable_expenses(customer.email)
+        self.listOfExpensesSEK.item(2).setText(str(fix_exp["subscription"]))
+        self.listOfExpensesSEK.item(3).setText(str(fix_exp["insurance"]))
+        self.listOfExpensesSEK.item(4).setText(str(fix_exp["rent"]))
+        self.listOfExpensesSEK.item(5).setText(str(fix_exp["others"]))
+
+        self.listOfExpensesSEK.item(11).setText(str(var_exp["transportation"]))
+        self.listOfExpensesSEK.item(12).setText(str(var_exp["entertainment"]))
+        self.listOfExpensesSEK.item(13).setText(str(var_exp["clothes"]))
+        self.listOfExpensesSEK.item(14).setText(str(var_exp["hygien"]))
+        self.listOfExpensesSEK.item(15).setText(str(var_exp["food"]))
+        self.listOfExpensesSEK.item(16).setText(str(var_exp["bills"]))
+        self.listOfExpensesSEK.item(17).setText(str(var_exp["others"]))
+
 
 class SavingGoal(QMainWindow, Ui_SavinggoalScreen):
 
