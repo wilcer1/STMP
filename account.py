@@ -1,3 +1,5 @@
+
+from budget import Budget
 class Account:
     __instance = None
 
@@ -19,17 +21,15 @@ class Account:
             self.first_name = None
             self.last_name = None
             self.password = None
-            self.income = None  # list of tuples
-            self.expenses = None  # list of tuples
+            self.budget = Budget()
 
     def setCustomer(self, details):
         self.email = details[0]
         self.first_name = details[1]
         self.last_name = details[2]
         self.password = details[3]
-        self.income = []
-        self.expenses = []
+    
 
-    def logOut(self):
+    def log_out(self):
         Account.__instance = None
     
