@@ -56,10 +56,10 @@ def get_last_name(email):
 
 def get_income(email):
     """Return income."""
-    sql = "SELECT income.name, income.value From income Right join account ON budget_budget_id = account.email WHERE email = %s;"
+    sql = "SELECT income.name, income.value From income where budget_account_email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
-    myresult = mycursor.fetchone()[0]
+    myresult = mycursor.fetchone()
 
     return myresult
 
@@ -127,7 +127,7 @@ def register_account(val):
         register = False
 
     if register is not False:
-        sql = "INSERT INTO account VALUES (%s, %s, %s, %s);"
+        sql = "INSERT INTO account VALUES (%s, %s, %s, %s, %s);"
         mycursor.execute(sql, val)
         connection.commit()
 
@@ -148,5 +148,16 @@ def check_email(email):
     else:
         return False
 
+def new_customer(email):
+    sql = "select new_customer from account where email = %s"
+    val = (email,)
+    mycursor.execute(sql, val)
+    myresult = mycursor.fetchone()[0]
+    if myresult == "Y":
+        return True
+    else:
+        return False
+
 if __name__ == "__main__":
-    get_income("wille@live.se")
+    new_customer("s")
+    disconnect()
