@@ -149,4 +149,4 @@ def check_email(email):
         return False
 
 if __name__ == "__main__":
-    getBasicInfo("s")
+    get_income("wille@live.se")
