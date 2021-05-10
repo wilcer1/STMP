@@ -5,7 +5,7 @@ import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
 
-current_date = datetime.today().strftime('%Y-%m-%d')
+current_date = datetime.today().strftime("%Y-%m-%d")
 connection = None
 
 
@@ -37,29 +37,11 @@ def disconnect():
         print(e)
 
 
-def get_first_name(email):
-    """Return first_name."""
-    sql = "SELECT first_name FROM account WHERE email = %s;"
-    val = (email,)
-    mycursor.execute(sql, val)
-    myresult = mycursor.fetchone()[0]
-
-    return myresult
-
 def not_new_customer(email):
     sql = "UPDATE account SET new_customer = 'N' WHERE email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
     connection.commit()
-
-def get_last_name(email):
-    """Return last_name."""
-    sql = "SELECT last_name FROM account WHERE email = %s;"
-    val = (email,)
-    mycursor.execute(sql, val)
-    myresult = mycursor.fetchone()[0]
-
-    return myresult
 
 
 def get_income(email):
@@ -86,13 +68,12 @@ def set_variable_expenses(email, var_exp):
 
     sql = "INSERT INTO variable_expenses VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
 
-
     mycursor.execute(sql, tuple(val))
     connection.commit()
 
 
 def get_variable_expenses(email):
-    """Return expenses."""
+    """Return variable_expenses."""
     sql = "SELECT * FROM variable_expenses WHERE budget_account_email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
@@ -119,13 +100,39 @@ def get_variable_expenses(email):
         return variable_expenses
 
 
-def get_all_info(email):
-    """Return all info."""
-    sql = "SELECT * FROM fixed_expenses, variable_expenses INNER JOIN account ON budget_budget_id = account.email WHERE email = %s;"
+def set_fixed_expenses(email, var_exp):
+    """Set fixed_expenses."""
+    val = []
+    val.append(email)
+    for x in var_exp:
+        val.append(var_exp[x])
+
+    sql = "INSERT INTO fixed_expenses VALUES (%s, %s, %s, %s, %s);"
+
+    mycursor.execute(sql, tuple(val))
+    connection.commit()
+
+
+def get_fixed_expenses(email):
+    """Return fixed_expenses."""
+    sql = "SELECT * FROM fixed_expenses WHERE budget_account_email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
     myresult = mycursor.fetchone()
-    return myresult
+    if myresult is not None:
+        rent = myresult[1]
+        subscription = myresult[2]
+        insurance = myresult[3]
+        others = myresult[4]
+
+        fixed_expenses = {
+            "rent": rent,
+            "subscription": subscription,
+            "insurance": insurance,
+            "others": others,
+        }
+
+        return fixed_expenses
 
 
 def get_basic_info(email):
@@ -218,5 +225,5 @@ def new_customer(email):
 
 
 if __name__ == "__main__":
-    
+
     disconnect()
