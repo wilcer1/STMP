@@ -12,5 +12,5 @@ class Budget():
         for name, amount in variable_expenses:
             self.variable_expenses.append(name, amount)
 
-        for name, amount in fixed_expenses:
-            self.fixed_expenses.append(name, amount)
+        for pair in fixed_expenses.items():
+            self.fixed_expenses.append(pair)

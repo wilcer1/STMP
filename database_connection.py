@@ -63,15 +63,36 @@ def get_income(email):
 
     return myresult
 
+def set_variable_expenses(email, var_exp):
+    pass
+    
 
-def get_expenses(email):
+def get_variable_expenses(email):
     """Return expenses."""
-    sql = "SELECT expenses FROM account WHERE email = %s;"
+    sql = "SELECT * FROM variable_expenses WHERE budget_account_email = %s;"
     val = (email,)
     mycursor.execute(sql, val)
-    myresult = mycursor.fetchone()[0]
+    myresult = mycursor.fetchone()
+    if myresult is not None:
+        food = myresult[1]
+        bills = myresult[2]
+        transportation = myresult[3]
+        hygien = myresult[4]
+        clothes = myresult[5]
+        entertainment = myresult[6]
+        others = myresult[7]
 
-    return myresult
+        fixed_expenses = {
+                            "food" : food,
+                            "bills" : bills,
+                            "transportation" : transportation,
+                            "hygien" : hygien,
+                            "clothes" : clothes,
+                            "entertainment" : entertainment,
+                            "others" : others              
+                        }   
+
+        return fixed_expenses
 
 
 def get_all_info(email):
@@ -159,5 +180,5 @@ def new_customer(email):
         return False
 
 if __name__ == "__main__":
-    new_customer("s")
+    print(get_variable_expenses("h@live.se"))
     disconnect()

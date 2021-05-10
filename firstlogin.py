@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_FirstLoginWindow(object):
+class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 572)
@@ -236,6 +236,28 @@ class Ui_FirstLoginWindow(object):
         self.listOfExpensesSEK.setSortingEnabled(False)
         item = self.listOfExpensesSEK.item(0)
         item.setText(_translate("MainWindow", "Amount:"))
+        item = self.listOfExpensesSEK.item(2)
+        item.setText(_translate("MainWindow", "0"))
+        item = self.listOfExpensesSEK.item(3)
+        item.setText(_translate("MainWindow", "0"))
+        item = self.listOfExpensesSEK.item(4)
+        item.setText(_translate("MainWindow", "0"))
+        item = self.listOfExpensesSEK.item(5)
+        item.setText(_translate("MainWindow", "0"))
+        item = self.listOfExpensesSEK.item(11)
+        item.setText(_translate("MainWindow", "0"))
+        item = self.listOfExpensesSEK.item(12)
+        item.setText(_translate("MainWindow", "0"))
+        item = self.listOfExpensesSEK.item(13)
+        item.setText(_translate("MainWindow", "0"))
+        item = self.listOfExpensesSEK.item(14)
+        item.setText(_translate("MainWindow", "0"))
+        item = self.listOfExpensesSEK.item(15)
+        item.setText(_translate("MainWindow", "0"))
+        item = self.listOfExpensesSEK.item(16)
+        item.setText(_translate("MainWindow", "0"))
+        item = self.listOfExpensesSEK.item(17)
+        item.setText(_translate("MainWindow", "0"))
         self.listOfExpensesSEK.setSortingEnabled(__sortingEnabled)
         self.pushButton.setText(_translate("MainWindow", "Back"))
         self.label_3.setText(_translate("MainWindow", "Set your income and expenses"))
