@@ -531,7 +531,7 @@ class Ui_BudgetScreen(object):
 class Ui_SavinggoalScreen(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(606, 271)
+        MainWindow.resize(606, 318)
         MainWindow.setStyleSheet("background-color: rgb(3, 130, 168);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -564,6 +564,12 @@ class Ui_SavinggoalScreen(object):
         self.label_3.setTextFormat(QtCore.Qt.RichText)
         self.label_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.label_3.setObjectName("label_3")
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(50, 200, 281, 81))
+        self.label_4.setText("")
+        self.label_4.setPixmap(QtGui.QPixmap("STMP-Logo.png"))
+        self.label_4.setScaledContents(True)
+        self.label_4.setObjectName("label_4")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(490, 200, 101, 23))
         self.pushButton.setStyleSheet("background-color: rgb(255, 255, 255);")
