@@ -87,7 +87,8 @@ class TestPlayerClass(unittest.TestCase):
 
     def test_register_account(self):
         """Test register_account."""
-        pass
+        res = DB.register_account("test@unit.se")
+        self.assertFalse(res)
 
     def test_check_email(self):
         """Test check_email method."""
@@ -96,9 +97,30 @@ class TestPlayerClass(unittest.TestCase):
 
     def test_new_customer(self):
         """Test new_customer function."""
-        pass
+        res = DB.new_customer("test@unit.se")
+        self.assertFalse(res)
 
-    def log_out(self):
-        """Test log out."""
-        DB.log_out()
-        self.assertIsInstance(self.connection)
+    def test_get_variable_expenses(self):
+        """Test get_variable_expenses."""
+        exp = {
+            "food": 1,
+            "bills": 2,
+            "transportation": 3,
+            "hygien": 4,
+            "clothes": 5,
+            "entertainment": 6,
+            "others": 7,
+        }
+        res = DB.get_variable_expenses("test@unit.se")
+        self.assertEqual(exp, res)
+
+    def test_get_fixed_expenses(self):
+        """Test get_fixed_expenses."""
+        exp = {
+            "rent": 1,
+            "subscription": 2,
+            "insurance": 3,
+            "others": 4,
+        }
+        res = DB.get_fixed_expenses("test@unit.se")
+        self.assertEqual(exp, res)
