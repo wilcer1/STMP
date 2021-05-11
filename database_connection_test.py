@@ -11,7 +11,7 @@ class TestPlayerClass(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        """set up acc for testing."""
+        """Set up acc for testing."""
         try:
             # Connect to the db
             cls.connection = mysql.connector.connect(
