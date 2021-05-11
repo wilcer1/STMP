@@ -376,6 +376,7 @@ class Ui_FirstLoginScreen(object):
         self.label_3.setText(_translate("MainWindow",
                                         "Set your income and expenses"))
 
+
 class Ui_MenuScreen(object):
     """Menu Window"""
 
@@ -417,12 +418,15 @@ class Ui_MenuScreen(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", f"Welcome, {customer.first_name}"))
+        self.label.setText(_translate("MainWindow", f"Welcome,\
+                                      {customer.first_name}"))
         self.pushButton.setText(_translate("MainWindow", "Make a budget"))
-        self.pushButton_2.setText(_translate("MainWindow", "Create long-term savings"))
+        self.pushButton_2.setText(_translate("MainWindow",
+                                             "Create long-term savings"))
         self.pushButton_3.setText(_translate("MainWindow", "eee"))
         self.pushButton_4.setText(_translate("MainWindow", "PushButton"))
         self.pushButton_5.setText(_translate("MainWindow", "Log out"))
+
 
 class Ui_RegisterScreen(object):
     """Register window."""
@@ -532,8 +536,10 @@ class Ui_BudgetChoiceScreen(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton_2.setText(_translate("MainWindow", "Get help with budget"))
-        self.pushButton_3.setText(_translate("MainWindow", "Make your own budget"))
+        self.pushButton_2.setText(_translate("MainWindow",
+                                  "Get help with budget"))
+        self.pushButton_3.setText(_translate("MainWindow",
+                                             "Make your own budget"))
         self.pushButton.setText(_translate("MainWindow", "Back"))
 
 
@@ -556,7 +562,8 @@ class Ui_BudgetScreen(object):
         self.label_2.setObjectName("label_2")
         self.listOfIncome = QtWidgets.QListWidget(self.centralwidget)
         self.listOfIncome.setGeometry(QtCore.QRect(80, 50, 121, 391))
-        self.listOfIncome.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.listOfIncome.setStyleSheet("background-color: \
+                                        rgb(255, 255, 255);")
         self.listOfIncome.setObjectName("listOfIncome")
         item = QtWidgets.QListWidgetItem()
         font = QtGui.QFont()
@@ -570,7 +577,8 @@ class Ui_BudgetScreen(object):
         self.listOfIncome.addItem(item)
         self.listOfExpenses = QtWidgets.QListWidget(self.centralwidget)
         self.listOfExpenses.setGeometry(QtCore.QRect(450, 50, 131, 391))
-        self.listOfExpenses.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.listOfExpenses.setStyleSheet("background-color: \
+                                          rgb(255, 255, 255);")
         self.listOfExpenses.setObjectName("listOfExpenses")
         item = QtWidgets.QListWidgetItem()
         font = QtGui.QFont()
@@ -615,7 +623,8 @@ class Ui_BudgetScreen(object):
         self.moneyleftLabel = QtWidgets.QLabel(self.centralwidget)
         self.moneyleftLabel.setGeometry(QtCore.QRect(330, 470, 131, 41))
         self.moneyleftLabel.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.moneyleftLabel.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.moneyleftLabel.setAlignment(QtCore.Qt.AlignHCenter |
+                                         QtCore.Qt.AlignTop)
         self.moneyleftLabel.setObjectName("moneyleftLabel")
         self.saveButton = QtWidgets.QPushButton(self.centralwidget)
         self.saveButton.setGeometry(QtCore.QRect(700, 480, 75, 23))
@@ -623,7 +632,8 @@ class Ui_BudgetScreen(object):
         self.saveButton.setObjectName("saveButton")
         self.listOfIncomeSEK = QtWidgets.QListWidget(self.centralwidget)
         self.listOfIncomeSEK.setGeometry(QtCore.QRect(200, 50, 141, 391))
-        self.listOfIncomeSEK.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.listOfIncomeSEK.setStyleSheet("background-color: \
+                                            rgb(255, 255, 255);")
         self.listOfIncomeSEK.setObjectName("listOfIncomeSEK")
         item = QtWidgets.QListWidgetItem()
         font = QtGui.QFont()
@@ -632,7 +642,11 @@ class Ui_BudgetScreen(object):
         item.setFont(font)
         self.listOfIncomeSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsEditable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        item.setFlags(QtCore.Qt.ItemIsSelectable |
+                      QtCore.Qt.ItemIsEditable |
+                      QtCore.Qt.ItemIsDragEnabled |
+                      QtCore.Qt.ItemIsUserCheckable |
+                      QtCore.Qt.ItemIsEnabled)
         self.listOfIncomeSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
         self.listOfIncomeSEK.addItem(item)
@@ -649,16 +663,32 @@ class Ui_BudgetScreen(object):
         item = QtWidgets.QListWidgetItem()
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsEditable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        item.setFlags(QtCore.Qt.ItemIsSelectable |
+                      QtCore.Qt.ItemIsEditable |
+                      QtCore.Qt.ItemIsDragEnabled |
+                      QtCore.Qt.ItemIsUserCheckable |
+                      QtCore.Qt.ItemIsEnabled)
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsEditable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        item.setFlags(QtCore.Qt.ItemIsSelectable |
+                      QtCore.Qt.ItemIsEditable |
+                      QtCore.Qt.ItemIsDragEnabled |
+                      QtCore.Qt.ItemIsUserCheckable |
+                      QtCore.Qt.ItemIsEnabled)
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsEditable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        item.setFlags(QtCore.Qt.ItemIsSelectable |
+                      QtCore.Qt.ItemIsEditable |
+                      QtCore.Qt.ItemIsDragEnabled |
+                      QtCore.Qt.ItemIsUserCheckable |
+                      QtCore.Qt.ItemIsEnabled)
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsEditable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        item.setFlags(QtCore.Qt.ItemIsSelectable |
+                      QtCore.Qt.ItemIsEditable |
+                      QtCore.Qt.ItemIsDragEnabled |
+                      QtCore.Qt.ItemIsUserCheckable |
+                      QtCore.Qt.ItemIsEnabled)
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
         self.listOfExpensesSEK.addItem(item)
@@ -671,19 +701,39 @@ class Ui_BudgetScreen(object):
         item = QtWidgets.QListWidgetItem()
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsEditable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        item.setFlags(QtCore.Qt.ItemIsSelectable |
+                      QtCore.Qt.ItemIsEditable |
+                      QtCore.Qt.ItemIsDragEnabled |
+                      QtCore.Qt.ItemIsUserCheckable |
+                      QtCore.Qt.ItemIsEnabled)
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsEditable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        item.setFlags(QtCore.Qt.ItemIsSelectable |
+                      QtCore.Qt.ItemIsEditable |
+                      QtCore.Qt.ItemIsDragEnabled |
+                      QtCore.Qt.ItemIsUserCheckable |
+                      QtCore.Qt.ItemIsEnabled)
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsEditable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        item.setFlags(QtCore.Qt.ItemIsSelectable |
+                      QtCore.Qt.ItemIsEditable |
+                      QtCore.Qt.ItemIsDragEnabled |
+                      QtCore.Qt.ItemIsUserCheckable |
+                      QtCore.Qt.ItemIsEnabled)
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsEditable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        item.setFlags(QtCore.Qt.ItemIsSelectable |
+                      QtCore.Qt.ItemIsEditable |
+                      QtCore.Qt.ItemIsDragEnabled |
+                      QtCore.Qt.ItemIsUserCheckable |
+                      QtCore.Qt.ItemIsEnabled)
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsEditable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        item.setFlags(QtCore.Qt.ItemIsSelectable |
+                      QtCore.Qt.ItemIsEditable |
+                      QtCore.Qt.ItemIsDragEnabled |
+                      QtCore.Qt.ItemIsUserCheckable |
+                      QtCore.Qt.ItemIsEnabled)
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
         item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsEditable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)

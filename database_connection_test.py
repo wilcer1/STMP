@@ -1,7 +1,7 @@
-"""Unittest for database_connection."""
+"""Unittest for DB."""
 
 import unittest
-import database_connection
+import database_connection as DB
 import mysql.connector
 from mysql.connector import Error
 
@@ -68,22 +68,37 @@ class TestPlayerClass(unittest.TestCase):
     def test_get_income(self):
         """Test get_income."""
         exp = 3
-        res = database_connection.get_income("test@unit.se")
+        res = DB.get_income("test@unit.se")
         self.assertEqual(res, exp)
 
     def test_get_basic_info(self):
         """Test get_basic_info."""
         exp = ("test@unit.se", "test", "test2", "test3", "N")
-        res = database_connection.get_basic_info("test@unit.se")
+        res = DB.get_basic_info("test@unit.se")
         self.assertTrue(exp == res)
 
     def test_verify_login(self):
         """Test verify_login."""
-        res = database_connection.verify_login("test@unit.se", "test3")
+        res = DB.verify_login("test@unit.se", "test3")
         self.assertTrue(res)
 
-        res = database_connection.verify_login("test@unit.se", "wrong")
+        res = DB.verify_login("test@unit.se", "wrong")
         self.assertFalse(res)
 
     def test_register_account(self):
         """Test register_account."""
+        pass
+
+    def test_check_email(self):
+        """Test check_email method."""
+        self.assertTrue(DB.check_email("test@unit.se"))
+        self.assertFalse(DB.check_email("s"))
+
+    def test_new_customer(self):
+        """Test new_customer function."""
+        pass
+
+    def log_out(self):
+        """Test log out."""
+        DB.log_out()
+        self.assertIsInstance(self.connection)
