@@ -45,6 +45,9 @@ class TestPlayerClass(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         """Disconnect from database."""
+        sql = "DELETE FROM account WHERE email = test@unit.se"
+        cls.mycursor.execute(sql)
+        cls.connection.commit()
         try:
             if cls.connection is not None and cls.connection.is_connected():
                 cls.mycursor.close()
