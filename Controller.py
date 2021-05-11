@@ -1143,7 +1143,8 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
                             "entertainment":  float(self.listOfExpensesSEK.item(16).text()),
                             "others":  float(self.listOfExpensesSEK.item(17).text())
                         }
-        customer.budget.set_budget(customer.budget.income, fixed_expenses, variable_expenses)
+        customer.budget.set_budget(customer.budget.income,
+                                   fixed_expenses, variable_expenses)
         # update instead of set
         DB.update_variable_expenses(customer.email, variable_expenses)
         # DB.set_fixed_expenses(customer.email, fixed_expenses)
