@@ -210,7 +210,7 @@ def register_account(val):
 
 def log_out():
     """Log out."""
-    pass
+    disconnect()
 
 
 def check_email(email):
@@ -241,5 +241,5 @@ def new_customer(email):
 
 
 if __name__ == "__main__":
-    print(get_basic_info("s"))
+    print(get_basic_info("email@email.se"))
     disconnect()

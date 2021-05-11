@@ -1,19 +1,21 @@
 
 from budget import Budget
+
+
 class Account:
     __instance = None
 
     @staticmethod
     def getInstance():
         """ Static access method. """
-        if Account.__instance == None:
+        if Account.__instance is None:
             Account()
 
         return Account.__instance
 
     def __init__(self):
         """ Virtually private constructor. """
-        if Account.__instance != None:
+        if Account.__instance is not None:
             raise Exception("This class is a Account!")
         else:
             Account.__instance = self
@@ -28,8 +30,6 @@ class Account:
         self.first_name = details[1]
         self.last_name = details[2]
         self.password = details[3]
-    
 
     def log_out(self):
         Account.__instance = None
-    
