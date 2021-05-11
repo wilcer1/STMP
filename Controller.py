@@ -956,7 +956,7 @@ class LoginScreen(QMainWindow, Ui_LoginScreen):
         if DB.verify_login(username, password) \
                 and not DB.new_customer(username):
             customer.budget.set_budget(DB.get_income(customer.email),
-                                       DB.get_variable_expenses(customer.email), 
+                                       DB.get_variable_expenses(customer.email),
                                        DB.get_fixed_expenses(customer.email))
             self.displayUi = MenuScreen()
             self.hide()
@@ -988,7 +988,7 @@ class FirstLoginScreen(QMainWindow, Ui_FirstLoginScreen):
                             "insurance": float(self.listOfExpensesSEK.item(3).text()),
                             "rent": float(self.listOfExpensesSEK.item(4).text()),
                             "others": float(self.listOfExpensesSEK.item(5).text())
-                        }   
+                        }
         variable_expenses = {
                             "food":  float(self.listOfExpensesSEK.item(11).text()),
                             "bills":  float(self.listOfExpensesSEK.item(12).text()),
@@ -996,8 +996,8 @@ class FirstLoginScreen(QMainWindow, Ui_FirstLoginScreen):
                             "hygien":  float(self.listOfExpensesSEK.item(14).text()),
                             "clothes":  float(self.listOfExpensesSEK.item(15).text()),
                             "entertainment":  float(self.listOfExpensesSEK.item(16).text()),
-                            "others":  float(self.listOfExpensesSEK.item(17).text())             
-                        }   
+                            "others":  float(self.listOfExpensesSEK.item(17).text())
+                        }
         customer.budget.set_budget(income, fixed_expenses, variable_expenses)
         DB.set_variable_expenses(customer.email, variable_expenses)
         DB.set_fixed_expenses(customer.email, fixed_expenses)
@@ -1032,12 +1032,12 @@ class MenuScreen(QMainWindow, Ui_MenuScreen):
         self.displayUi = BudgetChoiceScreen()
         self.hide()
         self.displayUi.show()
-    
+
     def longtermSaving(self):
         self.displayUi = SavingGoal()
         self.hide()
         self.displayUi.show()
-    
+
     def log_out(self):
         DB.log_out()
         customer.log_out()
@@ -1124,27 +1124,25 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         self.set_list_of_expenses()
 
         self.label_3.setText(str(customer.budget.income - customer.budget.get_total_expenses()))
-        
-
 
     def save_change(self):
         customer.budget.income = float(self.incomeItem.text())
         self.incomeItem.setText(f"{customer.budget.income}")
         fixed_expenses = {
-                            "subscriptions" : float(self.listOfExpensesSEK.item(2).text()),
-                            "insurance" : float(self.listOfExpensesSEK.item(3).text()),
-                            "rent" : float(self.listOfExpensesSEK.item(4).text()),
-                            "others" : float(self.listOfExpensesSEK.item(5).text())
-                        }   
+                            "subscriptions": float(self.listOfExpensesSEK.item(2).text()),
+                            "insurance": float(self.listOfExpensesSEK.item(3).text()),
+                            "rent": float(self.listOfExpensesSEK.item(4).text()),
+                            "others": float(self.listOfExpensesSEK.item(5).text())
+                        }
         variable_expenses = {
-                            "food" :  float(self.listOfExpensesSEK.item(11).text()),
-                            "bills" :  float(self.listOfExpensesSEK.item(12).text()),
-                            "transportation" :  float(self.listOfExpensesSEK.item(13).text()),
-                            "hygien" :  float(self.listOfExpensesSEK.item(14).text()),
-                            "clothes" :  float(self.listOfExpensesSEK.item(15).text()),
-                            "entertainment" :  float(self.listOfExpensesSEK.item(16).text()),
-                            "others" :  float(self.listOfExpensesSEK.item(17).text())             
-                        }   
+                            "food":  float(self.listOfExpensesSEK.item(11).text()),
+                            "bills":  float(self.listOfExpensesSEK.item(12).text()),
+                            "transportation":  float(self.listOfExpensesSEK.item(13).text()),
+                            "hygien":  float(self.listOfExpensesSEK.item(14).text()),
+                            "clothes":  float(self.listOfExpensesSEK.item(15).text()),
+                            "entertainment":  float(self.listOfExpensesSEK.item(16).text()),
+                            "others":  float(self.listOfExpensesSEK.item(17).text())
+                        }
         customer.budget.set_budget(customer.budget.income, fixed_expenses, variable_expenses)
         # update instead of set
         DB.update_variable_expenses(customer.email, variable_expenses)
@@ -1158,7 +1156,7 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         self.displayUi = BudgetChoiceScreen()
         self.hide()
         self.displayUi.show()
-    
+
     def set_list_of_expenses(self):
         """Set the items in the listwidget to the budget numbers stored in DB."""
         fix_exp = DB.get_fixed_expenses(customer.email)
@@ -1184,7 +1182,6 @@ class SavingGoal(QMainWindow, Ui_SavinggoalScreen):
         self.setupUi(self)
         self.pushButton.clicked.connect(self.goBack)
         self.pushButton_2.clicked.connect(self.calculate)
-        
 
     def goBack(self):
         self.displayUi = MenuScreen()
@@ -1198,12 +1195,10 @@ class SavingGoal(QMainWindow, Ui_SavinggoalScreen):
         self.label_2.setText(f"It will take {timeToReach} months to reach your goal")
 
 
-
 if __name__ == "__main__":
     import sys
 
     customer = account.Account.getInstance()
-    
     app = QApplication(sys.argv)
     MainWindow = LoginScreen()  # Use the login screen as the mainwindow to start
     MainWindow.show()
