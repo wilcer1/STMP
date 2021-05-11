@@ -622,7 +622,8 @@ class Ui_BudgetScreen(object):
         self.listOfExpenses.addItem(item)
         self.moneyleftLabel = QtWidgets.QLabel(self.centralwidget)
         self.moneyleftLabel.setGeometry(QtCore.QRect(330, 470, 131, 41))
-        self.moneyleftLabel.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.moneyleftLabel.setStyleSheet("background-color: \
+                                          rgb(255, 255, 255);")
         self.moneyleftLabel.setAlignment(QtCore.Qt.AlignHCenter |
                                          QtCore.Qt.AlignTop)
         self.moneyleftLabel.setObjectName("moneyleftLabel")
@@ -652,7 +653,8 @@ class Ui_BudgetScreen(object):
         self.listOfIncomeSEK.addItem(item)
         self.listOfExpensesSEK = QtWidgets.QListWidget(self.centralwidget)
         self.listOfExpensesSEK.setGeometry(QtCore.QRect(580, 50, 131, 391))
-        self.listOfExpensesSEK.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.listOfExpensesSEK.setStyleSheet("background-color: \
+                                             rgb(255, 255, 255);")
         self.listOfExpensesSEK.setObjectName("listOfExpensesSEK")
         item = QtWidgets.QListWidgetItem()
         font = QtGui.QFont()
@@ -736,10 +738,18 @@ class Ui_BudgetScreen(object):
                       QtCore.Qt.ItemIsEnabled)
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsEditable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        item.setFlags(QtCore.Qt.ItemIsSelectable |
+                      QtCore.Qt.ItemIsEditable |
+                      QtCore.Qt.ItemIsDragEnabled |
+                      QtCore.Qt.ItemIsUserCheckable |
+                      QtCore.Qt.ItemIsEnabled)
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
-        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsEditable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+        item.setFlags(QtCore.Qt.ItemIsSelectable |
+                      QtCore.Qt.ItemIsEditable |
+                      QtCore.Qt.ItemIsDragEnabled |
+                      QtCore.Qt.ItemIsUserCheckable |
+                      QtCore.Qt.ItemIsEnabled)
         self.listOfExpensesSEK.addItem(item)
         self.backButton = QtWidgets.QPushButton(self.centralwidget)
         self.backButton.setGeometry(QtCore.QRect(20, 480, 75, 23))
@@ -804,7 +814,8 @@ class Ui_BudgetScreen(object):
         item = self.listOfExpenses.item(17)
         item.setText(_translate("MainWindow", "Others"))
         self.listOfExpenses.setSortingEnabled(__sortingEnabled)
-        self.moneyleftLabel.setText(_translate("MainWindow", "Money left to spend:"))
+        self.moneyleftLabel.setText(_translate("MainWindow",
+                                               "Money left to spend:"))
         self.saveButton.setText(_translate("MainWindow", "Save"))
         __sortingEnabled = self.listOfIncomeSEK.isSortingEnabled()
         self.listOfIncomeSEK.setSortingEnabled(False)
@@ -847,6 +858,7 @@ class Ui_BudgetScreen(object):
         self.backButton.setText(_translate("MainWindow", "Back"))
         self.label_3.setText(_translate("MainWindow", "put money left here"))
 
+
 class Ui_SavinggoalScreen(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -881,7 +893,9 @@ class Ui_SavinggoalScreen(object):
         self.label_3.setGeometry(QtCore.QRect(440, 30, 151, 71))
         self.label_3.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.label_3.setTextFormat(QtCore.Qt.RichText)
-        self.label_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.label_3.setAlignment(QtCore.Qt.AlignLeading |
+                                  QtCore.Qt.AlignLeft |
+                                  QtCore.Qt.AlignTop)
         self.label_3.setObjectName("label_3")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(490, 200, 101, 23))
@@ -889,7 +903,8 @@ class Ui_SavinggoalScreen(object):
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(210, 150, 61, 21))
-        self.pushButton_2.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.pushButton_2.setStyleSheet("background-color: \
+                                        rgb(255, 255, 255);")
         self.pushButton_2.setObjectName("pushButton")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -907,11 +922,18 @@ class Ui_SavinggoalScreen(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "Saving goal"))
-        self.lineEdit.setPlaceholderText(_translate("MainWindow", "Amount to save per month"))
-        self.lineEdit_2.setPlaceholderText(_translate("MainWindow", "Your saving goal"))
-        self.label_3.setText(_translate("MainWindow", "<html><head/><body><p>Play around and see how long </p><p>it would take to reach your</p><p>saving goal or buffert</p></body></html>"))
+        self.lineEdit.setPlaceholderText(_translate("MainWindow",
+                                                    "Amount to save a month"))
+        self.lineEdit_2.setPlaceholderText(_translate("MainWindow",
+                                                      "Your saving goal"))
+        self.label_3.setText(_translate("MainWindow",
+                                        "<html><head/><body><p>Play around and \
+                                            see how long </p><p>it would take \
+                                            to reach your</p><p>saving goal \
+                                            or buffert</p></body></html>"))
         self.pushButton.setText(_translate("MainWindow", "Back"))
         self.pushButton_2.setText(_translate("MainWindow", "Calculate"))
+
 
 class LoginScreen(QMainWindow, Ui_LoginScreen):
     """Inherit from the code for the ui to have all information necessary."""
@@ -931,9 +953,11 @@ class LoginScreen(QMainWindow, Ui_LoginScreen):
         )  # Get the text from the username & password lineedit
         password = self.lineEdit_2.text()  #
         # Check if password and username isnt empty, if it is, popup
-        if DB.verify_login(username, password) and not DB.new_customer(username):
-            customer.budget.set_budget(DB.get_income(customer.email), DB.get_variable_expenses(customer.email), 
-                                DB.get_fixed_expenses(customer.email))
+        if DB.verify_login(username, password) \
+                and not DB.new_customer(username):
+            customer.budget.set_budget(DB.get_income(customer.email),
+                                       DB.get_variable_expenses(customer.email), 
+                                       DB.get_fixed_expenses(customer.email))
             self.displayUi = MenuScreen()
             self.hide()
             self.displayUi.show()
@@ -949,6 +973,7 @@ class LoginScreen(QMainWindow, Ui_LoginScreen):
         self.hide()
         self.displayUi.show()
 
+
 class FirstLoginScreen(QMainWindow, Ui_FirstLoginScreen):
     def __init__(self):
         super().__init__()  # Call the superclass constructor
@@ -959,19 +984,19 @@ class FirstLoginScreen(QMainWindow, Ui_FirstLoginScreen):
     def save_change(self):
         income = self.listOfIncomeSEK.item(1)
         fixed_expenses = {
-                            "subscriptions" : float(self.listOfExpensesSEK.item(2).text()),
-                            "insurance" : float(self.listOfExpensesSEK.item(3).text()),
-                            "rent" : float(self.listOfExpensesSEK.item(4).text()),
-                            "others" : float(self.listOfExpensesSEK.item(5).text())
+                            "subscriptions": float(self.listOfExpensesSEK.item(2).text()),
+                            "insurance": float(self.listOfExpensesSEK.item(3).text()),
+                            "rent": float(self.listOfExpensesSEK.item(4).text()),
+                            "others": float(self.listOfExpensesSEK.item(5).text())
                         }   
         variable_expenses = {
-                            "food" :  float(self.listOfExpensesSEK.item(11).text()),
-                            "bills" :  float(self.listOfExpensesSEK.item(12).text()),
-                            "transportation" :  float(self.listOfExpensesSEK.item(13).text()),
-                            "hygien" :  float(self.listOfExpensesSEK.item(14).text()),
-                            "clothes" :  float(self.listOfExpensesSEK.item(15).text()),
-                            "entertainment" :  float(self.listOfExpensesSEK.item(16).text()),
-                            "others" :  float(self.listOfExpensesSEK.item(17).text())             
+                            "food":  float(self.listOfExpensesSEK.item(11).text()),
+                            "bills":  float(self.listOfExpensesSEK.item(12).text()),
+                            "transportation":  float(self.listOfExpensesSEK.item(13).text()),
+                            "hygien":  float(self.listOfExpensesSEK.item(14).text()),
+                            "clothes":  float(self.listOfExpensesSEK.item(15).text()),
+                            "entertainment":  float(self.listOfExpensesSEK.item(16).text()),
+                            "others":  float(self.listOfExpensesSEK.item(17).text())             
                         }   
         customer.budget.set_budget(income, fixed_expenses, variable_expenses)
         DB.set_variable_expenses(customer.email, variable_expenses)
@@ -1040,12 +1065,8 @@ class RegisterScreen(QMainWindow, Ui_RegisterScreen):
             self.firstname.text(),
             self.lastname.text(),
             self.password.text(),
-            "Y"              
+            "Y"
             )
-        
-        
-        
-
         if DB.register_account(val):
             self.popUp.setText("Registered successfully, please log in")
             self.popUp.exec_()
