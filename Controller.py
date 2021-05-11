@@ -14,7 +14,6 @@ import account
 import database_connection as DB
 
 
-
 class Ui_LoginScreen(object):
     """Main Login Window."""
 
@@ -998,7 +997,7 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         self.listOfExpensesSEK.item(10).setText(total_var)
         self.set_list_of_expenses()
 
-        self.label_3.setText(str(customer.budget.get_total_expenses()))
+        self.label_3.setText(str(customer.budget.income - customer.budget.get_total_expenses()))
         
 
 
@@ -1027,6 +1026,7 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         total_fix, total_var = customer.budget.get_expenses()
         self.listOfExpensesSEK.item(1).setText(total_var)
         self.listOfExpensesSEK.item(10).setText(total_fix)
+        self.label_3.setText(str(customer.budget.income - customer.budget.get_total_expenses()))
 
     def go_back(self):
         self.displayUi = BudgetChoiceScreen()

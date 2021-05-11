@@ -81,7 +81,7 @@ def update_variable_expenses(email, var_exp):
     val.append(email)
 
     sql = "UPDATE variable_expenses SET food = %s, bills = %s, transportation = %s, \
-           hygien = %s, clothes = %s, entertainment = %s, others = %s \
+           hygien = %s, clothes = %s, enternainment = %s, others = %s \
            WHERE budget_account_email = %s;"
 
     mycursor.execute(sql, tuple(val))
