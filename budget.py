@@ -35,3 +35,4 @@ class Budget():
         for key in self.fixed_expenses:
             total_fix += self.fixed_expenses[key]
         return total_var + total_fix
+

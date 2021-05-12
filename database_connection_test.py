@@ -124,3 +124,7 @@ class TestPlayerClass(unittest.TestCase):
         }
         res = DB.get_fixed_expenses("test@unit.se")
         self.assertEqual(exp, res)
+
+if __name__ == '__main__':
+
+    unittest.main()
