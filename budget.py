@@ -1,5 +1,6 @@
 class Budget():
     def __init__(self):
+        """Declare the attributes needed."""
         self.income = 0
         self.variable_expenses = {}
         self.fixed_expenses = {}
@@ -12,7 +13,7 @@ class Budget():
 
 
     def get_expenses(self):
-        """Add the expenses together and return."""
+        """Add the expenses together and return as string."""
         total_fix = 0
         total_var = 0
      

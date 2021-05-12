@@ -940,6 +940,7 @@ class LoginScreen(QMainWindow, Ui_LoginScreen):
 
     # Login Screen Controller
     def __init__(self):
+        """Constructor that runs the setup."""
         super().__init__()  # Call the superclass constructor
         self.setupUi(self)  # Run the code that creates the UI layout
         self.pushButton.clicked.connect(
@@ -948,6 +949,7 @@ class LoginScreen(QMainWindow, Ui_LoginScreen):
         self.pushButton_2.clicked.connect(self.registerFunc)  #
 
     def loginFunc(self):
+        """Confirm that login is correct."""
         username = (
             self.lineEdit.text()
         )  # Get the text from the username & password lineedit
@@ -976,6 +978,7 @@ class LoginScreen(QMainWindow, Ui_LoginScreen):
 
 class FirstLoginScreen(QMainWindow, Ui_FirstLoginScreen):
     def __init__(self):
+        """Constructor that runs the setup."""
         super().__init__()  # Call the superclass constructor
         self.setupUi(self)  # Run the code that creates the UI layout
         self.saveButton.clicked.connect(self.save_change)
@@ -1019,6 +1022,7 @@ class MenuScreen(QMainWindow, Ui_MenuScreen):
 
     # Logged in menu screen Controller
     def __init__(self):
+        """Constructor that runs the setup."""
         super().__init__()  # Call the superclass constructor
         self.setupUi(self)  # Run the code that creates the UI layout
         self.pushButton.clicked.connect(
@@ -1051,6 +1055,7 @@ class RegisterScreen(QMainWindow, Ui_RegisterScreen):
 
     # Register user window controller
     def __init__(self):
+        """Constructor that runs the setup."""
         super().__init__()  # Call the superclass constructor
         self.setupUi(self)  # Run the code that creates the UI layout
         self.pushButton.clicked.connect(

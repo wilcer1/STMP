@@ -26,10 +26,12 @@ class Account:
             self.budget = Budget()
 
     def set_customer(self, details):
+        """Set the customer attributes."""
         self.email = details[0]
         self.first_name = details[1]
         self.last_name = details[2]
         self.password = details[3]
 
     def log_out(self):
+        """Remove the instance."""
         Account.__instance = None
