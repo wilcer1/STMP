@@ -467,12 +467,6 @@ class Ui_RegisterScreen(object):
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
         self.label_6.setGeometry(QtCore.QRect(290, 200, 61, 16))
         self.label_6.setObjectName("label_6")
-        # self.income = QtWidgets.QLineEdit(self.centralwidget)
-        # self.income.setGeometry(QtCore.QRect(290, 320, 113, 20))
-        # self.income.setObjectName("income")
-        # self.expenses = QtWidgets.QLineEdit(self.centralwidget)
-        # self.expenses.setGeometry(QtCore.QRect(290, 270, 113, 20))
-        # self.expenses.setObjectName("expenses")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(600, 360, 75, 23))
         self.pushButton.setObjectName("pushButton")
@@ -971,6 +965,7 @@ class LoginScreen(QMainWindow, Ui_LoginScreen):
             self.popUp.exec_()
 
     def registerFunc(self):
+        """Go to registerScreen."""
         self.displayUi = RegisterScreen()
         self.hide()
         self.displayUi.show()
@@ -1032,17 +1027,19 @@ class MenuScreen(QMainWindow, Ui_MenuScreen):
         self.pushButton_2.clicked.connect(self.longtermSaving)
 
     def MakeBudget(self):
-        # display makebudget
+        """Display makebudget."""
         self.displayUi = BudgetChoiceScreen()
         self.hide()
         self.displayUi.show()
 
     def longtermSaving(self):
+        """Switch screen."""
         self.displayUi = SavingGoal()
         self.hide()
         self.displayUi.show()
 
     def log_out(self):
+        """Log out the customer and empty singleton."""
         DB.log_out()
         customer.log_out()
         self.displayUi = LoginScreen()
@@ -1072,14 +1069,14 @@ class RegisterScreen(QMainWindow, Ui_RegisterScreen):
             self.password.text(),
             "Y"
             )
-        if DB.register_account(val):
+        if DB.register_account(val): # Check if account is in DB
             self.popUp.setText("Registered successfully, please log in")
             self.popUp.exec_()
             self.displayUi = LoginScreen()
             self.hide()
             self.displayUi.show()
         else:
-            self.popUp.exec_()
+            self.popUp.exec_() # popup error wrong username/password
 
     def goBack(self):
         """ Go back to login page."""
@@ -1093,6 +1090,7 @@ class BudgetChoiceScreen(QMainWindow, Ui_BudgetChoiceScreen):
 
     # Login Screen Controller
     def __init__(self):
+        """Constructor that runs setup and connects buttons."""
         super().__init__()  # Call the superclass constructor
         self.setupUi(self)  # Run the code that creates the UI layout
         self.pushButton_3.clicked.connect(
@@ -1102,6 +1100,7 @@ class BudgetChoiceScreen(QMainWindow, Ui_BudgetChoiceScreen):
         self.pushButton.clicked.connect(self.goBack)  #    -""-
 
     def Manual(self):
+        """Show the budget screen."""
         self.displayUi = BudgetScreen()
         self.hide()
         self.displayUi.show()
@@ -1110,6 +1109,7 @@ class BudgetChoiceScreen(QMainWindow, Ui_BudgetChoiceScreen):
         pass
 
     def goBack(self):
+        """Go back to previous screen."""
         self.displayUi = MenuScreen()
         self.hide()
         self.displayUi.show()
@@ -1117,6 +1117,7 @@ class BudgetChoiceScreen(QMainWindow, Ui_BudgetChoiceScreen):
 
 class BudgetScreen(QMainWindow, Ui_BudgetScreen):
     def __init__(self):
+        """Constructor that runs setup and buttons & labels."""
         super().__init__()  # Call the superclass constructor
         self.setupUi(self)  # Run the code that creates the UI layout
         self.incomeItem = self.listOfIncomeSEK.item(1)
@@ -1131,6 +1132,7 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         self.label_3.setText(str(customer.budget.income - customer.budget.get_total_expenses()))
 
     def save_change(self):
+        """Save the changes entered to DB and singleton."""
         customer.budget.income = float(self.incomeItem.text())
         self.incomeItem.setText(f"{customer.budget.income}")
         fixed_expenses = {
@@ -1159,6 +1161,7 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         self.label_3.setText(str(customer.budget.income - customer.budget.get_total_expenses()))
 
     def go_back(self):
+        """Go back to the budget choice screen."""
         self.displayUi = BudgetChoiceScreen()
         self.hide()
         self.displayUi.show()
