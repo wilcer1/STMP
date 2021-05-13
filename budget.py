@@ -23,7 +23,6 @@ class Budget():
         for key in self.variable_expenses:
             total_var += self.variable_expenses[key]
 
-
         return str(total_fix), str(total_var)
     
     def get_total_expenses(self):
