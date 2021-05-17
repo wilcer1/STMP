@@ -112,6 +112,7 @@ class MenuScreen(QMainWindow, gui.Ui_MenuScreen):
         )  # Call function when button is pressed
         self.pushButton_5.clicked.connect(self.log_out)
         self.pushButton_2.clicked.connect(self.longtermSaving)
+        self.pushButton_3.clicked.connect(self.make_buffert)
 
     def MakeBudget(self):
         """Display makebudget."""
@@ -122,6 +123,11 @@ class MenuScreen(QMainWindow, gui.Ui_MenuScreen):
     def longtermSaving(self):
         """Switch screen."""
         self.displayUi = SavingGoal()
+        self.hide()
+        self.displayUi.show()
+    
+    def make_buffert(self):
+        self.displayUi = BuffertScreen()
         self.hide()
         self.displayUi.show()
 
@@ -307,8 +313,31 @@ class SavingGoal(QMainWindow, gui.Ui_SavinggoalScreen):
         else:
             self.popUp.exec_()
 
+class BuffertScreen(QMainWindow, gui.Ui_BuffertScreen):
+    def __init__(self):
+        """Constructor that runs setup and buttons & labels."""
+        super().__init__()
+        self.setupUi(self)
+        self.totalincome.setText(str(customer.budget.income))
+        self.totalexpenses.setText(str(customer.budget.get_total_expenses()))
+        self.back_button.clicked.connect(self.back)
+        self.save_button.clicked.connect(self.save)
 
+    def save(self):
+        try:
+            customer.budget.set_buffert(abs(float(self.buffert_input.text())))
+        except Exception:
+            self.popUp.exec_()
+        else:
+            DB.set_buffert(customer.email, (abs(float(self.buffert_input.text()))))
+            buffert_percent = (customer.budget.buffert / customer.budget.income) * 100
+            self.amount_of_budget.setValue(int(buffert_percent))
 
+    def back(self):
+        self.displayUi = MenuScreen()
+        self.hide()
+        self.displayUi.show()
+        
 if __name__ == "__main__":
     import sys
     DB = DB.database_connection()
