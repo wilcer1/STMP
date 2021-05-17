@@ -4,6 +4,8 @@ class Budget():
         self.income = 0
         self.variable_expenses = {}
         self.fixed_expenses = {}
+        self.saving_goal = 0
+        self.buffert = 0
 
     def set_budget(self, income, variable_expenses, fixed_expenses):
        """set the attributes."""
@@ -35,3 +37,8 @@ class Budget():
             total_fix += self.fixed_expenses[key]
         return total_var + total_fix
 
+    def set_saving_goal(self, saving_goal):
+        self.saving_goal = saving_goal
+    
+    def set_buffert(self, buffert):
+        self.buffert = buffert
