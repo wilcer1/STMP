@@ -1218,7 +1218,7 @@ class SavingGoal(QMainWindow, Ui_SavinggoalScreen):
 
 if __name__ == "__main__":
     import sys
-
+    DB = DB.database_connection()
     customer = account.Account.getInstance()
     app = QApplication(sys.argv)
     MainWindow = LoginScreen()  # Use the login screen as the mainwindow to start
