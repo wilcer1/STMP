@@ -766,7 +766,7 @@ class Ui_BudgetScreen(object):
         MainWindow.setStatusBar(self.statusbar)
         self.popUp = QMessageBox()
         self.popUp.setWindowTitle("Error")
-        self.popUp.setText("Bad input, please enter only integers")
+        self.popUp.setText("Bad input, please enter only positive integers")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -987,21 +987,21 @@ class FirstLoginScreen(QMainWindow, Ui_FirstLoginScreen):
 
     def save_change(self):
         try:
-            income = self.listOfIncomeSEK.item(1)
+            income = abs(float(self.listOfIncomeSEK.item(1).text()))
             fixed_expenses = {
-                                "rent": float(self.listOfExpensesSEK.item(4).text()),
-                                "subscription": float(self.listOfExpensesSEK.item(2).text()),
-                                "insurance": float(self.listOfExpensesSEK.item(3).text()),
-                                "others": float(self.listOfExpensesSEK.item(5).text())
+                                "rent": abs(float(self.listOfExpensesSEK.item(4).text())),
+                                "subscription":  abs(float(self.listOfExpensesSEK.item(2).text())),
+                                "insurance":  abs(float(self.listOfExpensesSEK.item(3).text())),
+                                "others":  abs(float(self.listOfExpensesSEK.item(5).text()))
                             }
             variable_expenses = {
-                                "food":  float(self.listOfExpensesSEK.item(11).text()),
-                                "bills":  float(self.listOfExpensesSEK.item(12).text()),
-                                "transportation":  float(self.listOfExpensesSEK.item(13).text()),
-                                "hygien":  float(self.listOfExpensesSEK.item(14).text()),
-                                "clothes":  float(self.listOfExpensesSEK.item(15).text()),
-                                "entertainment":  float(self.listOfExpensesSEK.item(16).text()),
-                                "others":  float(self.listOfExpensesSEK.item(17).text())
+                                "food":   abs(float(self.listOfExpensesSEK.item(11).text())),
+                                "bills":   abs(float(self.listOfExpensesSEK.item(12).text())),
+                                "transportation":   abs(float(self.listOfExpensesSEK.item(13).text())),
+                                "hygien":   abs(float(self.listOfExpensesSEK.item(14).text())),
+                                "clothes":   abs(float(self.listOfExpensesSEK.item(15).text())),
+                                "entertainment":   abs(float(self.listOfExpensesSEK.item(16).text())),
+                                "others":   abs(float(self.listOfExpensesSEK.item(17).text()))
                             }
             customer.budget.set_budget(income, fixed_expenses, variable_expenses)
             DB.set_variable_expenses(customer.email, variable_expenses)
@@ -1071,21 +1071,27 @@ class RegisterScreen(QMainWindow, Ui_RegisterScreen):
 
     def Register(self):
         """Get details for register function."""
-        val = (
-            self.username.text(),
-            self.firstname.text(),
-            self.lastname.text(),
-            self.password.text(),
-            "Y"
-            )
-        if DB.register_account(val): # Check if account is in DB
-            self.popUp.setText("Registered successfully, please log in")
+        if not self.firstname.text() or \
+            not self.lastname.text() or not self.password.text():
+            self.popUp.setText("Some fields empty, please fill them")
             self.popUp.exec_()
-            self.displayUi = LoginScreen()
-            self.hide()
-            self.displayUi.show()
         else:
-            self.popUp.exec_() # popup error wrong username/password
+            val = (
+                self.username.text(),
+                self.firstname.text(),
+                self.lastname.text(),
+                self.password.text(),
+                "Y"
+                )
+            if DB.register_account(val): # Check if account is in DB
+                self.popUp.setText("Registered successfully, please log in")
+                self.popUp.exec_()
+                self.displayUi = LoginScreen()
+                self.hide()
+                self.displayUi.show()
+            else:
+                self.popUp.setText("email already exists, try log in")
+                self.popUp.exec_() # popup error wrong username/password
 
     def goBack(self):
         """ Go back to login page."""
@@ -1137,28 +1143,27 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
         self.listOfExpensesSEK.item(1).setText(total_fix)
         self.listOfExpensesSEK.item(10).setText(total_var)
         self.set_list_of_expenses()
-
         self.label_3.setText(str(customer.budget.income - customer.budget.get_total_expenses()))
 
     def save_change(self):
         """Save the changes entered to DB and singleton."""
         try:
-            customer.budget.income = float(self.incomeItem.text())
+            customer.budget.income = abs(float(self.incomeItem.text()))
             self.incomeItem.setText(f"{customer.budget.income}")
             fixed_expenses = {
-                                "rent": float(self.listOfExpensesSEK.item(4).text()),
-                                "subscription": float(self.listOfExpensesSEK.item(2).text()),
-                                "insurance": float(self.listOfExpensesSEK.item(3).text()),
-                                "others": float(self.listOfExpensesSEK.item(5).text())
+                                "rent":  abs(float(self.listOfExpensesSEK.item(4).text())),
+                                "subscription":  abs(float(self.listOfExpensesSEK.item(2).text())),
+                                "insurance":  abs(float(self.listOfExpensesSEK.item(3).text())),
+                                "others":  abs(float(self.listOfExpensesSEK.item(5).text()))
                             }
             variable_expenses = {
-                                "food":  float(self.listOfExpensesSEK.item(11).text()),
-                                "bills":  float(self.listOfExpensesSEK.item(12).text()),
-                                "transportation":  float(self.listOfExpensesSEK.item(13).text()),
-                                "hygien":  float(self.listOfExpensesSEK.item(14).text()),
-                                "clothes":  float(self.listOfExpensesSEK.item(15).text()),
-                                "entertainment":  float(self.listOfExpensesSEK.item(16).text()),
-                                "others":  float(self.listOfExpensesSEK.item(17).text())
+                                "food":   abs(float(self.listOfExpensesSEK.item(11).text())),
+                                "bills":   abs(float(self.listOfExpensesSEK.item(12).text())),
+                                "transportation":   abs(float(self.listOfExpensesSEK.item(13).text())),
+                                "hygien":   abs(float(self.listOfExpensesSEK.item(14).text())),
+                                "clothes":   abs(float(self.listOfExpensesSEK.item(15).text())),
+                                "entertainment":   abs(float(self.listOfExpensesSEK.item(16).text())),
+                                "others":   abs(float(self.listOfExpensesSEK.item(17).text()))
                             }
             customer.budget.set_budget(customer.budget.income,
                                     variable_expenses, fixed_expenses)
