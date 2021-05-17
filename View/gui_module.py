@@ -870,7 +870,7 @@ class Ui_SavinggoalScreen(object):
         self.label.setObjectName("label")
         self.popUp = QMessageBox()
         self.popUp.setWindowTitle("Error")
-        self.popUp.setText("Need input to calculate")
+        self.popUp.setText("Bad input, enter only positive numbers")
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(50, 70, 141, 20))
         self.lineEdit.setToolTip("")
