@@ -88,6 +88,9 @@ class Ui_FirstLoginScreen(object):
         self.label_2.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
+        self.popUp = QMessageBox()
+        self.popUp.setWindowTitle("Error")
+        self.popUp.setText("Bad input, please only enter integers")
         self.listOfIncome = QtWidgets.QListWidget(self.centralwidget)
         self.listOfIncome.setGeometry(QtCore.QRect(80, 50, 121, 391))
         self.listOfIncome.setStyleSheet("background-color:\
@@ -761,6 +764,9 @@ class Ui_BudgetScreen(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.popUp = QMessageBox()
+        self.popUp.setWindowTitle("Error")
+        self.popUp.setText("Bad input, please enter only integers")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -980,30 +986,33 @@ class FirstLoginScreen(QMainWindow, Ui_FirstLoginScreen):
         self.pushButton.clicked.connect(self.go_back)
 
     def save_change(self):
-        income = self.listOfIncomeSEK.item(1)
-        fixed_expenses = {
-                            "subscriptions": float(self.listOfExpensesSEK.item(2).text()),
-                            "insurance": float(self.listOfExpensesSEK.item(3).text()),
-                            "rent": float(self.listOfExpensesSEK.item(4).text()),
-                            "others": float(self.listOfExpensesSEK.item(5).text())
-                        }
-        variable_expenses = {
-                            "food":  float(self.listOfExpensesSEK.item(11).text()),
-                            "bills":  float(self.listOfExpensesSEK.item(12).text()),
-                            "transportation":  float(self.listOfExpensesSEK.item(13).text()),
-                            "hygien":  float(self.listOfExpensesSEK.item(14).text()),
-                            "clothes":  float(self.listOfExpensesSEK.item(15).text()),
-                            "entertainment":  float(self.listOfExpensesSEK.item(16).text()),
-                            "others":  float(self.listOfExpensesSEK.item(17).text())
-                        }
-        customer.budget.set_budget(income, fixed_expenses, variable_expenses)
-        DB.set_variable_expenses(customer.email, variable_expenses)
-        DB.set_fixed_expenses(customer.email, fixed_expenses)
-        DB.not_new_customer(customer.email)
+        try:
+            income = self.listOfIncomeSEK.item(1)
+            fixed_expenses = {
+                                "subscriptions": float(self.listOfExpensesSEK.item(2).text()),
+                                "insurance": float(self.listOfExpensesSEK.item(3).text()),
+                                "rent": float(self.listOfExpensesSEK.item(4).text()),
+                                "others": float(self.listOfExpensesSEK.item(5).text())
+                            }
+            variable_expenses = {
+                                "food":  float(self.listOfExpensesSEK.item(11).text()),
+                                "bills":  float(self.listOfExpensesSEK.item(12).text()),
+                                "transportation":  float(self.listOfExpensesSEK.item(13).text()),
+                                "hygien":  float(self.listOfExpensesSEK.item(14).text()),
+                                "clothes":  float(self.listOfExpensesSEK.item(15).text()),
+                                "entertainment":  float(self.listOfExpensesSEK.item(16).text()),
+                                "others":  float(self.listOfExpensesSEK.item(17).text())
+                            }
+            customer.budget.set_budget(income, fixed_expenses, variable_expenses)
+            DB.set_variable_expenses(customer.email, variable_expenses)
+            DB.set_fixed_expenses(customer.email, fixed_expenses)
+            DB.not_new_customer(customer.email)
 
-        self.displayUi = MenuScreen()
-        self.hide()
-        self.displayUi.show()
+            self.displayUi = MenuScreen()
+            self.hide()
+            self.displayUi.show()
+        except Exception:
+            self.popUp.exec_()
 
     def go_back(self):
         self.displayUi = LoginScreen()
@@ -1133,32 +1142,35 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
 
     def save_change(self):
         """Save the changes entered to DB and singleton."""
-        customer.budget.income = float(self.incomeItem.text())
-        self.incomeItem.setText(f"{customer.budget.income}")
-        fixed_expenses = {
-                            "subscriptions": float(self.listOfExpensesSEK.item(2).text()),
-                            "insurance": float(self.listOfExpensesSEK.item(3).text()),
-                            "rent": float(self.listOfExpensesSEK.item(4).text()),
-                            "others": float(self.listOfExpensesSEK.item(5).text())
-                        }
-        variable_expenses = {
-                            "food":  float(self.listOfExpensesSEK.item(11).text()),
-                            "bills":  float(self.listOfExpensesSEK.item(12).text()),
-                            "transportation":  float(self.listOfExpensesSEK.item(13).text()),
-                            "hygien":  float(self.listOfExpensesSEK.item(14).text()),
-                            "clothes":  float(self.listOfExpensesSEK.item(15).text()),
-                            "entertainment":  float(self.listOfExpensesSEK.item(16).text()),
-                            "others":  float(self.listOfExpensesSEK.item(17).text())
-                        }
-        customer.budget.set_budget(customer.budget.income,
-                                   fixed_expenses, variable_expenses)
-        # update instead of set
-        DB.update_variable_expenses(customer.email, variable_expenses)
-        # DB.set_fixed_expenses(customer.email, fixed_expenses)
-        total_fix, total_var = customer.budget.get_expenses()
-        self.listOfExpensesSEK.item(1).setText(total_var)
-        self.listOfExpensesSEK.item(10).setText(total_fix)
-        self.label_3.setText(str(customer.budget.income - customer.budget.get_total_expenses()))
+        try:
+            customer.budget.income = float(self.incomeItem.text())
+            self.incomeItem.setText(f"{customer.budget.income}")
+            fixed_expenses = {
+                                "subscriptions": float(self.listOfExpensesSEK.item(2).text()),
+                                "insurance": float(self.listOfExpensesSEK.item(3).text()),
+                                "rent": float(self.listOfExpensesSEK.item(4).text()),
+                                "others": float(self.listOfExpensesSEK.item(5).text())
+                            }
+            variable_expenses = {
+                                "food":  float(self.listOfExpensesSEK.item(11).text()),
+                                "bills":  float(self.listOfExpensesSEK.item(12).text()),
+                                "transportation":  float(self.listOfExpensesSEK.item(13).text()),
+                                "hygien":  float(self.listOfExpensesSEK.item(14).text()),
+                                "clothes":  float(self.listOfExpensesSEK.item(15).text()),
+                                "entertainment":  float(self.listOfExpensesSEK.item(16).text()),
+                                "others":  float(self.listOfExpensesSEK.item(17).text())
+                            }
+            customer.budget.set_budget(customer.budget.income,
+                                    variable_expenses, fixed_expenses)
+            # update instead of set
+            DB.update_variable_expenses(customer.email, variable_expenses)
+            DB.update_fixed_expenses(customer.email, fixed_expenses)
+            total_fix, total_var = customer.budget.get_expenses()
+            self.listOfExpensesSEK.item(1).setText(total_fix)
+            self.listOfExpensesSEK.item(10).setText(total_var)
+            self.label_3.setText(str(customer.budget.income - customer.budget.get_total_expenses()))
+        except Exception:
+            self.popUp.exec_()
 
     def go_back(self):
         """Go back to the budget choice screen."""
