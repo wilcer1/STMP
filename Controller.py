@@ -989,9 +989,9 @@ class FirstLoginScreen(QMainWindow, Ui_FirstLoginScreen):
         try:
             income = self.listOfIncomeSEK.item(1)
             fixed_expenses = {
-                                "subscriptions": float(self.listOfExpensesSEK.item(2).text()),
-                                "insurance": float(self.listOfExpensesSEK.item(3).text()),
                                 "rent": float(self.listOfExpensesSEK.item(4).text()),
+                                "subscription": float(self.listOfExpensesSEK.item(2).text()),
+                                "insurance": float(self.listOfExpensesSEK.item(3).text()),
                                 "others": float(self.listOfExpensesSEK.item(5).text())
                             }
             variable_expenses = {
@@ -1146,9 +1146,9 @@ class BudgetScreen(QMainWindow, Ui_BudgetScreen):
             customer.budget.income = float(self.incomeItem.text())
             self.incomeItem.setText(f"{customer.budget.income}")
             fixed_expenses = {
-                                "subscriptions": float(self.listOfExpensesSEK.item(2).text()),
-                                "insurance": float(self.listOfExpensesSEK.item(3).text()),
                                 "rent": float(self.listOfExpensesSEK.item(4).text()),
+                                "subscription": float(self.listOfExpensesSEK.item(2).text()),
+                                "insurance": float(self.listOfExpensesSEK.item(3).text()),
                                 "others": float(self.listOfExpensesSEK.item(5).text())
                             }
             variable_expenses = {
