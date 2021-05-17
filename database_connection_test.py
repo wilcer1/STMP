@@ -56,8 +56,7 @@ class TestPlayerClass(unittest.TestCase):
         cls.mycursor.execute(sql, val)
         cls.connection.commit()
         sql = "DELETE FROM account WHERE email = %s;"
-        cls.mycursor.execute(sql, val)
-        cls.connection.commit()
+
         try:
             if cls.connection is not None and cls.connection.is_connected():
                 cls.mycursor.close()
@@ -70,6 +69,55 @@ class TestPlayerClass(unittest.TestCase):
         exp = 3
         res = DB.get_income("test@unit.se")
         self.assertEqual(res, exp)
+    
+    def test_set_variable_expenses(self):
+        pass
+
+    def test_get_variable_expenses(self):
+        exp = ("test@unit.se", 1, 2, 3, 4, 5, 6, 7)
+        res = DB.get_variable_expenses("test@unit.se")
+        self.assertTrue(exp == res)
+
+    def test_set_fixed_expenses(self):
+        pass
+
+
+
+    def test_update_fixed_expenses(self):
+        """New values"""
+        fixed_expenses = {
+            "rent": 4,
+            "subscription": 3,
+            "insurance": 2,
+            "others": 1
+        }
+        
+        exp = fixed_expenses
+        DB.update_fixed_expenses("test@unit.se", fixed_expenses)
+        res = DB.get_fixed_expenses("test@unit.se")
+        self.assertTrue(exp == res)
+    
+    def test_update_variable_expenses(self):
+        """New values"""
+        variable_expenses = {
+            "food": 7,
+            "bills": 6,
+            "transportation": 5,
+            "hygien": 4,
+            "clothes": 3,
+            "entertainment": 2,
+            "others": 1,
+        }
+        
+        exp = variable_expenses
+        DB.update_variable_expenses("test@unit.se", variable_expenses)
+        res = DB.get_variable_expenses("test@unit.se")
+        self.assertTrue(exp == res)
+
+    def test_get_fixed_expenses(self):
+        exp = ("test@unit.se", 1, 2, 3, 4)
+        res = DB.get_fixed_expenses("test@unit.se")
+        self.assertTrue(exp == res)
 
     def test_get_basic_info(self):
         """Test get_basic_info."""
