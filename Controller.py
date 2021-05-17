@@ -298,6 +298,7 @@ class SavingGoal(QMainWindow, gui.Ui_SavinggoalScreen):
                 amount_per_month = float(self.lineEdit.text())
                 saving_goal = float(self.lineEdit_2.text())
                 customer.budget.set_saving_goal(saving_goal)
+                DB.set_saving_goal(customer.email, saving_goal)
                 time_to_reach = saving_goal / amount_per_month
                 self.textBrowser.setText(f"It will take {time_to_reach} months to reach your goal")
                 

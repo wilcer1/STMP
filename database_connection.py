@@ -256,6 +256,16 @@ class database_connection():
         else:
             return False
 
+    def set_buffert(self, email, buffert):
+        sql = "UPDATE budget SET buffert = %s WHERE email = %s; "
+        val = (buffert, email,)
+        self.mycursor.execute(sql, val)
+        self.connection.commit()
 
+    def set_saving_goal(self, email, saving_goal):
+        sql = "UPDATE budget SET saving_goal = %s WHERE email = %s; "
+        val = (saving_goal, email,)
+        self.mycursor.execute(sql, val)
+        self.connection.commit()
 if __name__ == "__main__":
     pass
