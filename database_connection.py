@@ -128,6 +128,19 @@ def set_fixed_expenses(email, var_exp):
     mycursor.execute(sql, tuple(val))
     connection.commit()
 
+def update_fixed_expenses(email, fix_exp):
+    """Update fixed_expenses."""
+    val = []
+    for x in fix_exp:
+        val.append(fix_exp[x])
+    val.append(email)
+
+    sql = "UPDATE fixed_expenses SET rent = %s, subscription = %s, insurance = %s, \
+           others = %s WHERE budget_account_email = %s;"
+
+    mycursor.execute(sql, tuple(val))
+    connection.commit()
+
 
 def get_fixed_expenses(email):
     """Return fixed_expenses."""
