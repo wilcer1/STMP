@@ -295,10 +295,11 @@ class SavingGoal(QMainWindow, gui.Ui_SavinggoalScreen):
     def calculate(self):
         if self.lineEdit.text() and self.lineEdit_2.text():
             try:
-                amountPerMonth = float(self.lineEdit.text())
-                savingGoal = float(self.lineEdit_2.text())
-                timeToReach = savingGoal / amountPerMonth
-                self.textBrowser.setText(f"It will take {timeToReach} months to reach your goal")
+                amount_per_month = float(self.lineEdit.text())
+                saving_goal = float(self.lineEdit_2.text())
+                customer.budget.set_saving_goal(saving_goal)
+                time_to_reach = saving_goal / amount_per_month
+                self.textBrowser.setText(f"It will take {time_to_reach} months to reach your goal")
                 
             except ValueError:
                 self.popUp.exec_()
