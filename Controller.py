@@ -293,10 +293,13 @@ class SavingGoal(QMainWindow, gui.Ui_SavinggoalScreen):
         self.displayUi.show()
 
     def calculate(self):
-        amountPerMonth = float(self.lineEdit.text())
-        savingGoal = float(self.lineEdit_2.text())
-        timeToReach = savingGoal / amountPerMonth
-        self.label_2.setText(f"It will take {timeToReach} months to reach your goal")
+        if self.lineEdit.text() and self.lineEdit_2.text():
+            amountPerMonth = float(self.lineEdit.text())
+            savingGoal = float(self.lineEdit_2.text())
+            timeToReach = savingGoal / amountPerMonth
+            self.label_2.setText(f"It will take {timeToReach} months to reach your goal")
+        else:
+            self.popUp.exec_()
 
 
 
