@@ -418,7 +418,7 @@ class Ui_MenuScreen(object):
         self.pushButton.setText(_translate("MainWindow", "Make a budget"))
         self.pushButton_2.setText(_translate("MainWindow",
                                              "Create long-term savings"))
-        self.pushButton_3.setText(_translate("MainWindow", "eee"))
+        self.pushButton_3.setText(_translate("MainWindow", "Set your buffert"))
         self.pushButton_4.setText(_translate("MainWindow", "PushButton"))
         self.pushButton_5.setText(_translate("MainWindow", "Log out"))
 
@@ -612,6 +612,15 @@ class Ui_BudgetScreen(object):
         self.listOfExpenses.addItem(item)
         item = QtWidgets.QListWidgetItem()
         self.listOfExpenses.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listOfExpenses.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listOfExpenses.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        self.listOfExpenses.addItem(item)
         self.moneyleftLabel = QtWidgets.QLabel(self.centralwidget)
         self.moneyleftLabel.setGeometry(QtCore.QRect(330, 470, 131, 41))
         self.moneyleftLabel.setStyleSheet("background-color: \
@@ -695,11 +704,8 @@ class Ui_BudgetScreen(object):
         item = QtWidgets.QListWidgetItem()
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
-        item.setFlags(QtCore.Qt.ItemIsSelectable |
-                      QtCore.Qt.ItemIsEditable |
-                      QtCore.Qt.ItemIsDragEnabled |
-                      QtCore.Qt.ItemIsUserCheckable |
-                      QtCore.Qt.ItemIsEnabled)
+        self.listOfExpensesSEK.addItem(item)
+        item = QtWidgets.QListWidgetItem()
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
         item.setFlags(QtCore.Qt.ItemIsSelectable |
@@ -735,6 +741,10 @@ class Ui_BudgetScreen(object):
                       QtCore.Qt.ItemIsDragEnabled |
                       QtCore.Qt.ItemIsUserCheckable |
                       QtCore.Qt.ItemIsEnabled)
+        self.listOfExpensesSEK.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listOfExpensesSEK.addItem(item)
+        item = QtWidgets.QListWidgetItem()
         self.listOfExpensesSEK.addItem(item)
         item = QtWidgets.QListWidgetItem()
         item.setFlags(QtCore.Qt.ItemIsSelectable |
@@ -808,6 +818,8 @@ class Ui_BudgetScreen(object):
         item.setText(_translate("MainWindow", "Entertainment"))
         item = self.listOfExpenses.item(17)
         item.setText(_translate("MainWindow", "Others"))
+        item = self.listOfExpenses.item(20)
+        item.setText(_translate("MainWindow", "Buffert"))
         self.listOfExpenses.setSortingEnabled(__sortingEnabled)
         self.moneyleftLabel.setText(_translate("MainWindow",
                                                "Money left to spend:"))
@@ -849,6 +861,11 @@ class Ui_BudgetScreen(object):
         item.setText(_translate("MainWindow", "0"))
         item = self.listOfExpensesSEK.item(17)
         item.setText(_translate("MainWindow", "0"))
+        item = self.listOfExpensesSEK.item(20)
+        item.setText(_translate("MainWindow", "0"))
+        
+        
+
         self.listOfExpensesSEK.setSortingEnabled(__sortingEnabled)
         self.backButton.setText(_translate("MainWindow", "Back"))
         self.label_3.setText(_translate("MainWindow", "put money left here"))

@@ -226,6 +226,7 @@ class BudgetScreen(QMainWindow, gui.Ui_BudgetScreen):
         total_fix, total_var = self.customer.budget.get_expenses()
         self.listOfExpensesSEK.item(1).setText(total_fix)
         self.listOfExpensesSEK.item(10).setText(total_var)
+        self.listOfExpensesSEK.item(20).setText(str(customer.budget.buffert))
         self.set_list_of_expenses()
         self.label_3.setText(str(self.customer.budget.income - self.customer.budget.get_total_expenses()))
 
@@ -257,8 +258,11 @@ class BudgetScreen(QMainWindow, gui.Ui_BudgetScreen):
             total_fix, total_var = self.customer.budget.get_expenses()
             self.listOfExpensesSEK.item(1).setText(total_fix)
             self.listOfExpensesSEK.item(10).setText(total_var)
+            customer.budget.set_buffert(abs(float(self.listOfExpensesSEK.item(20).text())))
+            DB.update_buffert(customer.email, abs(float(self.listOfExpensesSEK.item(20).text())))
             self.label_3.setText(str(self.customer.budget.income - self.customer.budget.get_total_expenses()))
-        except Exception:
+        except Exception as e:
+            print(e)
             self.popUp.exec_()
 
     def go_back(self):
