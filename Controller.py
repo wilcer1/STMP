@@ -42,7 +42,7 @@ class LoginScreen(QMainWindow, gui.Ui_LoginScreen):
             self.displayUi = MenuScreen()
             self.hide()
             self.displayUi.show()
-        elif DB.verify_login(username, password) and DB.new_self.customer(username):
+        elif DB.verify_login(username, password) and DB.new_customer(username):
             self.displayUi = FirstLoginScreen()
             self.hide()
             self.displayUi.show()
@@ -84,7 +84,7 @@ class FirstLoginScreen(QMainWindow, gui.Ui_FirstLoginScreen):
             self.customer.budget.set_budget(income, fixed_expenses, variable_expenses)
             DB.set_variable_expenses(self.customer.email, variable_expenses)
             DB.set_fixed_expenses(self.customer.email, fixed_expenses)
-            DB.not_new_customer(self.customer.email)
+            DB.not_new_self.customer(self.customer.email)
 
             self.displayUi = MenuScreen()
             self.hide()
@@ -113,6 +113,7 @@ class MenuScreen(QMainWindow, gui.Ui_MenuScreen):
         self.pushButton_5.clicked.connect(self.log_out)
         self.pushButton_2.clicked.connect(self.longtermSaving)
         self.pushButton_3.clicked.connect(self.make_buffert)
+        self.pushButton_4.clicked.connect(self.eco_overview)
 
     def MakeBudget(self):
         """Display makebudget."""
@@ -126,13 +127,18 @@ class MenuScreen(QMainWindow, gui.Ui_MenuScreen):
         self.hide()
         self.displayUi.show()
     
+    def eco_overview(self):
+        self.displayUi = EcoOverviewScreen()
+        self.hide()
+        self.displayUi.show()
+
     def make_buffert(self):
         self.displayUi = BuffertScreen()
         self.hide()
         self.displayUi.show()
 
     def log_out(self):
-        """Log out the customer and empty singleton."""
+        """Log out the self.customer and empty singleton."""
         DB.log_out()
         self.customer.log_out()
         self.displayUi = LoginScreen()
@@ -226,7 +232,7 @@ class BudgetScreen(QMainWindow, gui.Ui_BudgetScreen):
         total_fix, total_var = self.customer.budget.get_expenses()
         self.listOfExpensesSEK.item(1).setText(total_fix)
         self.listOfExpensesSEK.item(10).setText(total_var)
-        self.listOfExpensesSEK.item(20).setText(str(customer.budget.buffert))
+        self.listOfExpensesSEK.item(20).setText(str(self.customer.budget.buffert))
         self.set_list_of_expenses()
         self.label_3.setText(str(self.customer.budget.income - self.customer.budget.get_total_expenses()))
 
@@ -258,8 +264,8 @@ class BudgetScreen(QMainWindow, gui.Ui_BudgetScreen):
             total_fix, total_var = self.customer.budget.get_expenses()
             self.listOfExpensesSEK.item(1).setText(total_fix)
             self.listOfExpensesSEK.item(10).setText(total_var)
-            customer.budget.set_buffert(abs(float(self.listOfExpensesSEK.item(20).text())))
-            DB.update_buffert(customer.email, abs(float(self.listOfExpensesSEK.item(20).text())))
+            self.customer.budget.set_buffert(abs(float(self.listOfExpensesSEK.item(20).text())))
+            DB.update_buffert(self.customer.email, abs(float(self.listOfExpensesSEK.item(20).text())))
             self.label_3.setText(str(self.customer.budget.income - self.customer.budget.get_total_expenses()))
         except Exception as e:
             print(e)
@@ -307,8 +313,8 @@ class SavingGoal(QMainWindow, gui.Ui_SavinggoalScreen):
             try:
                 amount_per_month = float(self.lineEdit.text())
                 saving_goal = float(self.lineEdit_2.text())
-                customer.budget.set_saving_goal(saving_goal)
-                DB.update_saving_goal(customer.email, saving_goal)
+                self.customer.budget.set_saving_goal(saving_goal)
+                DB.update_saving_goal(self.customer.email, saving_goal)
                 time_to_reach = saving_goal / amount_per_month
                 self.textBrowser.setText(f"It will take {time_to_reach} months to reach your goal")
                 
@@ -322,30 +328,68 @@ class BuffertScreen(QMainWindow, gui.Ui_BuffertScreen):
         """Constructor that runs setup and buttons & labels."""
         super().__init__()
         self.setupUi(self)
-        self.totalincome.setText(str(customer.budget.income))
-        self.totalexpenses.setText(str(customer.budget.get_total_expenses()))
+        self.totalincome.setText(str(self.customer.budget.income))
+        self.totalexpenses.setText(str(self.customer.budget.get_total_expenses()))
         self.back_button.clicked.connect(self.back)
         self.save_button.clicked.connect(self.save)
 
     def save(self):
         try:
-            customer.budget.set_buffert(abs(float(self.buffert_input.text())))
+            self.customer.budget.set_buffert(abs(float(self.buffert_input.text())))
         except Exception:
             self.popUp.exec_()
         else:
-            DB.update_buffert(customer.email, (abs(float(self.buffert_input.text()))))
-            buffert_percent = (customer.budget.buffert / customer.budget.income) * 100
+            DB.update_buffert(self.customer.email, (abs(float(self.buffert_input.text()))))
+            buffert_percent = (self.customer.budget.buffert / self.customer.budget.income) * 100
             self.amount_of_budget.setValue(int(buffert_percent))
 
     def back(self):
         self.displayUi = MenuScreen()
         self.hide()
         self.displayUi.show()
-        
+
+class EcoOverviewScreen(QMainWindow, gui.Ui_EcoOverviewScreen):
+
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.listOfIncomeSEK.item(1).setText(f"{self.customer.budget.income}")
+        self.pushButton.clicked.connect(self.go_back)
+        total_fix, total_var = self.customer.budget.get_expenses()
+        self.listOfExpensesSEK.item(1).setText(total_fix)
+        self.listOfExpensesSEK.item(10).setText(total_var)
+        self.savingsListSEK.item(1).setText(str(self.customer.budget.saving_goal))
+        self.savingsListSEK.item(2).setText(str(self.customer.budget.buffert))
+        self.set_list_of_expenses()
+        self.label_3.setText(str(self.customer.budget.income - self.customer.budget.get_total_expenses()))
+
+    def go_back(self):
+        self.displayUi = MenuScreen()
+        self.hide()
+        self.displayUi.show()
+    
+    def set_list_of_expenses(self):
+        """Set the items in the listwidget to the budget numbers stored in DB."""
+        fix_exp = DB.get_fixed_expenses(self.customer.email)
+        var_exp = DB.get_variable_expenses(self.customer.email)
+        self.listOfExpensesSEK.item(2).setText(str(fix_exp["subscription"]))
+        self.listOfExpensesSEK.item(3).setText(str(fix_exp["insurance"]))
+        self.listOfExpensesSEK.item(4).setText(str(fix_exp["rent"]))
+        self.listOfExpensesSEK.item(5).setText(str(fix_exp["others"]))
+
+        self.listOfExpensesSEK.item(11).setText(str(var_exp["food"]))
+        self.listOfExpensesSEK.item(12).setText(str(var_exp["bills"]))
+        self.listOfExpensesSEK.item(13).setText(str(var_exp["transportation"]))
+        self.listOfExpensesSEK.item(14).setText(str(var_exp["hygien"]))
+        self.listOfExpensesSEK.item(15).setText(str(var_exp["clothes"]))
+        self.listOfExpensesSEK.item(16).setText(str(var_exp["entertainment"]))
+        self.listOfExpensesSEK.item(17).setText(str(var_exp["others"]))
+
+
+
 if __name__ == "__main__":
     import sys
     DB = DB.database_connection()
-    customer = account.Account.getInstance()
     app = QApplication(sys.argv)
     MainWindow = LoginScreen()  # Use the login screen as the mainwindow to start
     MainWindow.show()
