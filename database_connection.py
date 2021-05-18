@@ -210,7 +210,7 @@ class database_connection():
                     register = False
                     break
 
-        if not self.check_email(email) or not self.check_details():
+        if not self.check_email(email) or not self.check_details(email, val[1], val[2]):
             register = False
 
         if register is not False:
@@ -224,13 +224,19 @@ class database_connection():
 
         return register
     
-    def check_details(self, first_name, last_name):
+    def check_details(self, email, first_name, last_name):
         """Check if first/lastname contains nums."""
         isnum = 0
         for i in first_name:
             for c in last_name:
-                if i.isnum() or c.isnum():
+                if i.isdigit() or c.isdigit():
                     isnum += 1
+        split = email.split(".")
+        for c in split[-1]:
+            if c.isdigit():
+                isnum += 1
+
+
         if isnum > 0:
             return False
 
