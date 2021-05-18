@@ -225,7 +225,7 @@ class database_connection():
         return register
     
     def check_details(self, email, first_name, last_name):
-        """Check if first/lastname contains nums."""
+        """Check if email/first/lastname contains nums."""
         isnum = 0
         for i in first_name:
             for c in last_name:
