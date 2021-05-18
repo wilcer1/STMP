@@ -304,7 +304,7 @@ class SavingGoal(QMainWindow, gui.Ui_SavinggoalScreen):
                 amount_per_month = float(self.lineEdit.text())
                 saving_goal = float(self.lineEdit_2.text())
                 customer.budget.set_saving_goal(saving_goal)
-                DB.set_saving_goal(customer.email, saving_goal)
+                DB.update_saving_goal(customer.email, saving_goal)
                 time_to_reach = saving_goal / amount_per_month
                 self.textBrowser.setText(f"It will take {time_to_reach} months to reach your goal")
                 
@@ -329,7 +329,7 @@ class BuffertScreen(QMainWindow, gui.Ui_BuffertScreen):
         except Exception:
             self.popUp.exec_()
         else:
-            DB.set_buffert(customer.email, (abs(float(self.buffert_input.text()))))
+            DB.update_buffert(customer.email, (abs(float(self.buffert_input.text()))))
             buffert_percent = (customer.budget.buffert / customer.budget.income) * 100
             self.amount_of_budget.setValue(int(buffert_percent))
 
