@@ -1,20 +1,18 @@
-"""Unittest for DB."""
+"""Unittest for self.DB."""
 
 import unittest
-import database_connection as DB
+from database_connection import database_connection as DB
 import mysql.connector
 from mysql.connector import Error
 
 
 class TestPlayerClass(unittest.TestCase):
     """Test Player Class."""
-    
-
     @classmethod
     def setUpClass(cls):
         """Set up account for testing."""
         try:
-            # Connect to the db
+            # Connect to the self.db
             cls.connection = mysql.connector.connect(
                 host="den1.mysql5.gear.host",
                 user="stmp",
@@ -43,6 +41,8 @@ class TestPlayerClass(unittest.TestCase):
         cls.mycursor.execute(sql, val)
         cls.connection.commit()
 
+        cls.DB = DB()
+
     @classmethod
     def tearDownClass(cls):
         """Disconnect from database and delete test account."""
@@ -67,10 +67,16 @@ class TestPlayerClass(unittest.TestCase):
         except Error as e:
             print(e)
 
+    def test_init(self):
+        """Test constructor."""
+        exp = DB
+        res = self.DB
+        self.assertIsInstance(res, exp)
+
     def test_get_income(self):
         """Test get_income."""
         exp = 3
-        res = DB.get_income("test@unit.se")
+        res = self.DB.get_income("test@unit.se")
         self.assertEqual(res, exp)
     
     def test_set_variable_expenses(self):
@@ -89,8 +95,8 @@ class TestPlayerClass(unittest.TestCase):
         }
         
         exp = variable_expenses
-        DB.set_variable_expenses("test@unit.se", variable_expenses)
-        res = DB.get_variable_expenses("test@unit.se")
+        self.DB.set_variable_expenses("test@unit.se", variable_expenses)
+        res = self.DB.get_variable_expenses("test@unit.se")
         self.assertEqual(res, exp)
         exp = {
             "food": 7,
@@ -117,8 +123,8 @@ class TestPlayerClass(unittest.TestCase):
         }
 
         exp = fixed_expenses
-        DB.set_fixed_expenses("test@unit.se", fixed_expenses)
-        res = DB.get_fixed_expenses("test@unit.se")
+        self.DB.set_fixed_expenses("test@unit.se", fixed_expenses)
+        res = self.DB.get_fixed_expenses("test@unit.se")
         self.assertEqual(exp, res)
         res = {
             "rent": 1,
@@ -140,8 +146,8 @@ class TestPlayerClass(unittest.TestCase):
         }
         
         exp = fixed_expenses
-        DB.update_fixed_expenses("test@unit.se", fixed_expenses)
-        res = DB.get_fixed_expenses("test@unit.se")
+        self.DB.update_fixed_expenses("test@unit.se", fixed_expenses)
+        res = self.DB.get_fixed_expenses("test@unit.se")
         self.assertEqual(exp, res)
 
         res = {
@@ -165,8 +171,8 @@ class TestPlayerClass(unittest.TestCase):
         }
         
         exp = variable_expenses
-        DB.update_variable_expenses("test@unit.se", variable_expenses)
-        res = DB.get_variable_expenses("test@unit.se")
+        self.DB.update_variable_expenses("test@unit.se", variable_expenses)
+        res = self.DB.get_variable_expenses("test@unit.se")
         self.assertEqual(res, exp)
         exp = {
             "food": 7,
@@ -182,30 +188,30 @@ class TestPlayerClass(unittest.TestCase):
     def test_get_basic_info(self):
         """Test get_basic_info."""
         exp = ("test@unit.se", "test", "test2", "test3", "N")
-        res = DB.get_basic_info("test@unit.se")
+        res = self.DB.get_basic_info("test@unit.se")
         self.assertTrue(exp == res)
 
     def test_verify_login(self):
         """Test verify_login."""
-        res = DB.verify_login("test@unit.se", "test3")
+        res = self.DB.verify_login("test@unit.se", "test3")
         self.assertTrue(res)
 
-        res = DB.verify_login("test@unit.se", "wrong")
+        res = self.DB.verify_login("test@unit.se", "wrong")
         self.assertFalse(res)
 
     def test_register_account(self):
         """Test register_account."""
-        res = DB.register_account("test@unit.se")
+        res = self.DB.register_account("test@unit.se")
         self.assertFalse(res)
 
     def test_check_email(self):
         """Test check_email method."""
-        self.assertTrue(DB.check_email("test@unit.se"))
-        self.assertFalse(DB.check_email("s"))
+        self.assertTrue(self.DB.check_email("test@unit.se"))
+        self.assertFalse(self.DB.check_email("s"))
 
     def test_new_customer(self):
         """Test new_customer function."""
-        res = DB.new_customer("test@unit.se")
+        res = self.DB.new_customer("test@unit.se")
         self.assertFalse(res)
 
     def test_get_variable_expenses(self):
@@ -219,7 +225,7 @@ class TestPlayerClass(unittest.TestCase):
             "entertainment": 6,
             "others": 7,
         }
-        res = DB.get_variable_expenses("test@unit.se")
+        res = self.DB.get_variable_expenses("test@unit.se")
         self.assertEqual(exp, res)
 
     def test_get_fixed_expenses(self):
@@ -230,8 +236,47 @@ class TestPlayerClass(unittest.TestCase):
             "insurance": 3,
             "others": 4,
         }
-        res = DB.get_fixed_expenses("test@unit.se")
+        res = self.DB.get_fixed_expenses("test@unit.se")
         self.assertEqual(exp, res)
+
+    def test_check_details(self):
+        """Test check_details."""
+        res = self.DB.check_details("test.23@unit.se", "Test", "User")
+        self.assertTrue(res)
+        res = self.DB.check_details("test.23@unit.s2", "123", "Us23")
+        self.assertFalse(res)
+
+    def test_get_buffert(self):
+        """Test get_buffert."""
+        exp = 2
+        res = self.DB.get_buffert("test@unit.se")
+        self.assertEqual(exp, res)
+        exp = 5
+        self.assertNotEqual(exp, res)
+
+    def test_get_saving_goal(self):
+        """Test get_saving_goal."""
+
+        exp = 1
+        res = self.DB.get_saving_goal("test@unit.se")
+        self.assertEqual(exp, res)
+        exp = 5
+        self.assertNotEqual(exp, res)
+
+    def test_update_buffert(self):
+        """Test update_buffert."""
+        exp = 3
+        self.DB.update_buffert("test@unit.se", 3)
+        res = self.DB.get_buffert("test@unit.se")
+        self.assertEqual(exp, res)
+
+    def test_update_saving_goal(self):
+        """Test update_saving_goal."""
+        exp = 4
+        self.DB.update_saving_goal("test@unit.se", 4)
+        res = self.DB.get_saving_goal("test@unit.se")
+        self.assertEqual(exp, res)
+        
 
 if __name__ == '__main__':
 
