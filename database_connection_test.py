@@ -8,10 +8,11 @@ from mysql.connector import Error
 
 class TestPlayerClass(unittest.TestCase):
     """Test Player Class."""
+    
 
     @classmethod
     def setUpClass(cls):
-        """Set up acc for testing."""
+        """Set up account for testing."""
         try:
             # Connect to the db
             cls.connection = mysql.connector.connect(
@@ -44,7 +45,7 @@ class TestPlayerClass(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        """Disconnect from database."""
+        """Disconnect from database and delete test account."""
         val = ("test@unit.se",)
         sql = "DELETE FROM variable_expenses WHERE budget_account_email = %s;"
         cls.mycursor.execute(sql, val)
@@ -73,6 +74,7 @@ class TestPlayerClass(unittest.TestCase):
         self.assertEqual(res, exp)
     
     def test_set_variable_expenses(self):
+        """Test set_variable_expenses."""
         sql = "DELETE FROM variable_expenses WHERE budget_account_email = 'test@unit.se';"
         self.mycursor.execute(sql)
         self.connection.commit()
@@ -89,15 +91,20 @@ class TestPlayerClass(unittest.TestCase):
         exp = variable_expenses
         DB.set_variable_expenses("test@unit.se", variable_expenses)
         res = DB.get_variable_expenses("test@unit.se")
-        self.assertTrue(exp == res)
+        self.assertEqual(res, exp)
+        exp = {
+            "food": 7,
+            "bills": 6,
+            "transportation": 7,
+            "hygien": 2,
+            "clothes": 6,
+            "entertainment": 4,
+            "others": 5,
+        }
+        self.assertNotEqual(res, exp)
 
-    def test_get_variable_expenses(self):
-        exp = ("test@unit.se", 1, 2, 3, 4, 5, 6, 7)
-        res = DB.get_variable_expenses("test@unit.se")
-        self.assertTrue(exp == res)
-
-    def test_set_fixed_expenses(self):
-        
+    def test_set_fixed_expenses(self): 
+        """Test set_fixed_expenses."""
         sql = "DELETE FROM fixed_expenses WHERE budget_account_email = 'test@unit.se';"
         self.mycursor.execute(sql)
         self.connection.commit()
@@ -112,16 +119,19 @@ class TestPlayerClass(unittest.TestCase):
         exp = fixed_expenses
         DB.set_fixed_expenses("test@unit.se", fixed_expenses)
         res = DB.get_fixed_expenses("test@unit.se")
-        self.assertTrue(exp == res)
-
-
-
-
-
+        self.assertEqual(exp, res)
+        res = {
+            "rent": 1,
+            "subscription": 1,
+            "insurance": 2,
+            "others": 1
+        }
+        self.assertNotEqual(exp, res)
+        
 
 
     def test_update_fixed_expenses(self):
-        """New values"""
+        """Test update_fixed_expenses."""
         fixed_expenses = {
             "rent": 4,
             "subscription": 3,
@@ -132,10 +142,18 @@ class TestPlayerClass(unittest.TestCase):
         exp = fixed_expenses
         DB.update_fixed_expenses("test@unit.se", fixed_expenses)
         res = DB.get_fixed_expenses("test@unit.se")
-        self.assertTrue(exp == res)
+        self.assertEqual(exp, res)
+
+        res = {
+            "rent": 1,
+            "subscription": 1,
+            "insurance": 2,
+            "others": 1
+        }
+        self.assertNotEqual(exp, res)
     
     def test_update_variable_expenses(self):
-        """New values"""
+        """Test update_variable_expenses."""
         variable_expenses = {
             "food": 7,
             "bills": 6,
@@ -149,12 +167,17 @@ class TestPlayerClass(unittest.TestCase):
         exp = variable_expenses
         DB.update_variable_expenses("test@unit.se", variable_expenses)
         res = DB.get_variable_expenses("test@unit.se")
-        self.assertTrue(exp == res)
-
-    def test_get_fixed_expenses(self):
-        exp = ("test@unit.se", 1, 2, 3, 4)
-        res = DB.get_fixed_expenses("test@unit.se")
-        self.assertTrue(exp == res)
+        self.assertEqual(res, exp)
+        exp = {
+            "food": 7,
+            "bills": 6,
+            "transportation": 7,
+            "hygien": 2,
+            "clothes": 6,
+            "entertainment": 4,
+            "others": 5,
+        }
+        self.assertNotEqual(res, exp)
 
     def test_get_basic_info(self):
         """Test get_basic_info."""
