@@ -275,6 +275,20 @@ class database_connection():
         else:
             return False
 
+    def get_buffert(self, email):
+        sql = "SELECT buffert FROM budget WHERE account_email = %s"
+        val = (email,)
+        self.mycursor.execute(sql, val)
+        myresult = self.mycursor.fetchone()[0]
+        return myresult
+    
+    def get_saving_goal(self, email):
+        sql = "SELECT saving_goal FROM budget WHERE account_email = %s"
+        val = (email,)
+        self.mycursor.execute(sql, val)
+        myresult = self.mycursor.fetchone()[0]
+        return myresult
+
     def update_buffert(self, email, buffert):
         sql = "UPDATE budget SET buffert = %s WHERE account_email = %s; "
         val = (buffert, email,)
