@@ -1,6 +1,5 @@
 """Database connection and quieries."""
 
-from logging import setLogRecordFactory
 from account import Account
 import mysql.connector
 from mysql.connector import Error
@@ -224,6 +223,7 @@ class database_connection():
 
         return register
     
+
     def check_details(self, email, first_name, last_name):
         """Check if email/first/lastname contains nums."""
         isnum = 0
@@ -241,7 +241,6 @@ class database_connection():
             return False
 
         return True
-
 
 
     def log_out(self):
