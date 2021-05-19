@@ -89,7 +89,7 @@ class FirstLoginScreen(QMainWindow, gui.Ui_FirstLoginScreen):
             self.displayUi = MenuScreen()
             self.hide()
             self.displayUi.show()
-        except Exception:
+        except Exception as e:
             self.popUp.exec_()
 
     def go_back(self):
@@ -229,6 +229,7 @@ class BudgetScreen(QMainWindow, gui.Ui_BudgetScreen):
         self.incomeItem.setText(f"{self.customer.budget.income}")
         self.saveButton.clicked.connect(self.save_change)
         self.backButton.clicked.connect(self.go_back)
+        self.label_4.setText(str(self.customer.budget.saving_goal))
         total_fix, total_var = self.customer.budget.get_expenses()
         self.listOfExpensesSEK.item(1).setText(total_fix)
         self.listOfExpensesSEK.item(10).setText(total_var)

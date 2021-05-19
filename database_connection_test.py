@@ -8,10 +8,11 @@ from mysql.connector import Error
 
 class TestPlayerClass(unittest.TestCase):
     """Test Player Class."""
+    
 
     @classmethod
     def setUpClass(cls):
-        """Set up acc for testing."""
+        """Set up account for testing."""
         try:
             # Connect to the db
             cls.connection = mysql.connector.connect(
@@ -44,7 +45,7 @@ class TestPlayerClass(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        """Disconnect from database."""
+        """Disconnect from database and delete test account."""
         val = ("test@unit.se",)
         sql = "DELETE FROM variable_expenses WHERE budget_account_email = %s;"
         cls.mycursor.execute(sql, val)
@@ -58,6 +59,7 @@ class TestPlayerClass(unittest.TestCase):
         sql = "DELETE FROM account WHERE email = %s;"
         cls.mycursor.execute(sql, val)
         cls.connection.commit()
+
         try:
             if cls.connection is not None and cls.connection.is_connected():
                 cls.mycursor.close()
@@ -70,6 +72,112 @@ class TestPlayerClass(unittest.TestCase):
         exp = 3
         res = DB.get_income("test@unit.se")
         self.assertEqual(res, exp)
+    
+    def test_set_variable_expenses(self):
+        """Test set_variable_expenses."""
+        sql = "DELETE FROM variable_expenses WHERE budget_account_email = 'test@unit.se';"
+        self.mycursor.execute(sql)
+        self.connection.commit()
+        variable_expenses = {
+            "food": 7,
+            "bills": 6,
+            "transportation": 5,
+            "hygien": 4,
+            "clothes": 3,
+            "entertainment": 2,
+            "others": 1,
+        }
+        
+        exp = variable_expenses
+        DB.set_variable_expenses("test@unit.se", variable_expenses)
+        res = DB.get_variable_expenses("test@unit.se")
+        self.assertEqual(res, exp)
+        exp = {
+            "food": 7,
+            "bills": 6,
+            "transportation": 7,
+            "hygien": 2,
+            "clothes": 6,
+            "entertainment": 4,
+            "others": 5,
+        }
+        self.assertNotEqual(res, exp)
+
+    def test_set_fixed_expenses(self): 
+        """Test set_fixed_expenses."""
+        sql = "DELETE FROM fixed_expenses WHERE budget_account_email = 'test@unit.se';"
+        self.mycursor.execute(sql)
+        self.connection.commit()
+
+        fixed_expenses = {
+            "rent": 4,
+            "subscription": 3,
+            "insurance": 2,
+            "others": 1
+        }
+
+        exp = fixed_expenses
+        DB.set_fixed_expenses("test@unit.se", fixed_expenses)
+        res = DB.get_fixed_expenses("test@unit.se")
+        self.assertEqual(exp, res)
+        res = {
+            "rent": 1,
+            "subscription": 1,
+            "insurance": 2,
+            "others": 1
+        }
+        self.assertNotEqual(exp, res)
+        
+
+
+    def test_update_fixed_expenses(self):
+        """Test update_fixed_expenses."""
+        fixed_expenses = {
+            "rent": 4,
+            "subscription": 3,
+            "insurance": 2,
+            "others": 1
+        }
+        
+        exp = fixed_expenses
+        DB.update_fixed_expenses("test@unit.se", fixed_expenses)
+        res = DB.get_fixed_expenses("test@unit.se")
+        self.assertEqual(exp, res)
+
+        res = {
+            "rent": 1,
+            "subscription": 1,
+            "insurance": 2,
+            "others": 1
+        }
+        self.assertNotEqual(exp, res)
+    
+    def test_update_variable_expenses(self):
+        """Test update_variable_expenses."""
+        variable_expenses = {
+            "food": 7,
+            "bills": 6,
+            "transportation": 5,
+            "hygien": 4,
+            "clothes": 3,
+            "entertainment": 2,
+            "others": 1,
+        }
+        
+        exp = variable_expenses
+        DB.update_variable_expenses("test@unit.se", variable_expenses)
+        res = DB.get_variable_expenses("test@unit.se")
+        self.assertEqual(res, exp)
+        exp = {
+            "food": 7,
+            "bills": 6,
+            "transportation": 7,
+            "hygien": 2,
+            "clothes": 6,
+            "entertainment": 4,
+            "others": 5,
+        }
+        self.assertNotEqual(res, exp)
 
     def test_get_basic_info(self):
         """Test get_basic_info."""

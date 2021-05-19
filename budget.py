@@ -8,10 +8,10 @@ class Budget():
         self.buffert = 0
 
     def set_budget(self, income, variable_expenses, fixed_expenses):
-       """set the attributes."""
-       self.income = income
-       self.variable_expenses = variable_expenses
-       self.fixed_expenses = fixed_expenses
+        """set the attributes."""
+        self.income = income
+        self.variable_expenses = variable_expenses
+        self.fixed_expenses = fixed_expenses
 
 
     def get_expenses(self):
