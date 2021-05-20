@@ -10,9 +10,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
-import account
 import database_connection as DB
 from View import gui_module as gui
+
 
 class LoginScreen(QMainWindow, gui.Ui_LoginScreen):
     """Inherit from the code for the ui to have all information necessary."""
@@ -37,8 +37,8 @@ class LoginScreen(QMainWindow, gui.Ui_LoginScreen):
         if DB.verify_login(username, password) \
                 and not DB.new_customer(username):
             self.customer.budget.set_budget(DB.get_income(self.customer.email),
-                                       DB.get_variable_expenses(self.customer.email),
-                                       DB.get_fixed_expenses(self.customer.email))
+                                            DB.get_variable_expenses(self.customer.email),
+                                            DB.get_fixed_expenses(self.customer.email))
             self.displayUi = MenuScreen()
             self.hide()
             self.displayUi.show()
@@ -320,7 +320,10 @@ class SavingGoal(QMainWindow, gui.Ui_SavinggoalScreen):
                 saving_goal = float(self.lineEdit_2.text())
                 self.customer.budget.set_saving_goal(saving_goal)
                 DB.update_saving_goal(self.customer.email, saving_goal)
-                time_to_reach = saving_goal / amount_per_month
+                if saving_goal < amount_per_month:
+                    time_to_reach = 0
+                else:
+                    time_to_reach = saving_goal / amount_per_month
                 self.textBrowser.setText(f"It will take {time_to_reach} months to reach your goal")
                 
             except ValueError:

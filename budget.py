@@ -14,12 +14,10 @@ class Budget():
         self.variable_expenses = variable_expenses
         self.fixed_expenses = fixed_expenses
 
-
     def get_expenses(self):
         """Add the expenses together and return as string."""
         total_fix = 0
         total_var = 0
-     
         for key in self.fixed_expenses:
             total_fix += self.fixed_expenses[key]
 
@@ -27,7 +25,7 @@ class Budget():
             total_var += self.variable_expenses[key]
 
         return str(total_fix), str(total_var)
-    
+
     def get_total_expenses(self):
         total_fix = 0
         total_var = 0
