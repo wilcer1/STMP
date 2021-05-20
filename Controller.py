@@ -82,8 +82,8 @@ class FirstLoginScreen(QMainWindow, gui.Ui_FirstLoginScreen):
                                 "others":   abs(float(self.listOfExpensesSEK.item(17).text()))
                             }
             self.customer.budget.set_budget(income, fixed_expenses, variable_expenses)
-            DB.update_variable_expenses(self.customer.email, variable_expenses)
-            DB.update_fixed_expenses(self.customer.email, fixed_expenses)
+            DB.set_variable_expenses(self.customer.email, variable_expenses)
+            DB.set_fixed_expenses(self.customer.email, fixed_expenses)
             DB.not_new_customer(self.customer.email)
             DB.update_income(income, self.customer.email)
 
