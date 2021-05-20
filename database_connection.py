@@ -204,6 +204,8 @@ class database_connection():
         """Add new account to database."""
         # check if email is unique, return true if it is and create the acc.
         # Otherwise return false
+        if not self.connection.is_connected():
+            self.__init__()
         sql = "SELECT email FROM account;"
         email = val[0]
         self.mycursor.execute(sql)
