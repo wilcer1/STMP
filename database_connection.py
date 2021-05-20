@@ -295,13 +295,13 @@ class database_connection():
         return myresult
 
     def update_buffert(self, email, buffert):
-        sql = "UPDATE budget SET buffert = %s WHERE account_email = %s; "
+        sql = "UPDATE budget SET buffert = %s WHERE account_email = %s;"
         val = (buffert, email,)
         self.mycursor.execute(sql, val)
         self.connection.commit()
 
     def update_saving_goal(self, email, saving_goal):
-        sql = "UPDATE budget SET saving_goal = %s WHERE account_email = %s; "
+        sql = "UPDATE budget SET saving_goal = %s WHERE account_email = %s;"
         val = (saving_goal, email,)
         self.mycursor.execute(sql, val)
         self.connection.commit()
