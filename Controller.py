@@ -116,6 +116,7 @@ class MenuScreen(QMainWindow, gui.Ui_MenuScreen):
         self.pushButton_2.clicked.connect(self.longtermSaving)
         self.pushButton_3.clicked.connect(self.make_buffert)
         self.pushButton_4.clicked.connect(self.eco_overview)
+        self.label.setText(f"Welcome, {self.customer.first_name}")
 
     def MakeBudget(self):
         """Display makebudget."""

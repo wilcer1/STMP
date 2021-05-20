@@ -424,8 +424,6 @@ class Ui_MenuScreen(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", f"Welcome,\
-                                      {self.customer.first_name}"))
         self.pushButton.setText(_translate("MainWindow", "Make a budget"))
         self.pushButton_2.setText(_translate("MainWindow",
                                              "Create long-term savings"))
