@@ -45,7 +45,13 @@ class database_connection():
         val = (email,)
         self.mycursor.execute(sql, val)
         self.connection.commit()
-
+    
+    def update_income(self, income, email):
+        """Update the customers income in DB."""
+        sql = "UPDATE budget SET income = %s WHERE account_email = %s"
+        val = (income, email,)
+        self.mycursor.execute(sql, val)
+        self.connection.commit()
 
     def get_income(self, email):
         """Return income."""

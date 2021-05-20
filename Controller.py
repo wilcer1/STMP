@@ -85,6 +85,7 @@ class FirstLoginScreen(QMainWindow, gui.Ui_FirstLoginScreen):
             DB.set_variable_expenses(self.customer.email, variable_expenses)
             DB.set_fixed_expenses(self.customer.email, fixed_expenses)
             DB.not_new_self.customer(self.customer.email)
+            DB.update_income(income, self.customer.email)
 
             self.displayUi = MenuScreen()
             self.hide()
@@ -262,6 +263,7 @@ class BudgetScreen(QMainWindow, gui.Ui_BudgetScreen):
             # update instead of set
             DB.update_variable_expenses(self.customer.email, variable_expenses)
             DB.update_fixed_expenses(self.customer.email, fixed_expenses)
+            DB.update_income(self.customer.budget.income, self.customer.email)
             total_fix, total_var = self.customer.budget.get_expenses()
             self.listOfExpensesSEK.item(1).setText(total_fix)
             self.listOfExpensesSEK.item(10).setText(total_var)
