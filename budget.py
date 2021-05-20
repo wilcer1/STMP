@@ -1,3 +1,4 @@
+
 class Budget():
     def __init__(self):
         """Declare the attributes needed."""

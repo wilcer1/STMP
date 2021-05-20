@@ -235,10 +235,10 @@ class BudgetScreen(QMainWindow, gui.Ui_BudgetScreen):
         total_fix, total_var = self.customer.budget.get_expenses()
         self.listOfExpensesSEK.item(1).setText(total_fix)
         self.listOfExpensesSEK.item(10).setText(total_var)
-        self.listOfExpensesSEK.item(20).setText(str(self.customer.budget.buffert))
+        self.listOfExpensesSEK.item(20).setText(str(DB.get_buffert(self.customer.email)))
         self.set_list_of_expenses()
         self.label_3.setText(str(self.customer.budget.income - self.customer.budget.get_total_expenses()))
-
+        self.label_4.setText(str(DB.get_saving_goal(self.customer.email)))
     def save_change(self):
         """Save the changes entered to DB and singleton."""
         try:
@@ -362,8 +362,8 @@ class EcoOverviewScreen(QMainWindow, gui.Ui_EcoOverviewScreen):
         total_fix, total_var = self.customer.budget.get_expenses()
         self.listOfExpensesSEK.item(1).setText(total_fix)
         self.listOfExpensesSEK.item(10).setText(total_var)
-        self.savingsListSEK.item(1).setText(str(self.customer.budget.saving_goal))
-        self.savingsListSEK.item(2).setText(str(self.customer.budget.buffert))
+        self.savingsListSEK.item(1).setText(str(DB.get_saving_goal(self.customer.email)))
+        self.savingsListSEK.item(2).setText(str(DB.get_buffert(self.customer.email)))
         self.set_list_of_expenses()
         self.label_3.setText(str(self.customer.budget.income - self.customer.budget.get_total_expenses()))
 
