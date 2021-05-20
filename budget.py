@@ -36,7 +36,7 @@ class Budget():
 
         for key in self.fixed_expenses:
             total_fix += self.fixed_expenses[key]
-        return total_var + total_fix
+        return total_var + total_fix + self.buffert
 
     def set_saving_goal(self, saving_goal):
         self.saving_goal = saving_goal
