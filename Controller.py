@@ -39,6 +39,7 @@ class LoginScreen(QMainWindow, gui.Ui_LoginScreen):
             self.customer.budget.set_budget(DB.get_income(self.customer.email),
                                             DB.get_variable_expenses(self.customer.email),
                                             DB.get_fixed_expenses(self.customer.email))
+            self.customer.budget.set_buffert(DB.get_buffert(username))
             self.displayUi = MenuScreen()
             self.hide()
             self.displayUi.show()
