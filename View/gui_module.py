@@ -10,7 +10,7 @@ class Ui_LoginScreen(object):
         self.customer = Account.getInstance()
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1917, 1010)
-        MainWindow.setStyleSheet("background-color: rgb(34, 244, 255);")
+        MainWindow.setStyleSheet("background-color: rgb(3, 130, 168);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -61,7 +61,7 @@ class Ui_LoginScreen(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "STMP"))
         self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt;\">Username</span></p></body></html>"))
         self.label_2.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt;\">Password</span></p></body></html>"))
         self.pushButton.setText(_translate("MainWindow", "Log in"))
@@ -444,7 +444,7 @@ class Ui_RegisterScreen(object):
         self.customer = Account.getInstance()
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1917, 1010)
-        MainWindow.setStyleSheet("background-color: rgb(34, 244, 255);")
+        MainWindow.setStyleSheet("background-color: rgb(3, 130, 168);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
