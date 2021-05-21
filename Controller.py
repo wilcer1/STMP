@@ -356,12 +356,18 @@ class BuffertScreen(QMainWindow, gui.Ui_BuffertScreen):
         """Save the input when savebutton pressed."""
         try:
             self.customer.budget.set_buffert(abs(float(self.buffert_input.text())))
-        except Exception:
-            self.popUp.exec_()
-        else:
             DB.update_buffert(self.customer.email, (abs(float(self.buffert_input.text()))))
-            buffert_percent = (self.customer.budget.buffert / self.customer.budget.income) * 100
+            buffert_percent = (self.customer.budget.buffert /
+                               self.customer.budget.income) * 100
             self.amount_of_budget.setValue(int(buffert_percent))
+        except TypeError:
+            self.popUp.exec_()
+        except ZeroDivisionError:
+            self.popUp.setText("Cant divide by zero (Your income may be set to zero)")
+            self.popUp.exec_()
+        except Exception:
+            self.popUp.setText("Whoops, something went wrong")
+            self.popUp.exec_()
 
     def back(self):
         """Go back."""
