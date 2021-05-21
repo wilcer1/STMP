@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from account import Account
-import database_connection as DB
+
 
 class Ui_LoginScreen(object):
     """Main Login Window."""
@@ -428,7 +428,8 @@ class Ui_MenuScreen(object):
         self.pushButton_2.setText(_translate("MainWindow",
                                              "Create long-term savings"))
         self.pushButton_3.setText(_translate("MainWindow", "Set your buffert"))
-        self.pushButton_4.setText(_translate("MainWindow", "Economic Overview"))
+        self.pushButton_4.setText(_translate("MainWindow", "Economic Overview")
+                                  )
         self.pushButton_5.setText(_translate("MainWindow", "Log out"))
 
 
@@ -660,7 +661,7 @@ class Ui_BudgetScreen(object):
         self.saving_goal.setStyleSheet("background-color: \
                                           rgb(255, 255, 255);")
         self.saving_goal.setAlignment(QtCore.Qt.AlignHCenter |
-                                         QtCore.Qt.AlignTop)
+                                      QtCore.Qt.AlignTop)
         self.saving_goal.setObjectName("saving_goal")
         self.saveButton = QtWidgets.QPushButton(self.centralwidget)
         self.saveButton.setGeometry(QtCore.QRect(700, 480, 75, 23))
@@ -913,9 +914,6 @@ class Ui_BudgetScreen(object):
         item.setText(_translate("MainWindow", "0"))
         item = self.listOfExpensesSEK.item(20)
         item.setText(_translate("MainWindow", "0"))
-        
-        
-
         self.listOfExpensesSEK.setSortingEnabled(__sortingEnabled)
         self.backButton.setText(_translate("MainWindow", "Back"))
         self.label_3.setText(_translate("MainWindow", "put money left here"))
@@ -1010,6 +1008,7 @@ class Ui_SavinggoalScreen(object):
         self.pushButton.setText(_translate("MainWindow", "Back"))
         self.pushButton_2.setText(_translate("MainWindow", "Calculate"))
 
+
 class Ui_BuffertScreen(object):
     def setupUi(self, MainWindow):
         self.customer = Account.getInstance()
@@ -1032,7 +1031,8 @@ class Ui_BuffertScreen(object):
         self.totalincome.setObjectName("totalincome")
         self.totalexpenses = QtWidgets.QTextBrowser(self.centralwidget)
         self.totalexpenses.setGeometry(QtCore.QRect(100, 160, 256, 51))
-        self.totalexpenses.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.totalexpenses.setStyleSheet("background-color:\
+                                          rgb(255, 255, 255);")
         self.totalexpenses.setObjectName("totalexpenses")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(100, 60, 47, 13))
@@ -1068,7 +1068,8 @@ class Ui_BuffertScreen(object):
         self.back_button.setObjectName("back_button")
         self.buffert_input = QtWidgets.QLineEdit(self.centralwidget)
         self.buffert_input.setGeometry(QtCore.QRect(100, 240, 131, 21))
-        self.buffert_input.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.buffert_input.setStyleSheet("background-color:\
+                                          rgb(255, 255, 255);")
         self.buffert_input.setObjectName("buffert_input")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -1093,6 +1094,7 @@ class Ui_BuffertScreen(object):
         self.label_4.setText(_translate("MainWindow", "Buffert:"))
         self.label_5.setText(_translate("MainWindow", "'%' of budget"))
 
+
 class Ui_EcoOverviewScreen(object):
     def setupUi(self, MainWindow):
         self.customer = Account.getInstance()
@@ -1113,7 +1115,8 @@ class Ui_EcoOverviewScreen(object):
         self.label_2.setObjectName("label_2")
         self.listOfIncome = QtWidgets.QListWidget(self.centralwidget)
         self.listOfIncome.setGeometry(QtCore.QRect(70, 80, 121, 151))
-        self.listOfIncome.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.listOfIncome.setStyleSheet("background-color:\
+                                         rgb(255, 255, 255);")
         self.listOfIncome.setObjectName("listOfIncome")
         item = QtWidgets.QListWidgetItem()
         font = QtGui.QFont()
@@ -1127,7 +1130,8 @@ class Ui_EcoOverviewScreen(object):
         self.listOfIncome.addItem(item)
         self.listOfExpenses = QtWidgets.QListWidget(self.centralwidget)
         self.listOfExpenses.setGeometry(QtCore.QRect(490, 80, 131, 361))
-        self.listOfExpenses.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.listOfExpenses.setStyleSheet("background-color:\
+                                           rgb(255, 255, 255);")
         self.listOfExpenses.setObjectName("listOfExpenses")
         item = QtWidgets.QListWidgetItem()
         font = QtGui.QFont()
@@ -1171,12 +1175,15 @@ class Ui_EcoOverviewScreen(object):
         self.listOfExpenses.addItem(item)
         self.moneyleftLabel = QtWidgets.QLabel(self.centralwidget)
         self.moneyleftLabel.setGeometry(QtCore.QRect(330, 470, 141, 41))
-        self.moneyleftLabel.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.moneyleftLabel.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.moneyleftLabel.setStyleSheet("background-color:\
+                                           rgb(255, 255, 255);")
+        self.moneyleftLabel.setAlignment(QtCore.Qt.AlignHCenter |
+                                         QtCore.Qt.AlignTop)
         self.moneyleftLabel.setObjectName("moneyleftLabel")
         self.listOfIncomeSEK = QtWidgets.QListWidget(self.centralwidget)
         self.listOfIncomeSEK.setGeometry(QtCore.QRect(190, 80, 141, 151))
-        self.listOfIncomeSEK.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.listOfIncomeSEK.setStyleSheet("background-color:\
+                                            rgb(255, 255, 255);")
         self.listOfIncomeSEK.setObjectName("listOfIncomeSEK")
         item = QtWidgets.QListWidgetItem()
         font = QtGui.QFont()
@@ -1190,7 +1197,8 @@ class Ui_EcoOverviewScreen(object):
         self.listOfIncomeSEK.addItem(item)
         self.listOfExpensesSEK = QtWidgets.QListWidget(self.centralwidget)
         self.listOfExpensesSEK.setGeometry(QtCore.QRect(620, 80, 131, 361))
-        self.listOfExpensesSEK.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.listOfExpensesSEK.setStyleSheet("background-color:\
+                                              rgb(255, 255, 255);")
         self.listOfExpensesSEK.setObjectName("listOfExpensesSEK")
         item = QtWidgets.QListWidgetItem()
         font = QtGui.QFont()
@@ -1246,7 +1254,7 @@ class Ui_EcoOverviewScreen(object):
         self.label_4.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.label_4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_4.setObjectName("label_4")
-        self.savingsList= QtWidgets.QListWidget(self.centralwidget)
+        self.savingsList = QtWidgets.QListWidget(self.centralwidget)
         self.savingsList.setGeometry(QtCore.QRect(70, 290, 121, 151))
         self.savingsList.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.savingsList.setObjectName("savingsList")
@@ -1262,7 +1270,8 @@ class Ui_EcoOverviewScreen(object):
         self.savingsList.addItem(item)
         self.savingsListSEK = QtWidgets.QListWidget(self.centralwidget)
         self.savingsListSEK.setGeometry(QtCore.QRect(190, 290, 141, 151))
-        self.savingsListSEK.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.savingsListSEK.setStyleSheet("background-color:\
+                                           rgb(255, 255, 255);")
         self.savingsListSEK.setObjectName("savingsListSEK")
         item = QtWidgets.QListWidgetItem()
         font = QtGui.QFont()
@@ -1334,7 +1343,8 @@ class Ui_EcoOverviewScreen(object):
         item = self.listOfExpenses.item(17)
         item.setText(_translate("MainWindow", "Others"))
         self.listOfExpenses.setSortingEnabled(__sortingEnabled)
-        self.moneyleftLabel.setText(_translate("MainWindow", "Money left to spend/save:"))
+        self.moneyleftLabel.setText(_translate("MainWindow",
+                                               "Money left to spend/save:"))
         __sortingEnabled = self.listOfIncomeSEK.isSortingEnabled()
         self.listOfIncomeSEK.setSortingEnabled(False)
         item = self.listOfIncomeSEK.item(0)
