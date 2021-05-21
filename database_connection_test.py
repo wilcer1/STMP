@@ -6,8 +6,9 @@ import mysql.connector
 from mysql.connector import Error
 
 
-class TestPlayerClass(unittest.TestCase):
-    """Test Player Class."""
+class test_database_connection_class(unittest.TestCase):
+    """Test database_connection class."""
+
     @classmethod
     def setUpClass(cls):
         """Set up account for testing."""
@@ -78,7 +79,14 @@ class TestPlayerClass(unittest.TestCase):
         exp = 3
         res = self.DB.get_income("test@unit.se")
         self.assertEqual(res, exp)
-    
+
+    def test_update_income(self):
+        """Test update_income."""
+        exp = 100
+        self.DB.update_income(100, "test@unit.se")
+        res = self.DB.get_income("test@unit.se")
+        self.assertEqual(res, exp)
+
     def test_set_variable_expenses(self):
         """Test set_variable_expenses."""
         sql = "DELETE FROM variable_expenses WHERE budget_account_email = 'test@unit.se';"
@@ -93,7 +101,7 @@ class TestPlayerClass(unittest.TestCase):
             "entertainment": 2,
             "others": 1,
         }
-        
+
         exp = variable_expenses
         self.DB.set_variable_expenses("test@unit.se", variable_expenses)
         res = self.DB.get_variable_expenses("test@unit.se")
@@ -109,7 +117,7 @@ class TestPlayerClass(unittest.TestCase):
         }
         self.assertNotEqual(res, exp)
 
-    def test_set_fixed_expenses(self): 
+    def test_set_fixed_expenses(self):
         """Test set_fixed_expenses."""
         sql = "DELETE FROM fixed_expenses WHERE budget_account_email = 'test@unit.se';"
         self.mycursor.execute(sql)
@@ -133,8 +141,6 @@ class TestPlayerClass(unittest.TestCase):
             "others": 1
         }
         self.assertNotEqual(exp, res)
-        
-
 
     def test_update_fixed_expenses(self):
         """Test update_fixed_expenses."""
@@ -144,7 +150,7 @@ class TestPlayerClass(unittest.TestCase):
             "insurance": 2,
             "others": 1
         }
-        
+
         exp = fixed_expenses
         self.DB.update_fixed_expenses("test@unit.se", fixed_expenses)
         res = self.DB.get_fixed_expenses("test@unit.se")
@@ -157,7 +163,7 @@ class TestPlayerClass(unittest.TestCase):
             "others": 1
         }
         self.assertNotEqual(exp, res)
-    
+
     def test_update_variable_expenses(self):
         """Test update_variable_expenses."""
         variable_expenses = {
@@ -169,7 +175,7 @@ class TestPlayerClass(unittest.TestCase):
             "entertainment": 2,
             "others": 1,
         }
-        
+
         exp = variable_expenses
         self.DB.update_variable_expenses("test@unit.se", variable_expenses)
         res = self.DB.get_variable_expenses("test@unit.se")
@@ -256,7 +262,6 @@ class TestPlayerClass(unittest.TestCase):
 
     def test_get_saving_goal(self):
         """Test get_saving_goal."""
-
         exp = 1
         res = self.DB.get_saving_goal("test@unit.se")
         self.assertEqual(exp, res)
@@ -276,7 +281,7 @@ class TestPlayerClass(unittest.TestCase):
         self.DB.update_saving_goal("test@unit.se", 4)
         res = self.DB.get_saving_goal("test@unit.se")
         self.assertEqual(exp, res)
-        
+
 
 if __name__ == '__main__':
 

@@ -4,7 +4,7 @@ from budget import Budget
 import unittest
 
 
-class TestPlayerClass(unittest.TestCase):
+class test_budget_class(unittest.TestCase):
     """Test budget class."""
 
     def setUp(self) -> None:
@@ -57,13 +57,12 @@ class TestPlayerClass(unittest.TestCase):
         exp = "1"
         self.assertEqual(res2, exp)
 
-
     def test_get_total_expenses(self):
         """Test get_total_expenses."""
         exp = 3
         res = self.budget.get_total_expenses()
         self.assertEqual(exp, res)
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     unittest.main()
