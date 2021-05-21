@@ -1,13 +1,15 @@
-
+"""Singleton account class."""
 from budget import Budget
 
 
 class Account:
+    """Singleton account class."""
+
     __instance = None
 
     @staticmethod
     def getInstance():
-        """Static access method."""
+        """Get instance of class."""
         if Account.__instance is None:
             Account()
 

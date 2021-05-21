@@ -57,13 +57,12 @@ class test_budget_class(unittest.TestCase):
         exp = "1"
         self.assertEqual(res2, exp)
 
-
     def test_get_total_expenses(self):
         """Test get_total_expenses."""
         exp = 3
         res = self.budget.get_total_expenses()
         self.assertEqual(exp, res)
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     unittest.main()
