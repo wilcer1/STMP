@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1917</width>
-    <height>1010</height>
+    <width>606</width>
+    <height>271</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,8 +20,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>440</y>
+      <x>50</x>
+      <y>20</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -42,8 +42,8 @@
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>490</y>
+      <x>50</x>
+      <y>70</y>
       <width>141</width>
       <height>20</height>
      </rect>
@@ -67,8 +67,8 @@
    <widget class="QLineEdit" name="lineEdit_3">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>530</y>
+      <x>50</x>
+      <y>110</y>
       <width>141</width>
       <height>20</height>
      </rect>
@@ -83,9 +83,9 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>930</x>
-      <y>450</y>
-      <width>171</width>
+      <x>440</x>
+      <y>30</y>
+      <width>151</width>
       <height>71</height>
      </rect>
     </property>
@@ -93,7 +93,7 @@
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Play around and see how long &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;it would take to reach your&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;saving goal or buffert&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Play around and see how long &lt;/p&gt;&lt;p&gt;it would take to reach your&lt;/p&gt;&lt;p&gt;saving goal or buffert&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="textFormat">
      <enum>Qt::RichText</enum>
@@ -108,8 +108,8 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>1000</x>
-      <y>620</y>
+      <x>490</x>
+      <y>200</y>
       <width>101</width>
       <height>23</height>
      </rect>
@@ -124,8 +124,8 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>770</x>
-      <y>570</y>
+      <x>260</x>
+      <y>150</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -143,8 +143,8 @@
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>560</y>
+      <x>50</x>
+      <y>140</y>
       <width>181</width>
       <height>71</height>
      </rect>
@@ -153,32 +153,13 @@
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>450</width>
-      <height>200</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../STMP-Logo.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1917</width>
+     <width>606</width>
      <height>21</height>
     </rect>
    </property>
