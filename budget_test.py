@@ -4,7 +4,7 @@ from budget import Budget
 import unittest
 
 
-class TestPlayerClass(unittest.TestCase):
+class test_budget_class(unittest.TestCase):
     """Test budget class."""
 
     def setUp(self) -> None:

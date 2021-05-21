@@ -296,5 +296,7 @@ class database_connection():
         val = (saving_goal, email,)
         self.mycursor.execute(sql, val)
         self.connection.commit()
+
+
 if __name__ == "__main__":
     pass

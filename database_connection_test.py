@@ -6,8 +6,8 @@ import mysql.connector
 from mysql.connector import Error
 
 
-class TestPlayerClass(unittest.TestCase):
-    """Test Player Class."""
+class test_database_connection_class(unittest.TestCase):
+    """Test database_connection class."""
 
     @classmethod
     def setUpClass(cls):
