@@ -511,51 +511,6 @@ class Ui_RegisterScreen(object):
         self.pushButton_2.setText(_translate("MainWindow", "Back"))
 
 
-class Ui_BudgetChoiceScreen(object):
-    def setupUi(self, MainWindow):
-        self.customer = Account.getInstance()
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(604, 392)
-        MainWindow.setAutoFillBackground(False)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(220, 170, 131, 23))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_3.setGeometry(QtCore.QRect(220, 120, 131, 23))
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(40, 280, 75, 23))
-        self.pushButton.setObjectName("pushButton")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(170, 0, 241, 91))
-        self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("STMP-Logo.png"))
-        self.label.setScaledContents(True)
-        self.label.setObjectName("label")
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 604, 21))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
-
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton_2.setText(_translate("MainWindow",
-                                  "Get help with budget"))
-        self.pushButton_3.setText(_translate("MainWindow",
-                                             "Make your own budget"))
-        self.pushButton.setText(_translate("MainWindow", "Back"))
-
-
 class Ui_BudgetScreen(object):
     def setupUi(self, MainWindow):
         self.customer = Account.getInstance()

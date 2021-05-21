@@ -122,14 +122,14 @@ class MenuScreen(QMainWindow, gui.Ui_MenuScreen):
 
     def MakeBudget(self):
         """Display makebudget."""
-        self.displayUi = BudgetChoiceScreen()
+        self.displayUi = BudgetScreen()
         self.hide()
         self.displayUi.show()
 
     def longtermSaving(self):
         """Switch screen."""
         self.displayUi = SavingGoal()
-        self.hide()
+        # self.hide()
         self.displayUi.show()
 
     def eco_overview(self):
@@ -141,7 +141,7 @@ class MenuScreen(QMainWindow, gui.Ui_MenuScreen):
     def make_buffert(self):
         """Switch screen."""
         self.displayUi = BuffertScreen()
-        self.hide()
+        # self.hide()
         self.displayUi.show()
 
     def log_out(self):
@@ -194,36 +194,6 @@ class RegisterScreen(QMainWindow, gui.Ui_RegisterScreen):
     def goBack(self):
         """ Go back to login page."""
         self.displayUi = LoginScreen()
-        self.hide()
-        self.displayUi.show()
-
-
-class BudgetChoiceScreen(QMainWindow, gui.Ui_BudgetChoiceScreen):
-    """Inherit from the code for the ui to have all information necessary."""
-
-    # Login Screen Controller
-    def __init__(self):
-        """Constructor that runs setup and connects buttons."""
-        super().__init__()  # Call the superclass constructor
-        self.setupUi(self)  # Run the code that creates the UI layout
-        self.pushButton_3.clicked.connect(
-            self.Manual
-        )  # Call function when button is pressed
-        self.pushButton_2.clicked.connect(self.Auto)
-        self.pushButton.clicked.connect(self.goBack)
-
-    def Manual(self):
-        """Show the budget screen."""
-        self.displayUi = BudgetScreen()
-        self.hide()
-        self.displayUi.show()
-
-    def Auto(self):
-        pass
-
-    def goBack(self):
-        """Go back to previous screen."""
-        self.displayUi = MenuScreen()
         self.hide()
         self.displayUi.show()
 
@@ -289,7 +259,7 @@ class BudgetScreen(QMainWindow, gui.Ui_BudgetScreen):
 
     def go_back(self):
         """Go back to the budget choice screen."""
-        self.displayUi = BudgetChoiceScreen()
+        self.displayUi = MenuScreen()
         self.hide()
         self.displayUi.show()
 
