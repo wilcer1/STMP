@@ -97,7 +97,7 @@ class FirstLoginScreen(QMainWindow, gui.Ui_FirstLoginScreen):
 
     def go_back(self):
         self.displayUi = LoginScreen()
-        # logout
+        DB.log_out()
         self.hide()
         self.displayUi.show()
 
