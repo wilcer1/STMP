@@ -129,7 +129,6 @@ class MenuScreen(QMainWindow, gui.Ui_MenuScreen):
     def longtermSaving(self):
         """Switch screen."""
         self.displayUi = SavingGoal()
-        # self.hide()
         self.displayUi.show()
 
     def eco_overview(self):
@@ -141,7 +140,6 @@ class MenuScreen(QMainWindow, gui.Ui_MenuScreen):
     def make_buffert(self):
         """Switch screen."""
         self.displayUi = BuffertScreen()
-        # self.hide()
         self.displayUi.show()
 
     def log_out(self):
