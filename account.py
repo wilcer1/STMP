@@ -7,14 +7,14 @@ class Account:
 
     @staticmethod
     def getInstance():
-        """ Static access method. """
+        """Static access method."""
         if Account.__instance is None:
             Account()
 
         return Account.__instance
 
     def __init__(self):
-        """ Virtually private constructor. """
+        """Virtually private constructor."""
         if Account.__instance is not None:
             raise Exception("This class is a Account!")
         else:

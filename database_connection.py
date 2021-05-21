@@ -9,8 +9,10 @@ current_date = datetime.today().strftime("%Y-%m-%d")
 
 
 class database_connection():
+    """Handle information from/to DB."""
+
     def __init__(self):
-        
+        """Create connection to DB."""
         try:
             self.connection = mysql.connector.connect(
                 host="den1.mysql5.gear.host",
@@ -22,10 +24,8 @@ class database_connection():
             if self.connection.is_connected():
                 print("Connected")
 
-
         except Error as e:
             print(e)
-
 
     def disconnect(self):
         """Disconnect from database."""
@@ -38,14 +38,13 @@ class database_connection():
             print("Failed to disconnect")
             print(e)
 
-
     def not_new_customer(self, email):
         """Change new_customer to 'N'."""
         sql = "UPDATE account SET new_customer = 'N' WHERE email = %s;"
         val = (email,)
         self.mycursor.execute(sql, val)
         self.connection.commit()
-    
+
     def update_income(self, income, email):
         """Update the customers income in DB."""
         sql = "UPDATE budget SET income = %s WHERE account_email = %s"
@@ -65,7 +64,6 @@ class database_connection():
         else:
             return 0
 
-
     def set_variable_expenses(self, email, var_exp):
         """Set variable_expenses."""
         val = []
@@ -78,7 +76,6 @@ class database_connection():
 
         self.mycursor.execute(sql, tuple(val))
         self.connection.commit()
-
 
     def update_variable_expenses(self, email, var_exp):
         """Update variable_expenses."""
@@ -93,7 +90,6 @@ class database_connection():
 
         self.mycursor.execute(sql, tuple(val))
         self.connection.commit()
-
 
     def get_variable_expenses(self, email):
         """Return variable_expenses."""
@@ -122,7 +118,6 @@ class database_connection():
 
             return variable_expenses
 
-
     def set_fixed_expenses(self, email, var_exp):
         """Set fixed_expenses."""
         val = []
@@ -148,7 +143,6 @@ class database_connection():
         self.mycursor.execute(sql, tuple(val))
         self.connection.commit()
 
-
     def get_fixed_expenses(self, email):
         """Return fixed_expenses."""
         sql = "SELECT * FROM fixed_expenses WHERE budget_account_email = %s;"
@@ -170,7 +164,6 @@ class database_connection():
 
             return fixed_expenses
 
-
     def get_basic_info(self, email):
         """Get account info from DB."""
         sql = "SELECT * FROM account WHERE email = %s;"
@@ -178,7 +171,6 @@ class database_connection():
         self.mycursor.execute(sql, val)
         myresult = self.mycursor.fetchone()
         return myresult
-
 
     def verify_login(self, email, password):
         """verify_login."""
@@ -198,7 +190,6 @@ class database_connection():
                 customer = Account.getInstance()
                 customer.set_customer(self.get_basic_info(email))
                 return True
-
 
     def register_account(self, val):
         """Add new account to database."""
@@ -230,7 +221,6 @@ class database_connection():
             self.connection.commit()
 
         return register
-    
 
     def check_details(self, email, first_name, last_name):
         """Check if email/first/lastname contains nums."""
@@ -243,18 +233,14 @@ class database_connection():
         for c in split[-1]:
             if c.isdigit():
                 isnum += 1
-
-
         if isnum > 0:
             return False
 
         return True
 
-
     def log_out(self):
         """Log out."""
         self.disconnect()
-
 
     def check_email(self, email):
         """Validate email format."""
@@ -270,7 +256,6 @@ class database_connection():
         else:
             return False
 
-
     def new_customer(self, email):
         """Check if customer is new."""
         sql = "select new_customer from account where email = %s"
@@ -283,13 +268,15 @@ class database_connection():
             return False
 
     def get_buffert(self, email):
+        """Get buffert from DB."""
         sql = "SELECT buffert FROM budget WHERE account_email = %s"
         val = (email,)
         self.mycursor.execute(sql, val)
         myresult = self.mycursor.fetchone()[0]
         return myresult
-    
+
     def get_saving_goal(self, email):
+        """Get saving_goal from DB."""
         sql = "SELECT saving_goal FROM budget WHERE account_email = %s"
         val = (email,)
         self.mycursor.execute(sql, val)
@@ -297,12 +284,14 @@ class database_connection():
         return myresult
 
     def update_buffert(self, email, buffert):
+        """Update buffert in DB."""
         sql = "UPDATE budget SET buffert = %s WHERE account_email = %s;"
         val = (buffert, email,)
         self.mycursor.execute(sql, val)
         self.connection.commit()
 
     def update_saving_goal(self, email, saving_goal):
+        """Update saving_goal in DB."""
         sql = "UPDATE budget SET saving_goal = %s WHERE account_email = %s;"
         val = (saving_goal, email,)
         self.mycursor.execute(sql, val)
