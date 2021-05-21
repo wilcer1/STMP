@@ -494,7 +494,7 @@ class Ui_RegisterScreen(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.popUp = QMessageBox()
-        self.popUp.setWindowTitle("Error")
+        self.popUp.setWindowTitle("")
         self.popUp.setText("Incorrect email, please try again")
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)

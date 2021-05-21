@@ -186,7 +186,8 @@ class RegisterScreen(QMainWindow, gui.Ui_RegisterScreen):
                 self.hide()
                 self.displayUi.show()
             else:
-                self.popUp.setText("email already exists, try log in")
+                self.popUp.setText("Whoops, something went wrong!\
+                                    Please try again")
                 self.popUp.exec_()  # popup error wrong username/password
 
     def goBack(self):
