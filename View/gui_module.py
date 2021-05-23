@@ -69,7 +69,7 @@ class Ui_LoginScreen(object):
         self.label_2.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt;\">Password</span></p></body></html>"))
         self.pushButton.setText(_translate("MainWindow", "Log in"))
         self.pushButton_2.setText(_translate("MainWindow", "Not Registered? Click here")
-        )
+                                            )
 
 
 class Ui_FirstLoginScreen(object):

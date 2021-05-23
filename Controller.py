@@ -66,6 +66,7 @@ class FirstLoginScreen(QMainWindow, gui.Ui_FirstLoginScreen):
         self.pushButton.clicked.connect(self.go_back)
 
     def save_change(self):
+        """Save all of the input to db and program."""
         try:
             income = abs(float(self.listOfIncomeSEK.item(1).text()))
             fixed_expenses = {
@@ -97,6 +98,7 @@ class FirstLoginScreen(QMainWindow, gui.Ui_FirstLoginScreen):
             self.popUp.exec_()
 
     def go_back(self):
+        """Go back to previous screen."""
         self.displayUi = LoginScreen()
         DB.log_out()
         self.hide()
@@ -278,6 +280,7 @@ class BudgetScreen(QMainWindow, gui.Ui_BudgetScreen):
 class SavingGoal(QMainWindow, gui.Ui_SavinggoalScreen):
 
     def __init__(self):
+        """Constructor."""
         super().__init__()
         self.setupUi(self)
         self.pushButton.clicked.connect(self.goBack)
@@ -287,6 +290,7 @@ class SavingGoal(QMainWindow, gui.Ui_SavinggoalScreen):
         self.hide()
 
     def calculate(self):
+        """Calculate how long it will take and save input."""
         if self.lineEdit.text() and self.lineEdit_2.text():
             try:
                 amount_per_month = float(self.lineEdit.text())
@@ -339,6 +343,7 @@ class BuffertScreen(QMainWindow, gui.Ui_BuffertScreen):
 class EcoOverviewScreen(QMainWindow, gui.Ui_EcoOverviewScreen):
 
     def __init__(self):
+        """Constructor."""
         super().__init__()
         self.setupUi(self)
         self.listOfIncomeSEK.item(1).setText(f"{self.customer.budget.income}")
