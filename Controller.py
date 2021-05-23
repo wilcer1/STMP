@@ -123,7 +123,6 @@ class MenuScreen(QMainWindow, gui.Ui_MenuScreen):
     def MakeBudget(self):
         """Display makebudget."""
         self.displayUi = BudgetScreen()
-        self.hide()
         self.displayUi.show()
 
     def longtermSaving(self):
@@ -134,7 +133,6 @@ class MenuScreen(QMainWindow, gui.Ui_MenuScreen):
     def eco_overview(self):
         """Switch screen."""
         self.displayUi = EcoOverviewScreen()
-        self.hide()
         self.displayUi.show()
 
     def make_buffert(self):
@@ -257,9 +255,7 @@ class BudgetScreen(QMainWindow, gui.Ui_BudgetScreen):
 
     def go_back(self):
         """Go back to the budget choice screen."""
-        self.displayUi = MenuScreen()
         self.hide()
-        self.displayUi.show()
 
     def set_list_of_expenses(self):
         """Set the items in the listwidget to the budget numbers stored in DB."""
@@ -288,9 +284,7 @@ class SavingGoal(QMainWindow, gui.Ui_SavinggoalScreen):
         self.pushButton_2.clicked.connect(self.calculate)
 
     def goBack(self):
-        self.displayUi = MenuScreen()
         self.hide()
-        self.displayUi.show()
 
     def calculate(self):
         if self.lineEdit.text() and self.lineEdit_2.text():
@@ -339,9 +333,7 @@ class BuffertScreen(QMainWindow, gui.Ui_BuffertScreen):
 
     def back(self):
         """Go back."""
-        self.displayUi = MenuScreen()
         self.hide()
-        self.displayUi.show()
 
 
 class EcoOverviewScreen(QMainWindow, gui.Ui_EcoOverviewScreen):
@@ -365,9 +357,7 @@ class EcoOverviewScreen(QMainWindow, gui.Ui_EcoOverviewScreen):
 
     def go_back(self):
         """Go back to menu."""
-        self.displayUi = MenuScreen()
         self.hide()
-        self.displayUi.show()
 
     def set_list_of_expenses(self):
         """Set the items in the listwidget to the budget numbers stored in DB."""
@@ -393,5 +383,6 @@ if __name__ == "__main__":
     DB = DB.database_connection()
     app = QApplication(sys.argv)
     MainWindow = LoginScreen()  # Use the login screen as the mainwindow to start
+
     MainWindow.show()
     sys.exit(app.exec_())
