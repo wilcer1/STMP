@@ -530,7 +530,7 @@ class Ui_RegisterScreen(object):
         self.popUp.setText("Incorrect email, please try again")
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-     
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
