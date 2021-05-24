@@ -15,5 +15,5 @@ This command automatically install every thing you need to be able to run STMP.
 Now you are ready to run the program! In GitBash, write "python Controller.py"
 
 ## How to run the program in Visual Studio Code
-To be able to run the program in Visual Studio Code, write "pip install -r requirements.txt" in the Visual Studio Codes terminal.
+To be able to run the program in Visual Studio Code, open STMP and write "pip install -r requirements.txt" in the Visual Studio Codes terminal.
 After this step is done, go to "Controller.py" and click on the green arrow, in the top right corner.
