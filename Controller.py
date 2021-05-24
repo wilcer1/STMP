@@ -19,7 +19,8 @@ class LoginScreen(QMainWindow, gui.Ui_LoginScreen):
 
     # Login Screen Controller
     def __init__(self):
-        """Constructor that runs the setup."""
+        """Calls superclass constructor and runs the setupUi
+           Connects buttons to methods and sets up the window."""
         super().__init__()  # Call the superclass constructor
         self.setupUi(self)  # Run the code that creates the UI layout
         self.pushButton.clicked.connect(
@@ -59,7 +60,8 @@ class LoginScreen(QMainWindow, gui.Ui_LoginScreen):
 
 class FirstLoginScreen(QMainWindow, gui.Ui_FirstLoginScreen):
     def __init__(self):
-        """Constructor that runs the setup."""
+        """Calls superclass constructor and runs the setupUi
+           Connects buttons to methods and sets up the window."""
         super().__init__()  # Call the superclass constructor
         self.setupUi(self)  # Run the code that creates the UI layout
         self.saveButton.clicked.connect(self.save_change)
@@ -110,7 +112,8 @@ class MenuScreen(QMainWindow, gui.Ui_MenuScreen):
 
     # Logged in menu screen Controller
     def __init__(self):
-        """Constructor that runs the setup."""
+        """Calls superclass constructor and runs the setupUi
+           Connects buttons to methods and sets up the window."""
         super().__init__()  # Call the superclass constructor
         self.setupUi(self)  # Run the code that creates the UI layout
         self.pushButton.clicked.connect(
@@ -156,7 +159,8 @@ class RegisterScreen(QMainWindow, gui.Ui_RegisterScreen):
 
     # Register user window controller
     def __init__(self):
-        """Constructor that runs the setup."""
+        """Calls superclass constructor and runs the setupUi
+           Connects buttons to methods and sets up the window."""
         super().__init__()  # Call the superclass constructor
         self.setupUi(self)  # Run the code that creates the UI layout
         self.pushButton.clicked.connect(
@@ -198,7 +202,8 @@ class RegisterScreen(QMainWindow, gui.Ui_RegisterScreen):
 
 class BudgetScreen(QMainWindow, gui.Ui_BudgetScreen):
     def __init__(self):
-        """Constructor that runs setup and buttons & labels."""
+        """Calls superclass constructor and runs the setupUi
+           Connects buttons to methods and sets up the window."""
         super().__init__()  # Call the superclass constructor
         self.setupUi(self)  # Run the code that creates the UI layout
         self.incomeItem = self.listOfIncomeSEK.item(1)
@@ -280,13 +285,15 @@ class BudgetScreen(QMainWindow, gui.Ui_BudgetScreen):
 class SavingGoal(QMainWindow, gui.Ui_SavinggoalScreen):
 
     def __init__(self):
-        """Constructor."""
+        """Calls superclass constructor and runs the setupUi
+           Connects buttons to methods and sets up the window."""
         super().__init__()
         self.setupUi(self)
         self.pushButton.clicked.connect(self.goBack)
         self.pushButton_2.clicked.connect(self.calculate)
 
     def goBack(self):
+        """Go back to previous window."""
         self.hide()
 
     def calculate(self):
@@ -311,7 +318,8 @@ class SavingGoal(QMainWindow, gui.Ui_SavinggoalScreen):
 
 class BuffertScreen(QMainWindow, gui.Ui_BuffertScreen):
     def __init__(self):
-        """Constructor that runs setup and buttons & labels."""
+        """Calls superclass constructor and runs the setupUi
+           Connects buttons to methods and sets up the window."""
         super().__init__()
         self.setupUi(self)
         self.totalincome.setText(str(self.customer.budget.income))
@@ -343,7 +351,8 @@ class BuffertScreen(QMainWindow, gui.Ui_BuffertScreen):
 class EcoOverviewScreen(QMainWindow, gui.Ui_EcoOverviewScreen):
 
     def __init__(self):
-        """Constructor."""
+        """Calls superclass constructor and runs the setupUi
+           Connects buttons to methods and sets up the window."""
         super().__init__()
         self.setupUi(self)
         self.listOfIncomeSEK.item(1).setText(f"{self.customer.budget.income}")
