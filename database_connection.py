@@ -21,8 +21,6 @@ class database_connection():
                 database="stmp",
             )
             self.mycursor = self.connection.cursor()
-            if self.connection.is_connected():
-                print("Connected")
 
         except Error as e:
             print(e)
@@ -33,7 +31,6 @@ class database_connection():
             if self.connection is not None and self.connection.is_connected():
                 self.mycursor.close()
                 self.connection.close()
-                print("Disconnected")
         except Error as e:
             print("Failed to disconnect")
             print(e)
