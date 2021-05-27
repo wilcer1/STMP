@@ -309,7 +309,7 @@ class SavingGoal(QMainWindow, gui.Ui_SavinggoalScreen):
                     time_to_reach = saving_goal / amount_per_month
                 self.textBrowser.setText(f"It will take {time_to_reach} months to reach your goal")
 
-            except ValueError:
+            except Exception:
                 self.popUp.exec_()
         else:
             self.popUp.exec_()
