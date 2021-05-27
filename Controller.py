@@ -303,7 +303,7 @@ class SavingGoal(QMainWindow, gui.Ui_SavinggoalScreen):
                 saving_goal = float(self.lineEdit_2.text())
                 self.customer.budget.set_saving_goal(saving_goal)
                 DB.update_saving_goal(self.customer.email, saving_goal)
-                if saving_goal < amount_per_month:
+                if saving_goal < amount_per_month or amount_per_month < 0:
                     time_to_reach = 0
                 else:
                     time_to_reach = saving_goal / amount_per_month
