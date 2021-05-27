@@ -301,7 +301,7 @@ class Ui_FirstLoginScreen(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "STMP"))
         self.label.setText(_translate("MainWindow", "Income"))
         self.label_2.setText(_translate("MainWindow", "Expenses"))
         __sortingEnabled = self.listOfIncome.isSortingEnabled()
@@ -442,7 +442,7 @@ class Ui_MenuScreen(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "STMP"))
         self.pushButton.setText(_translate("MainWindow", "Make a budget"))
         self.pushButton_2.setText(_translate("MainWindow", "Create long-term savings"))
         self.pushButton_3.setText(_translate("MainWindow", "Set your buffert"))
@@ -533,7 +533,7 @@ class Ui_RegisterScreen(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "STMP"))
         self.label.setText(_translate("MainWindow", "Register"))
         self.label_2.setText(_translate("MainWindow", "Email"))
         self.label_3.setText(_translate("MainWindow", "Password"))
@@ -809,7 +809,7 @@ class Ui_BudgetScreen(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "STMP"))
         self.label.setText(_translate("MainWindow", "Income"))
         self.label_2.setText(_translate("MainWindow", "Expenses"))
         self.saving_goal.setText(_translate("MainWindow", "Your saving goal:"))
@@ -961,7 +961,7 @@ class Ui_SavinggoalScreen(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "STMP"))
         self.label.setText(_translate("MainWindow", "Saving goal"))
         self.lineEdit.setPlaceholderText(_translate("MainWindow",
                                                     "Amount to save a month"))
@@ -1052,7 +1052,7 @@ class Ui_BuffertScreen(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "STMP"))
         self.label.setText(_translate("MainWindow", "Set your buffert"))
         self.label_2.setText(_translate("MainWindow", "Income"))
         self.label_3.setText(_translate("MainWindow", "Expenses"))
@@ -1269,7 +1269,7 @@ class Ui_EcoOverviewScreen(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "STMP"))
         self.label.setText(_translate("MainWindow", "Income"))
         self.label_2.setText(_translate("MainWindow", "Expenses"))
         __sortingEnabled = self.listOfIncome.isSortingEnabled()
