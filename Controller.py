@@ -95,8 +95,7 @@ class FirstLoginScreen(QMainWindow, gui.Ui_FirstLoginScreen):
             self.displayUi = MenuScreen()
             self.hide()
             self.displayUi.show()
-        except Exception as e:
-            print(e)
+        except Exception:
             self.popUp.exec_()
 
     def go_back(self):
